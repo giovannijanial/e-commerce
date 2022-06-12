@@ -24,7 +24,7 @@ export class CartEntity {
   @JoinColumn()
   user: Users;
 
-  @OneToMany(() => CartItemEntity, (cartItem) => cartItem.id)
+  @OneToMany(() => CartItemEntity, (cartItems) => cartItems.id)
   @JoinColumn()
-  cartItem: CartItemEntity[];
+  cartItems: CartItemEntity[];
 }

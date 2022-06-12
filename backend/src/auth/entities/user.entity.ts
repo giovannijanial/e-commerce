@@ -1,39 +1,35 @@
 import { CartEntity } from 'src/cart/entities/cart.entity';
 import {
-    Column,
-    CreateDateColumn,
-    Entity,
-    JoinColumn,
-    OneToMany,
-    PrimaryGeneratedColumn,
-    UpdateDateColumn,
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 
 @Entity()
 export class Users {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column()
-    username: string;
+  @Column()
+  username: string;
 
-    @Column()
-    password: string;
+  @Column()
+  password: string;
 
-    @Column()
-    role: string;
+  @Column()
+  role: string;
 
-    @CreateDateColumn()
-    createdAt: string;
+  @CreateDateColumn()
+  createdAt: string;
 
-    @UpdateDateColumn()
-    updateAt: string;
+  @UpdateDateColumn()
+  updateAt: string;
 
-    @OneToMany(() => CartEntity, (cart) => cart.id)
-    @JoinColumn()
-    cart: CartEntity[];
-
-    /*@OneToOne(() => OrderEntity, (order) => order.id)
+  @OneToMany(() => CartEntity, (cart) => cart.id)
   @JoinColumn()
-  order: OrderEntity;*/
+  cart: CartEntity[];
 }

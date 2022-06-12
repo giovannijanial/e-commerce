@@ -13,9 +13,9 @@ export class CartItemEntity {
   @Column()
   quantity: number;
 
-  @ManyToOne(() => ProductEntity, (product) => product.cartItem)
+  @ManyToOne(() => ProductEntity, (product) => product.cartItems)
   product: ProductEntity;
 
-  @ManyToOne(() => CartEntity, (cart) => cart.cartItem)
+  @ManyToOne(() => CartEntity, (cart) => cart.cartItems)
   cart: CartEntity;
 }

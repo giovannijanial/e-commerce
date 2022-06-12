@@ -1,35 +1,35 @@
 import { CartItemEntity } from 'src/cart-item/entities/cart-item.entity';
 import {
-    Column,
-    CreateDateColumn,
-    Entity,
-    JoinColumn,
-    OneToMany,
-    PrimaryGeneratedColumn,
-    UpdateDateColumn,
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 
 @Entity()
 export class ProductEntity {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column()
-    name: string;
+  @Column()
+  name: string;
 
-    @Column()
-    price: number;
+  @Column()
+  price: number;
 
-    @Column()
-    quantity: number;
+  @Column()
+  quantity: number;
 
-    @CreateDateColumn()
-    createdAt: string;
+  @CreateDateColumn()
+  createdAt: string;
 
-    @UpdateDateColumn()
-    updateAt: string;
+  @UpdateDateColumn()
+  updateAt: string;
 
-    @OneToMany(() => CartItemEntity, (cartIterm) => cartIterm.id)
-    @JoinColumn()
-    cartItem: CartItemEntity[];
+  @OneToMany(() => CartItemEntity, (cartIterms) => cartIterms.id)
+  @JoinColumn()
+  cartItems: CartItemEntity[];
 }
