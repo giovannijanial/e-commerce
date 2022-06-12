@@ -21,10 +21,9 @@ export class CartEntity {
   quantity: number;
 
   @ManyToOne(() => Users, (user) => user.username)
-  @JoinColumn()
   user: Users;
 
   @OneToMany(() => CartItemEntity, (cartItems) => cartItems.id)
-  @JoinColumn()
+  @JoinColumn({})
   cartItems: CartItemEntity[];
 }
