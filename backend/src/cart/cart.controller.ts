@@ -1,14 +1,5 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-} from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
 import { CartService } from './cart.service';
-import { UpdateCartDto } from './dto/update-cart.dto';
 
 @Controller('cart')
 export class CartController {
@@ -17,7 +8,7 @@ export class CartController {
   @Post()
   addToCart(@Body() body) {
     const { productId, quantity, user } = body;
-    return this.cartService.addToCart(user, productId, quantity);
+    return this.cartService.verifyCart(user, productId, quantity);
   }
 
   @Get()
@@ -30,13 +21,8 @@ export class CartController {
     return this.cartService.findOne(id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCartDto: UpdateCartDto) {
-    return this.cartService.update(id, updateCartDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.cartService.remove(id);
+  @Delete(':id/:itemId')
+  remove(@Param('id') id: string, @Param('itemId') itemId: number) {
+    return this.cartService.removeItemCart(id, itemId);
   }
 }

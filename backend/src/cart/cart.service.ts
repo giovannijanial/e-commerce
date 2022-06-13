@@ -4,7 +4,6 @@ import { Users } from 'src/auth/entities/user.entity';
 import { CartItem } from 'src/cart-item/entities/cart-item.entity';
 import { ProductEntity } from 'src/product/entities/product.entity';
 import { Repository } from 'typeorm';
-import { UpdateCartDto } from './dto/update-cart.dto';
 import { CartEntity, CartStatus } from './entities/cart.entity';
 
 @Injectable()
@@ -23,11 +22,15 @@ export class CartService {
     private readonly cartItemRepository: Repository<CartItem>,
   ) {}
 
-  async addToCart(userId: Users, productId: number, quantity: number) {
-    const user = await this.userRepository.findOne({
-      where: { id: userId.id },
+  async verifyCart(user: Users, productId: number, quantity: number) {
+    const currentUser = await this.userRepository.findOne({
+      where: { id: user.id },
       relations: ['carts'],
     });
+
+    if (!currentUser) {
+      throw new NotFoundException(`User ID ${user.id} not found!`);
+    }
 
     const product = await this.productRepository.findOne({
       where: { id: productId },
@@ -37,39 +40,66 @@ export class CartService {
       throw new NotFoundException(`User ID ${productId} not found!`);
     }
 
-    if (!user.carts.length) {
-      const cart = await this.cartRepository.save({
-        total: product.price * quantity,
-        quantityProducts: 1,
-        user: user,
-      });
-      const newItem = this.cartItemRepository.create({
-        product: product,
-        quantity: quantity,
-        price: product.price,
-      });
-
-      console.log(cart);
-
-      this.cartItemRepository.save({ ...newItem, cart });
-    } else {
-      const currentCartId = user.carts.filter(
-        (cart) => cart.cartStatus === CartStatus.WAITING_PAYMENT,
-      );
-
-      const currentCart = await this.findOne(currentCartId[0].id);
-
-      const newItem = this.cartItemRepository.create({
-        product: product,
-        cart: currentCart,
-        quantity: quantity,
-        price: product.price,
-      });
-
-      console.log(currentCart);
-
-      this.cartItemRepository.save({ ...newItem });
+    if (!currentUser.carts.length) {
+      this.newCart(currentUser, product, quantity);
     }
+
+    const currentCart = currentUser.carts.find(
+      (cart) => cart.cartStatus === CartStatus.WAITING_PAYMENT,
+    );
+
+    if (!currentCart) {
+      this.newCart(currentUser, product, quantity);
+    } else {
+      this.addItemCart(product, quantity, currentCart);
+    }
+
+    return '';
+  }
+
+  async newCart(currentUser: Users, product: ProductEntity, quantity: number) {
+    const cart = await this.cartRepository.save({
+      total: product.price * quantity,
+      quantityProducts: 1,
+      user: currentUser,
+    });
+    const newItem = this.cartItemRepository.create({
+      product: product,
+      quantity: quantity,
+      price: product.price,
+    });
+
+    this.cartItemRepository.save({ ...newItem, cart });
+  }
+
+  async addItemCart(
+    product: ProductEntity,
+    quantity: number,
+    currentCart: CartEntity,
+  ) {
+    const newItem = this.cartItemRepository.create({
+      product: product,
+      cart: currentCart,
+      quantity: quantity,
+      price: product.price,
+    });
+
+    console.log(currentCart);
+
+    this.cartItemRepository.save({ ...newItem });
+  }
+
+  async removeItemCart(id: string, itemId: number) {
+    const cart = await this.findOne(id);
+
+    if (!cart) {
+      throw new NotFoundException(`Cart ID ${id} not found!`);
+    }
+    const cartItem = await this.cartItemRepository.findOne({
+      where: { id: itemId },
+    });
+
+    return this.cartItemRepository.remove(cartItem);
   }
 
   findAll() {
@@ -90,10 +120,6 @@ export class CartService {
     return cart;
   }
 
-  update(id: string, updateCartDto: UpdateCartDto) {
-    return `This action updates a #${id} cart`;
-  }
-
   async remove(id: string) {
     const cart = await this.cartRepository.find({ where: { id } });
 
@@ -103,6 +129,4 @@ export class CartService {
 
     return this.cartRepository.remove(cart);
   }
-
-  // async verifyCartStatus(cart: CartEntity) {}
 }
