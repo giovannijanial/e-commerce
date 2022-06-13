@@ -21,6 +21,12 @@ export class Users {
   password: string;
 
   @Column()
+  email: string;
+
+  @Column()
+  age: number;
+
+  @Column()
   role: string;
 
   @CreateDateColumn()
@@ -29,7 +35,7 @@ export class Users {
   @UpdateDateColumn()
   updateAt: string;
 
-  @OneToMany(() => CartEntity, (cart) => cart.user)
+  @OneToMany(() => CartEntity, (cart) => cart.user, { nullable: true })
   @JoinColumn({ name: 'user_id' })
-  cart: CartEntity[];
+  carts: CartEntity[];
 }

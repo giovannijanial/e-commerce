@@ -1,6 +1,8 @@
 import { Users } from 'src/auth/entities/user.entity';
 import { CartItemEntity } from 'src/cart-item/entities/cart-item.entity';
+import { v4 as uuidv4 } from 'uuid';
 import {
+  BeforeInsert,
   Column,
   Entity,
   JoinColumn,
@@ -9,21 +11,43 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
+export enum CartStatus {
+  WAITING_PAYMENT = 'waitingPayment',
+  PAYD = 'payd',
+  SHIPPED = 'shipped',
+  DELIVERED = 'delivered',
+  CANCELED = 'canceled',
+}
 @Entity()
 export class CartEntity {
   @PrimaryGeneratedColumn('uuid')
-  id: number;
+  id: string;
 
   @Column()
   total: number;
 
   @Column()
-  quantity: number;
+  quantityProducts: number;
 
-  @ManyToOne(() => Users, (user) => user.cart)
+  @Column({
+    type: 'simple-enum',
+    enum: CartStatus,
+    default: CartStatus.WAITING_PAYMENT,
+  })
+  cartStatus: CartStatus;
+
+  @ManyToOne(() => Users, (user) => user.carts)
   user: Users;
 
   @OneToMany(() => CartItemEntity, (cartItems) => cartItems.cart)
   @JoinColumn({ name: 'cart_id' })
   cartItems: CartItemEntity[];
+
+  @BeforeInsert()
+  generatedId() {
+    if (this.id) {
+      return;
+    }
+    this.id = uuidv4();
+  }
 }

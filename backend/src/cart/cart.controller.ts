@@ -8,7 +8,6 @@ import {
   Delete,
 } from '@nestjs/common';
 import { CartService } from './cart.service';
-import { CreateCartDto } from './dto/create-cart.dto';
 import { UpdateCartDto } from './dto/update-cart.dto';
 
 @Controller('cart')
@@ -16,8 +15,9 @@ export class CartController {
   constructor(private readonly cartService: CartService) {}
 
   @Post()
-  create(@Body() createCartDto: CreateCartDto) {
-    return this.cartService.create(createCartDto);
+  addToCart(@Body() body) {
+    const { productId, quantity, user } = body;
+    return this.cartService.addToCart(user, productId, quantity);
   }
 
   @Get()
@@ -37,6 +37,6 @@ export class CartController {
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.cartService.remove(+id);
+    return this.cartService.remove(id);
   }
 }

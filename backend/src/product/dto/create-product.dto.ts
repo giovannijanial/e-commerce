@@ -1,5 +1,5 @@
 import { IsNumber, IsObject, IsString } from 'class-validator';
-import { CartEntity } from 'src/cart/entities/cart.entity';
+import { CartItemEntity } from 'src/cart-item/entities/cart-item.entity';
 
 export class CreateProductDto {
   @IsString()
@@ -12,5 +12,5 @@ export class CreateProductDto {
   quantity: number;
 
   @IsObject()
-  cartItems: CartEntity[];
+  cartItems: CartItemEntity[];
 }
