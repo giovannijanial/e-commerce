@@ -18,11 +18,14 @@ export class UserService {
   }
 
   findAll() {
-    return this.userRepository.find();
+    return this.userRepository.find({ relations: ['carts'] });
   }
 
   async findOne(id: number) {
-    const user = await this.userRepository.findOne({ where: { id } });
+    const user = await this.userRepository.findOne({
+      where: { id },
+      relations: ['carts'],
+    });
 
     if (!user) {
       throw new NotFoundException(`User ID ${id} not found!`);

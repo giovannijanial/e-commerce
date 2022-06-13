@@ -5,7 +5,7 @@ import { CartItemEntity } from 'src/cart-item/entities/cart-item.entity';
 import { ProductEntity } from 'src/product/entities/product.entity';
 import { Repository } from 'typeorm';
 import { UpdateCartDto } from './dto/update-cart.dto';
-import { CartEntity } from './entities/cart.entity';
+import { CartEntity, CartStatus } from './entities/cart.entity';
 
 @Injectable()
 export class CartService {
@@ -26,30 +26,38 @@ export class CartService {
   async addToCart(userId: Users, productId: number, quantity: number) {
     const user = await this.userRepository.findOne({
       where: { id: userId.id },
+      relations: ['carts'],
     });
+    console.log(user);
 
-    // if (!user.carts.length) {
-    // }
-
-    const product = await this.productRepository.findOne({
-      where: { id: productId },
-    });
-
-    if (!product) {
-      throw new NotFoundException(`User ID ${productId} not found!`);
+    if (!user.carts.length) {
+      console.log('sem carrinho...');
+      // const cart = await this.cartRepository.save({
+      //   total: product.price * quantity,
+      //   quantityProducts: 1,
+      //   user: user,
+      // });
     } else {
-      const newItem = this.cartItemRepository.create({
-        product: product,
-        quantity: quantity,
-        price: product.price,
-      });
-      const cart = await this.cartRepository.save({
-        total: product.price * quantity,
-        quantityProducts: 1,
-        user: user,
+      const currentCart = user.carts.filter(
+        (cart) => cart.cartStatus === CartStatus.WAITING_PAYMENT,
+      );
+
+      const product = await this.productRepository.findOne({
+        where: { id: productId },
       });
 
-      this.cartItemRepository.save({ ...newItem, cart });
+      if (!product) {
+        throw new NotFoundException(`User ID ${productId} not found!`);
+      } else {
+        console.log(currentCart);
+        const newItem = this.cartItemRepository.create({
+          product: product,
+          quantity: quantity,
+          price: product.price,
+        });
+
+        this.cartItemRepository.save({ ...newItem, currentCart });
+      }
     }
   }
 
