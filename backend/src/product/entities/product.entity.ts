@@ -29,7 +29,7 @@ export class ProductEntity {
   @UpdateDateColumn()
   updateAt: string;
 
-  @OneToMany(() => CartItemEntity, (cartIterms) => cartIterms.id)
-  @JoinColumn()
+  @OneToMany(() => CartItemEntity, (cartIterms) => cartIterms.product)
+  @JoinColumn({ name: 'product_id' })
   cartItems: CartItemEntity[];
 }

@@ -29,7 +29,7 @@ export class Users {
   @UpdateDateColumn()
   updateAt: string;
 
-  @OneToMany(() => CartEntity, (cart) => cart.id)
-  @JoinColumn()
+  @OneToMany(() => CartEntity, (cart) => cart.user)
+  @JoinColumn({ name: 'user_id' })
   cart: CartEntity[];
 }

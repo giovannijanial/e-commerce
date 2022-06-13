@@ -20,10 +20,10 @@ export class CartEntity {
   @Column()
   quantity: number;
 
-  @ManyToOne(() => Users, (user) => user.username)
+  @ManyToOne(() => Users, (user) => user.cart)
   user: Users;
 
-  @OneToMany(() => CartItemEntity, (cartItems) => cartItems.id)
-  @JoinColumn({})
+  @OneToMany(() => CartItemEntity, (cartItems) => cartItems.cart)
+  @JoinColumn({ name: 'cart_id' })
   cartItems: CartItemEntity[];
 }
