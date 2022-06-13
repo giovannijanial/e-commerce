@@ -4,8 +4,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { ProductModule } from './product/product.module';
-import { CartItemModule } from './cart-item/cart-item.module';
 import { CartModule } from './cart/cart.module';
+import { CartItemModule } from './cart-item/cart-item.module';
 
 @Module({
   imports: [
@@ -15,6 +15,7 @@ import { CartModule } from './cart/cart.module';
       type: 'sqlite',
       database: 'ecommerceDB',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
+      autoLoadEntities: true,
       synchronize: true,
     }),
     ProductModule,

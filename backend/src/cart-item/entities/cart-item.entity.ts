@@ -3,7 +3,7 @@ import { ProductEntity } from 'src/product/entities/product.entity';
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
-export class CartItemEntity {
+export class CartItem {
   @PrimaryGeneratedColumn()
   id: number;
 

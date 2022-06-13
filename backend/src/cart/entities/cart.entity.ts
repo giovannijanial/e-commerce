@@ -1,5 +1,5 @@
 import { Users } from 'src/auth/entities/user.entity';
-import { CartItemEntity } from 'src/cart-item/entities/cart-item.entity';
+import { CartItem } from 'src/cart-item/entities/cart-item.entity';
 import { v4 as uuidv4 } from 'uuid';
 import {
   BeforeInsert,
@@ -39,9 +39,9 @@ export class CartEntity {
   @ManyToOne(() => Users, (user) => user.carts)
   user: Users;
 
-  @OneToMany(() => CartItemEntity, (cartItems) => cartItems.cart)
+  @OneToMany(() => CartItem, (cartItems) => cartItems.cart)
   @JoinColumn({ name: 'cart_id' })
-  cartItems: CartItemEntity[];
+  cartItems: CartItem[];
 
   @BeforeInsert()
   generatedId() {
