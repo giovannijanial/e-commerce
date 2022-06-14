@@ -1,7 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Users } from 'src/auth/entities/user.entity';
-import { CartItemService } from 'src/cart-item/cart-item.service';
 import { CartItem } from 'src/cart-item/entities/cart-item.entity';
 import { ProductEntity } from 'src/product/entities/product.entity';
 import { Repository } from 'typeorm';
@@ -42,7 +41,7 @@ export class CartService {
     }
 
     if (!currentUser.carts.length) {
-      this.newCart(currentUser, product, quantity);
+      return this.newCart(currentUser, product, quantity);
     }
 
     const currentCartID = currentUser.carts.find(
@@ -51,14 +50,11 @@ export class CartService {
 
     const currentCart = await this.findOne(currentCartID.id);
 
-    let cart: any;
     if (!currentCart) {
-      cart = await this.newCart(currentUser, product, quantity);
+      return this.newCart(currentUser, product, quantity);
     } else {
-      this.addItemCart(product, quantity, currentCart);
+      return this.addItemCart(product, quantity, currentCart);
     }
-
-    return cart;
   }
 
   async newCart(currentUser: Users, product: ProductEntity, quantity: number) {
@@ -102,7 +98,7 @@ export class CartService {
       });
     }
 
-    this.updateCart(currentCart);
+    return this.updateCart(currentCart.id);
   }
 
   async removeItemCart(id: string, itemId: number) {
@@ -118,7 +114,8 @@ export class CartService {
     return this.cartItemRepository.remove(cartItem);
   }
 
-  async updateCart(cart: CartEntity) {
+  async updateCart(cartId: string) {
+    const cart = await this.findOne(cartId);
     const total = cart.cartItems
       .map((item) => item.price * item.quantity)
       .reduce((x, y) => x + y);
