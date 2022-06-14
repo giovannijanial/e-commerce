@@ -6,7 +6,7 @@ export class CartController {
   constructor(private readonly cartService: CartService) {}
 
   @Post()
-  addToCart(@Body() body) {
+  addToCart(@Body() body: any) {
     const { productId, quantity, user } = body;
     return this.cartService.verifyCart(user, productId, quantity);
   }

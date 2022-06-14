@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Users } from 'src/auth/entities/user.entity';
+import { CartItemService } from 'src/cart-item/cart-item.service';
 import { CartItem } from 'src/cart-item/entities/cart-item.entity';
 import { ProductEntity } from 'src/product/entities/product.entity';
 import { Repository } from 'typeorm';
@@ -44,17 +45,20 @@ export class CartService {
       this.newCart(currentUser, product, quantity);
     }
 
-    const currentCart = currentUser.carts.find(
+    const currentCartID = currentUser.carts.find(
       (cart) => cart.cartStatus === CartStatus.WAITING_PAYMENT,
     );
 
+    const currentCart = await this.findOne(currentCartID.id);
+
+    let cart: any;
     if (!currentCart) {
-      this.newCart(currentUser, product, quantity);
+      cart = await this.newCart(currentUser, product, quantity);
     } else {
       this.addItemCart(product, quantity, currentCart);
     }
 
-    return '';
+    return cart;
   }
 
   async newCart(currentUser: Users, product: ProductEntity, quantity: number) {
@@ -70,6 +74,8 @@ export class CartService {
     });
 
     this.cartItemRepository.save({ ...newItem, cart });
+
+    return cart;
   }
 
   async addItemCart(
@@ -77,16 +83,26 @@ export class CartService {
     quantity: number,
     currentCart: CartEntity,
   ) {
-    const newItem = this.cartItemRepository.create({
-      product: product,
-      cart: currentCart,
-      quantity: quantity,
-      price: product.price,
-    });
+    const currentItem = currentCart.cartItems.find(
+      (cartItem) => cartItem.product.id === product.id,
+    );
 
-    console.log(currentCart);
+    if (!currentItem) {
+      const newItem = this.cartItemRepository.create({
+        product: product,
+        cart: currentCart,
+        quantity: quantity,
+        price: product.price,
+      });
+      this.cartItemRepository.save({ ...newItem });
+    } else {
+      const newQuantity = currentItem.quantity + quantity;
+      this.cartItemRepository.update(currentItem.id, {
+        quantity: newQuantity,
+      });
+    }
 
-    this.cartItemRepository.save({ ...newItem });
+    this.updateCart(currentCart);
   }
 
   async removeItemCart(id: string, itemId: number) {
@@ -100,6 +116,21 @@ export class CartService {
     });
 
     return this.cartItemRepository.remove(cartItem);
+  }
+
+  async updateCart(cart: CartEntity) {
+    const total = cart.cartItems
+      .map((item) => item.price * item.quantity)
+      .reduce((x, y) => x + y);
+
+    const quantity = cart.cartItems.length;
+
+    console.log(total);
+
+    return this.cartRepository.update(cart.id, {
+      total: total,
+      quantityProducts: quantity,
+    });
   }
 
   findAll() {
