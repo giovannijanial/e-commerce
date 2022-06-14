@@ -110,8 +110,9 @@ export class CartService {
     const cartItem = await this.cartItemRepository.findOne({
       where: { id: itemId },
     });
-
-    return this.cartItemRepository.remove(cartItem);
+    const removedItem = await this.cartItemRepository.remove(cartItem);
+    this.updateCart(cart.id);
+    return removedItem;
   }
 
   async updateCart(cartId: string) {

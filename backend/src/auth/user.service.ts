@@ -33,11 +33,23 @@ export class UserService {
     return user;
   }
 
-  async update(id: number, updateCourseDto: UpdateUserDto) {
-    return '';
+  async update(id: number, updateUserDto: UpdateUserDto) {
+    const user = await this.userRepository.findOne({ where: { id } });
+
+    if (!user) {
+      throw new NotFoundException(`User ID ${id} not found!`);
+    }
+
+    return this.userRepository.update(id, { ...updateUserDto });
   }
 
   async remove(id: number) {
-    return '';
+    const user = await this.userRepository.findOne({ where: { id } });
+
+    if (!user) {
+      throw new NotFoundException(`User ID ${id} not found!`);
+    }
+
+    return this.userRepository.remove(user);
   }
 }
