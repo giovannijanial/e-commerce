@@ -1,8 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Users } from 'src/auth/entities/user.entity';
-import { CartItem } from 'src/cart-item/entities/cart-item.entity';
+import { CartProductEntity } from 'src/cart-product/entities/cart-product.entity';
 import { ProductEntity } from 'src/product/entities/product.entity';
+import { UserEntity } from 'src/user/entities/user.entity';
 import { Repository } from 'typeorm';
 import { CartEntity, CartStatus } from './entities/cart.entity';
 
@@ -12,17 +12,17 @@ export class CartService {
     @InjectRepository(CartEntity)
     private readonly cartRepository: Repository<CartEntity>,
 
-    @InjectRepository(Users)
-    private readonly userRepository: Repository<Users>,
+    @InjectRepository(UserEntity)
+    private readonly userRepository: Repository<UserEntity>,
 
     @InjectRepository(ProductEntity)
     private readonly productRepository: Repository<ProductEntity>,
 
-    @InjectRepository(CartItem)
-    private readonly cartItemRepository: Repository<CartItem>,
+    @InjectRepository(CartProductEntity)
+    private readonly cartProductRepository: Repository<CartProductEntity>,
   ) {}
 
-  async verifyCart(user: Users, productId: number, quantity: number) {
+  async verifyCart(user: UserEntity, productId: number, quantity: number) {
     const currentUser = await this.userRepository.findOne({
       where: { id: user.id },
       relations: ['carts'],
@@ -57,19 +57,23 @@ export class CartService {
     }
   }
 
-  async newCart(currentUser: Users, product: ProductEntity, quantity: number) {
+  async newCart(
+    currentUser: UserEntity,
+    product: ProductEntity,
+    quantity: number,
+  ) {
     const cart = await this.cartRepository.save({
       total: product.price * quantity,
       quantityProducts: 1,
       user: currentUser,
     });
-    const newItem = this.cartItemRepository.create({
+    const newItem = this.cartProductRepository.create({
       product: product,
       quantity: quantity,
       price: product.price,
     });
 
-    this.cartItemRepository.save({ ...newItem, cart });
+    this.cartProductRepository.save({ ...newItem, cart });
 
     return cart;
   }
@@ -79,21 +83,21 @@ export class CartService {
     quantity: number,
     currentCart: CartEntity,
   ) {
-    const currentItem = currentCart.cartItems.find(
-      (cartItem) => cartItem.product.id === product.id,
+    const currentItem = currentCart.cartProducts.find(
+      (CartProduct) => CartProduct.product.id === product.id,
     );
 
     if (!currentItem) {
-      const newItem = this.cartItemRepository.create({
+      const newItem = this.cartProductRepository.create({
         product: product,
         cart: currentCart,
         quantity: quantity,
         price: product.price,
       });
-      this.cartItemRepository.save({ ...newItem });
+      this.cartProductRepository.save({ ...newItem });
     } else {
       const newQuantity = currentItem.quantity + quantity;
-      this.cartItemRepository.update(currentItem.id, {
+      this.cartProductRepository.update(currentItem.id, {
         quantity: newQuantity,
       });
     }
@@ -107,21 +111,21 @@ export class CartService {
     if (!cart) {
       throw new NotFoundException(`Cart ID ${id} not found!`);
     }
-    const cartItem = await this.cartItemRepository.findOne({
+    const cartProduct = await this.cartProductRepository.findOne({
       where: { id: itemId },
     });
-    const removedItem = await this.cartItemRepository.remove(cartItem);
+    const removedItem = await this.cartProductRepository.remove(cartProduct);
     this.updateCart(cart.id);
     return removedItem;
   }
 
   async updateCart(cartId: string) {
     const cart = await this.findOne(cartId);
-    const total = cart.cartItems
+    const total = cart.cartProducts
       .map((item) => item.price * item.quantity)
       .reduce((x, y) => x + y);
 
-    const quantity = cart.cartItems.length;
+    const quantity = cart.cartProducts.length;
 
     console.log(total);
 
@@ -133,14 +137,14 @@ export class CartService {
 
   findAll() {
     return this.cartRepository.find({
-      relations: ['user', 'cartItems', 'cartItems.product'],
+      relations: ['user', 'CartProducts', 'CartProducts.product'],
     });
   }
 
   findOne(id: string) {
     const cart = this.cartRepository.findOne({
       where: { id },
-      relations: ['user', 'cartItems', 'cartItems.product'],
+      relations: ['user', 'CartProducts', 'CartProducts.product'],
     });
 
     if (!cart) {

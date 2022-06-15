@@ -1,5 +1,7 @@
+import { hashSync } from 'bcrypt';
 import { CartEntity } from 'src/cart/entities/cart.entity';
 import {
+  BeforeInsert,
   Column,
   CreateDateColumn,
   Entity,
@@ -9,19 +11,25 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity()
-export class Users {
+@Entity({ name: 'user' })
+export class UserEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ name: 'first_name' })
+  firstName: string;
+
+  @Column({ name: 'last_name' })
+  lastName: string;
+
+  @Column({ name: 'user_name' })
   username: string;
 
   @Column()
-  password: string;
+  email: string;
 
   @Column()
-  email: string;
+  password: string;
 
   @Column()
   age: number;
@@ -38,4 +46,9 @@ export class Users {
   @OneToMany(() => CartEntity, (cart) => cart.user, { nullable: true })
   @JoinColumn({ name: 'user_id' })
   carts: CartEntity[];
+
+  @BeforeInsert()
+  hashPassword() {
+    this.password = hashSync(this.password, 10);
+  }
 }

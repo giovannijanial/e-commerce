@@ -1,25 +1,29 @@
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
+import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { AuthModule } from './auth/auth.module';
 import { ProductModule } from './product/product.module';
 import { CartModule } from './cart/cart.module';
-import { CartItemModule } from './cart-item/cart-item.module';
+import { CartProductModule } from './cart-product/cart-product.module';
+import { UserModule } from './user/user.module';
+import { ConfigModule } from '@nestjs/config';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
-    AuthModule,
+    ConfigModule.forRoot(),
     CartModule,
+    ProductModule,
+    CartProductModule,
+    UserModule,
     TypeOrmModule.forRoot({
-      type: 'sqlite',
-      database: 'ecommerceDB',
+      type: process.env.TYPEORM_CONNECTION,
+      database: process.env.TYPEORM_DATABASE,
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       autoLoadEntities: true,
       synchronize: true,
-    }),
-    ProductModule,
-    CartItemModule,
+    } as TypeOrmModuleOptions),
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

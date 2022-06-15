@@ -1,7 +1,7 @@
 import { IsObject } from 'class-validator';
-import { Users } from 'src/auth/entities/user.entity';
+import { UserEntity } from 'src/user/entities/user.entity';
 
 export class CreateCartDto {
   @IsObject()
-  user: Users;
+  user: UserEntity;
 }
