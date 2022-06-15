@@ -46,7 +46,8 @@ export class UserService {
   }
 
   async update(id: number, updateUserDto: UpdateUserDto) {
-    this.findOne(id);
+    await this.findOne(id);
+
     return this.userRepository.update(id, { ...updateUserDto });
   }
 
