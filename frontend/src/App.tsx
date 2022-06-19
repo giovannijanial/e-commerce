@@ -1,10 +1,9 @@
-
-import Navbar from "./components/navbar/Navbar"
+import { HeaderAction } from "./components/navbar/HeaderAction"
 
 function App() {
   return (
     <>
-      <Navbar />
+      <HeaderAction links={[{ link: "teste", label: "teste", links: [{ link: "teste", label: "teste" }] }]} />
     </>
   )
 }
