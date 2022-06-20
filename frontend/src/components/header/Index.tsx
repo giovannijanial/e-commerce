@@ -3,7 +3,6 @@ import Logo from './Logo'
 import { StyledGridItem, StyledGrid, StyledGridNavigation } from './index.styled'
 import Search from './Search'
 import Navbar from '../navbar/Index'
-import { Grid } from '@mui/material'
 
 const Header = () => {
   return (

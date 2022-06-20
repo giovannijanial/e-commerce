@@ -13,6 +13,9 @@ export const theme = createTheme({
 			default: "#fff",
 			paper: "#E5E5E5",
 		},
+		text: {
+			primary: "#2B3445",
+		},
 	},
 	typography: {
 		fontFamily: [
@@ -36,5 +39,7 @@ export const GlobalStyle = createGlobalStyle`
     padding: 0px;
     margin: 0px;
 		font-family: ${theme.typography.fontFamily};
+		font-size: 0.92em;
+		color:${theme.palette.text.primary}; ;
   }
 `;

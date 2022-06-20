@@ -15,7 +15,9 @@
 		"@mui/styled-engine-sc": "^5.8.0",
 		"react": "^18.0.0",
 		"react-dom": "^18.0.0",
+		"react-material-ui-carousel": "^3.4.2",
 		"styled-components": "^5.3.5",
+		"swiper": "^8.2.4",
 		"tabler-icons-react": "^1.49.0"
 	},
 	"devDependencies": {

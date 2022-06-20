@@ -7,8 +7,8 @@ const Logo = () => {
   return (
     <LogoBox component="img" alt='logo' src={LogoPrincipal}
       sx={{
-        maxHeight: { xs: 200, sm: 240, md: 140 },
-        maxWidth: { xs: 200, sm: 240, md: 140 },
+        maxHeight: { xs: 100, sm: 100, md: 100 },
+        maxWidth: { xs: 100, sm: 100, md: 100 },
       }} />
   )
 }

@@ -1,6 +1,5 @@
-import { Button, FormControl, IconButton, InputAdornment, TextField } from '@mui/material'
-import React from 'react'
-import { StyleSearchBox, StyleTextField } from './search.styled'
+import { IconButton } from '@mui/material'
+import { StyleTextField } from './search.styled'
 import SearchIcon from '@mui/icons-material/Search';
 
 const Search = () => {
