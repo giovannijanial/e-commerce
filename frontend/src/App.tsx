@@ -1,9 +1,14 @@
-import { HeaderAction } from "./components/navbar/HeaderAction"
+import Header from "./components/header/Index"
+import { GlobalStyle, theme } from "./app.styled"
+import { ThemeProvider } from '@mui/material/styles';
 
 function App() {
   return (
     <>
-      <HeaderAction links={[{ link: "teste", label: "teste", links: [{ link: "teste", label: "teste" }] }]} />
+      <ThemeProvider theme={theme} >
+        <GlobalStyle />
+        <Header />
+      </ThemeProvider>
     </>
   )
 }
