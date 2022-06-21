@@ -4,17 +4,21 @@ import { createGlobalStyle } from "styled-components";
 export const theme = createTheme({
 	palette: {
 		primary: {
-			main: "#FCA311",
+			light: "#E5383B",
+			main: "#BA181B",
+			dark: "#660708",
 		},
 		secondary: {
-			main: "#14213D",
+			light: "#B1A7A6",
+			main: "#161A1D",
+			dark: "#0B090A",
 		},
 		background: {
-			default: "#fff",
-			paper: "#E5E5E5",
+			default: "#F5F3F4",
+			paper: "#D3D3D3",
 		},
 		text: {
-			primary: "#2B3445",
+			primary: "#161A1D",
 		},
 	},
 	typography: {
