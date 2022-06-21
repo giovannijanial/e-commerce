@@ -1,5 +1,4 @@
-import { IconButton } from '@mui/material'
-import { SyledBox } from './buttons.styled'
+import { StyledIconButon, SyledBox } from './buttons.styled'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -7,15 +6,15 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 const Buttons = () => {
   return (
     <SyledBox>
-      <IconButton aria-label='account' size='large'>
+      <StyledIconButon aria-label='account' size='large' color='secondary'>
         <AccountCircleIcon fontSize='inherit' />
-      </ IconButton>
-      <IconButton aria-label='account' size='large'>
+      </ StyledIconButon>
+      <StyledIconButon aria-label='account' size='large' color='secondary'>
         <FavoriteIcon fontSize='inherit' />
-      </ IconButton>
-      <IconButton aria-label='cart' size='large'>
+      </ StyledIconButon>
+      <StyledIconButon aria-label='cart' size='large' color='secondary'>
         <ShoppingCartIcon fontSize='inherit' />
-      </ IconButton>
+      </ StyledIconButon>
     </SyledBox>
   )
 }
