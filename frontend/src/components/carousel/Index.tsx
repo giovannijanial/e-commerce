@@ -25,7 +25,7 @@ const Banner = (props: BannerProps) => {
 
   let items = [];
   const content = (
-    <Grid item xs={4} key="content">
+    <Grid item sm={4} display={{ xs: "none", sm: "block", md: "block" }} key="content">
       <StyledCardContent>
         <StyledTittle>
           {props.item.Name}
@@ -46,7 +46,7 @@ const Banner = (props: BannerProps) => {
     const item = props.item.Items[i];
 
     const media = (
-      <Grid item xs={4} key={item.Name}>
+      <Grid item xs={12} sm={4} key={item.Name}>
         <StyledCardMedia
           image={item.Image}
           title={item.Name}

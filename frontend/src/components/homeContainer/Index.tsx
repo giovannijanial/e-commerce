@@ -1,18 +1,21 @@
-import React from 'react'
+
+import BoxMid from './BoxMid'
+import BoxRight from './BoxRigth'
 import { StyledAside, StyledContainer, StyledGridMain, StyledMid, StyledRight } from './index.styled'
+import ListCategories from './ListCategories'
 
 const HomeContainer = () => {
   return (
     <StyledContainer>
-      <StyledGridMain container spacing={{ xs: 1 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+      <StyledGridMain container spacing={{ xs: 4 }} columns={{ xs: 4, sm: 8, md: 12 }}>
         <StyledAside item md={3} display={{ sm: "none", md: "block", xs: "none" }}>
-          <p>hello1</p>
+          <ListCategories />
         </StyledAside>
-        <StyledMid item md={6} sm={8} xs={12}>
-          <p>hello2</p>
+        <StyledMid item md={5} sm={8} xs={12}>
+          <BoxMid />
         </StyledMid>
-        <StyledRight item md={3} sm={8} xs={12}>
-          <p>hello3</p>
+        <StyledRight item md={4} sm={8} xs={12}>
+          <BoxRight />
         </StyledRight>
       </StyledGridMain>
     </StyledContainer >
