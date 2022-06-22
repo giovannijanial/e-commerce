@@ -1,4 +1,5 @@
 
+import { Typography } from '@mui/material'
 import BoxMid from './BoxMid'
 import BoxRight from './BoxRigth'
 import { StyledAside, StyledContainer, StyledGridItem, StyledGridMain, StyledGridMid, StyledMid, StyledProductBox, StyledRight } from './index.styled'
@@ -20,7 +21,22 @@ const HomeContainer = () => {
           </StyledRight>
         </StyledGridMain>
         <StyledGridMid container spacing={{ xs: 4 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-          <StyledGridItem>
+          <StyledGridItem item md={12}>
+            <Typography variant="h2" component="h4">
+              h1. Heading
+            </Typography>
+          </StyledGridItem>
+          <StyledGridItem item md={4} sm={8} xs={12}>
+            <StyledProductBox>
+              <p>prod</p>
+            </StyledProductBox>
+          </StyledGridItem>
+          <StyledGridItem item md={4} sm={8} xs={12}>
+            <StyledProductBox>
+              <p>prod</p>
+            </StyledProductBox>
+          </StyledGridItem>
+          <StyledGridItem item md={4} sm={8} xs={12}>
             <StyledProductBox>
               <p>prod</p>
             </StyledProductBox>

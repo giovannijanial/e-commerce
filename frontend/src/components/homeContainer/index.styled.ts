@@ -13,8 +13,12 @@ export const StyledMid = styled(Grid)``;
 
 export const StyledRight = styled(Grid)``;
 
-export const StyledGridMid = styled(Grid)``;
-
+export const StyledGridMid = styled(Grid)`
+	padding-top: 20px;
+`;
 export const StyledGridItem = styled(Grid)``;
 
-export const StyledProductBox = styled(Box)``;
+export const StyledProductBox = styled(Box)`
+	border: solid 1px black;
+	height: 300px;
+`;
