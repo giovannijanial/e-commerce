@@ -2,6 +2,7 @@ import Header from "./components/header/Index"
 import { GlobalStyle, theme } from "./app.styled"
 import { ThemeProvider } from '@mui/material/styles';
 import Carousel from "./components/carousel/Index";
+import HomeContainer from "./components/homeContainer/Index";
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
         <GlobalStyle />
         <Header />
         <Carousel />
+        <HomeContainer />
       </ThemeProvider>
     </>
   )
