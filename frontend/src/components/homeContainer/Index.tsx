@@ -2,7 +2,7 @@
 import { Typography } from '@mui/material'
 import BoxMid from './BoxMid'
 import BoxRight from './BoxRigth'
-import { StyledAside, StyledContainer, StyledGridItem, StyledGridMain, StyledGridMid, StyledMid, StyledProductBox, StyledRight } from './index.styled'
+import { StyledAside, StyledContainer, StyledGridItem, StyledGridMain, StyledMid, StyledNewProducts, StyledOthers, StyledProductBox, StyledRight, StyledTopSelling } from './index.styled'
 import ListCategories from './ListCategories'
 
 const HomeContainer = () => {
@@ -20,10 +20,10 @@ const HomeContainer = () => {
             <BoxRight />
           </StyledRight>
         </StyledGridMain>
-        <StyledGridMid container spacing={{ xs: 4 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+        <StyledNewProducts container spacing={{ xs: 4 }} columns={{ xs: 4, sm: 8, md: 12 }}>
           <StyledGridItem item md={12}>
             <Typography variant="h2" component="h4">
-              h1. Heading
+              New Products
             </Typography>
           </StyledGridItem>
           <StyledGridItem item md={4} sm={8} xs={12}>
@@ -41,7 +41,66 @@ const HomeContainer = () => {
               <p>prod</p>
             </StyledProductBox>
           </StyledGridItem>
-        </StyledGridMid>
+        </StyledNewProducts>
+        <StyledTopSelling container spacing={{ xs: 4 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+          <StyledGridItem item md={12}>
+            <Typography variant="h2" component="h4">
+              Top Sellings
+            </Typography>
+          </StyledGridItem>
+          <StyledGridItem item md={4} sm={8} xs={12}>
+            <StyledProductBox>
+              <p>prod</p>
+            </StyledProductBox>
+          </StyledGridItem>
+          <StyledGridItem item md={4} sm={8} xs={12}>
+            <StyledProductBox>
+              <p>prod</p>
+            </StyledProductBox>
+          </StyledGridItem>
+          <StyledGridItem item md={4} sm={8} xs={12}>
+            <StyledProductBox>
+              <p>prod</p>
+            </StyledProductBox>
+          </StyledGridItem>
+        </StyledTopSelling>
+        <StyledOthers container spacing={{ xs: 4 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+          <StyledGridItem item md={12}>
+            <Typography variant="h2" component="h4">
+              Others
+            </Typography>
+          </StyledGridItem>
+          <StyledGridItem item md={4} sm={8} xs={12}>
+            <StyledProductBox>
+              <p>prod</p>
+            </StyledProductBox>
+          </StyledGridItem>
+          <StyledGridItem item md={4} sm={8} xs={12}>
+            <StyledProductBox>
+              <p>prod</p>
+            </StyledProductBox>
+          </StyledGridItem>
+          <StyledGridItem item md={4} sm={8} xs={12}>
+            <StyledProductBox>
+              <p>prod</p>
+            </StyledProductBox>
+          </StyledGridItem>
+          <StyledGridItem item md={4} sm={8} xs={12}>
+            <StyledProductBox>
+              <p>prod</p>
+            </StyledProductBox>
+          </StyledGridItem>
+          <StyledGridItem item md={4} sm={8} xs={12}>
+            <StyledProductBox>
+              <p>prod</p>
+            </StyledProductBox>
+          </StyledGridItem>
+          <StyledGridItem item md={4} sm={8} xs={12}>
+            <StyledProductBox>
+              <p>prod</p>
+            </StyledProductBox>
+          </StyledGridItem>
+        </StyledOthers>
 
       </StyledContainer >
 
