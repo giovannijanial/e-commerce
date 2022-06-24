@@ -1,7 +1,7 @@
 import { ListItemButton, ListItemIcon, ListSubheader } from "@mui/material";
 import List from "@mui/material/List";
 import { styled } from "@mui/material/styles";
-import { theme } from "../../app.styled";
+import { theme } from "../../../app.styled";
 
 export const StyledList = styled(List)``;
 

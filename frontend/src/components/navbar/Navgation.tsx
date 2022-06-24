@@ -1,4 +1,5 @@
 import { StyledBoxNavgation, StyledItemBox } from "./navgation.styled"
+import { Link } from "react-router-dom"
 
 const Navgation = () => {
 
@@ -6,10 +7,10 @@ const Navgation = () => {
   return (
     <StyledBoxNavgation>
       <StyledItemBox>
-        Home
+        <Link to="/">Home</Link>
       </StyledItemBox>
       <StyledItemBox>
-        Produtos
+        <Link to="/products">Products</Link>
       </StyledItemBox>
       <StyledItemBox>
         Usuário
