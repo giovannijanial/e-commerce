@@ -22,7 +22,8 @@ const Footer = () => {
       sx={{
         display: 'flex',
         flexDirection: 'column',
-        height: "200px"
+        height: "100px",
+        marginTop: "20px"
       }}
     >
       <Box
@@ -31,7 +32,8 @@ const Footer = () => {
           py: 3,
           px: 2,
           mt: 'auto',
-          backgroundColor: theme.palette.primary.main
+          backgroundColor: theme.palette.primary.main,
+          height: "100%",
         }}
       >
         <Container maxWidth="sm">

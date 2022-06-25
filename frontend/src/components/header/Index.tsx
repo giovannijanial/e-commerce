@@ -2,7 +2,7 @@ import Buttons from './Buttons'
 import Logo from './Logo'
 import { StyledGridItem, StyledGrid, StyledGridNavigation } from './index.styled'
 import Search from './Search'
-import Navbar from '../navbar/Index'
+import Navbar from './navbar/Index'
 
 const Header = () => {
   return (

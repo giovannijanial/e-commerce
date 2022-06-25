@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import { theme } from "../../app.styled";
+import { theme } from "../../../app.styled";
 
 export const StyledBoxNavgation = styled(Box)`
 	width: 500px;
@@ -18,6 +18,9 @@ export const StyledItemBox = styled(Box)`
 	cursor: pointer;
 
 	a:hover {
+		color: ${theme.palette.primary.main};
+	}
+	.active {
 		color: ${theme.palette.primary.main};
 	}
 `;

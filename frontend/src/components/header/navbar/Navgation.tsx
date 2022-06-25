@@ -1,5 +1,5 @@
+import { NavLink } from "react-router-dom"
 import { StyledBoxNavgation, StyledItemBox } from "./navgation.styled"
-import { Link } from "react-router-dom"
 
 const Navgation = () => {
 
@@ -7,19 +7,19 @@ const Navgation = () => {
   return (
     <StyledBoxNavgation>
       <StyledItemBox>
-        <Link to="/">Home</Link>
+        <NavLink to="/">Home</NavLink>
       </StyledItemBox>
       <StyledItemBox>
-        <Link to="/products">Products</Link>
+        <NavLink to="/products">Products</NavLink>
       </StyledItemBox>
       <StyledItemBox>
-        <Link to="/">Usuário</Link>
+        <NavLink to="/users">Users</NavLink>
       </StyledItemBox>
       <StyledItemBox>
-        <Link to="/">Vendedores</Link>
+        <NavLink to="/sellers">Sellers</NavLink>
       </StyledItemBox>
       <StyledItemBox>
-        <Link to="/">Sair</Link>
+        <NavLink to="/#">Sair</NavLink>
       </StyledItemBox>
     </StyledBoxNavgation>
   )

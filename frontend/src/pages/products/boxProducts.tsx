@@ -17,7 +17,7 @@ const BoxProducts = () => {
   }, [data])
 
   function showProducts() {
-    return products && products.slice(0, 12).map((product: IProduct) => (
+    return products && products.slice(0, 15).map((product: IProduct) => (
       <BoxProduct key={product.id} product={product} />
     ))
   }

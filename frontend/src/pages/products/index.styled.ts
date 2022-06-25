@@ -5,7 +5,7 @@ export const SBoxProducts = styled(Box)`
 	display: flex;
 	flex-flow: row wrap;
 	justify-content: space-around;
-	gap: 15px;
+	gap: 10px;
 `;
 
 export const SBoxProduct = styled(Box)`

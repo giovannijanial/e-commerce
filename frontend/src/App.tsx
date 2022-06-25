@@ -5,6 +5,8 @@ import Footer from "./components/footer/Footer";
 import Header from "./components/header/Index";
 import HomePage from "./pages/home/Index";
 import ProductsPage from './pages/products/Index';
+import SellersPage from './pages/sellers/Index';
+import UsersPage from './pages/users/Index';
 
 export const url = "http://localhost:3000";
 
@@ -19,6 +21,8 @@ function App() {
           <Routes>
             <Route path='/' element={<HomePage />} />
             <Route path='/products' element={<ProductsPage />} />
+            <Route path='/users' element={<UsersPage />} />
+            <Route path='/sellers' element={<SellersPage />} />
           </Routes>
           <Footer />
         </BrowserRouter>
