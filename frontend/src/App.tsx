@@ -1,12 +1,15 @@
-import Header from "./components/header/Index"
-import { GlobalStyle, theme } from "./app.styled"
 import { ThemeProvider } from '@mui/material/styles';
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { GlobalStyle, theme } from "./app.styled";
 import Footer from "./components/footer/Footer";
-import Home from "./pages/home/Home";
-import Products from "./pages/products/Products";
+import Header from "./components/header/Index";
+import HomePage from "./pages/home/Index";
+import ProductsPage from './pages/products/Index';
+
+export const url = "http://localhost:3000";
 
 function App() {
+
   return (
     <>
       <ThemeProvider theme={theme}>
@@ -14,8 +17,8 @@ function App() {
         <BrowserRouter>
           <Header />
           <Routes>
-            <Route path='/' element={<Home />} />
-            <Route path='/products' element={<Products />} />
+            <Route path='/' element={<HomePage />} />
+            <Route path='/products' element={<ProductsPage />} />
           </Routes>
           <Footer />
         </BrowserRouter>

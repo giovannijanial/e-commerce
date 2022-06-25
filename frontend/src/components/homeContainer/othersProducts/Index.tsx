@@ -1,46 +1,35 @@
-import { Typography } from '@mui/material'
-import React from 'react'
-import { StyledGridItem, StyledProductBox } from '../index.styled'
+import { Grid, Typography } from '@mui/material'
+import { useEffect, useState } from 'react';
+import { IProduct } from '../../../interfaces/Product';
+import ProductItem from '../BoxProduct';
 import { StyledOthers } from './index.styled'
+import { useFetch } from '../../../hooks/useFetch';
+import { url } from '../../../App';
 
 const HomeOthers = () => {
+  const [products, setProducts] = useState<IProduct[] | any>(null);
+
+  const { data, loading, error, httpConfig } = useFetch(`${url}/product`);
+
+  useEffect(() => {
+    if (data) {
+      setProducts(data);
+    }
+  }, [data])
+
+  function showOthersProducts() {
+    return products && products.slice(13, 22).map((product: IProduct) => (
+      <ProductItem key={product.id} product={product} />
+    ))
+  }
   return (
     <StyledOthers container spacing={{ xs: 4 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-      <StyledGridItem item md={12}>
+      <Grid item md={12}>
         <Typography variant="h2" component="h4">
           Others
         </Typography>
-      </StyledGridItem>
-      <StyledGridItem item md={4} sm={8} xs={12}>
-        <StyledProductBox>
-          <p>prod</p>
-        </StyledProductBox>
-      </StyledGridItem>
-      <StyledGridItem item md={4} sm={8} xs={12}>
-        <StyledProductBox>
-          <p>prod</p>
-        </StyledProductBox>
-      </StyledGridItem>
-      <StyledGridItem item md={4} sm={8} xs={12}>
-        <StyledProductBox>
-          <p>prod</p>
-        </StyledProductBox>
-      </StyledGridItem>
-      <StyledGridItem item md={4} sm={8} xs={12}>
-        <StyledProductBox>
-          <p>prod</p>
-        </StyledProductBox>
-      </StyledGridItem>
-      <StyledGridItem item md={4} sm={8} xs={12}>
-        <StyledProductBox>
-          <p>prod</p>
-        </StyledProductBox>
-      </StyledGridItem>
-      <StyledGridItem item md={4} sm={8} xs={12}>
-        <StyledProductBox>
-          <p>prod</p>
-        </StyledProductBox>
-      </StyledGridItem>
+      </Grid>
+      {showOthersProducts()}
     </StyledOthers>
   )
 }

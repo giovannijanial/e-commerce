@@ -13,13 +13,13 @@ const Navgation = () => {
         <Link to="/products">Products</Link>
       </StyledItemBox>
       <StyledItemBox>
-        Usuário
+        <Link to="/">Usuário</Link>
       </StyledItemBox>
       <StyledItemBox>
-        Vendedores
+        <Link to="/">Vendedores</Link>
       </StyledItemBox>
       <StyledItemBox>
-        Sair
+        <Link to="/">Sair</Link>
       </StyledItemBox>
     </StyledBoxNavgation>
   )

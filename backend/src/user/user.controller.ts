@@ -16,11 +16,11 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { UserService } from './user.service';
 
 @Controller('user')
-@UseGuards(AuthGuard('jwt'))
+//@UseGuards(AuthGuard('jwt'))
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @Role('admin')
+  //@Role('admin')
   @UseGuards(RoleGuard)
   @Get()
   findAll() {

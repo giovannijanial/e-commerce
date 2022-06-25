@@ -16,7 +16,8 @@ export const StyledBoxNavgation = styled(Box)`
 export const StyledItemBox = styled(Box)`
 	height: 20px;
 	cursor: pointer;
-	&:hover {
+
+	a:hover {
 		color: ${theme.palette.primary.main};
 	}
 `;

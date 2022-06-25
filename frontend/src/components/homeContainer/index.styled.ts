@@ -5,8 +5,3 @@ export const SHomeContainer = styled(Container)`
 `;
 
 export const StyledGridItem = styled(Grid)``;
-
-export const StyledProductBox = styled(Box)`
-	border: solid 1px black;
-	height: 350px;
-`;

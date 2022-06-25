@@ -2,7 +2,7 @@ import React from 'react'
 import HomeContainer from '../../components/homeContainer/Index'
 import Carousel from "../../components/carousel/Index";
 
-const Home = () => {
+const HomePage = () => {
   return (
     <>
       <Carousel />
@@ -11,4 +11,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default HomePage

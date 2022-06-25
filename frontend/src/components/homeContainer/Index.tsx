@@ -2,6 +2,7 @@
 import { SHomeContainer } from './index.styled'
 import HomeMain from './main/Index'
 import HomeNewProducts from './newProducts/Index'
+import HomeOthers from './othersProducts/Index'
 import HomeTopSelling from './topSelling/Index'
 
 
@@ -11,6 +12,7 @@ const HomeContainer = () => {
       <HomeMain />
       <HomeNewProducts />
       <HomeTopSelling />
+      <HomeOthers />
     </SHomeContainer >
   )
 }
