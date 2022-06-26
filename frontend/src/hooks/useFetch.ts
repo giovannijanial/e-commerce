@@ -11,6 +11,7 @@ export function useFetch(url: string) {
 
 	const httpConfig: IHttpConfig = (data: any, method: string) => {
 		if (method === "POST") {
+			console.log(data);
 			setConfig({
 				method,
 				headers: {

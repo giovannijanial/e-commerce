@@ -1,12 +1,11 @@
-import React from 'react'
 import { MainContainer } from '../../components/main/main.styled'
 
-const UsersPage = () => {
+const AboutPage = () => {
   return (
     <MainContainer>
-      <h1>USERS</h1>
+      <h1>ABOUT</h1>
     </MainContainer>
   )
 }
 
-export default UsersPage
+export default AboutPage

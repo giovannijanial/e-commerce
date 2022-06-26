@@ -1,4 +1,4 @@
-import { Grid, Typography } from '@mui/material'
+import { Grid, Pagination, Typography } from '@mui/material'
 import ListCategories from '../../components/homeContainer/main/ListCategories'
 import { MainContainer } from '../../components/main/main.styled'
 import BoxProducts from './boxProducts'
@@ -16,6 +16,9 @@ const ProductsPage = () => {
       </Grid>
       <Grid item xs={9}>
         <BoxProducts />
+      </Grid>
+      <Grid item>
+        <Pagination count={10} size="large" variant='outlined' color='primary' />
       </Grid>
     </MainContainer >
   )
