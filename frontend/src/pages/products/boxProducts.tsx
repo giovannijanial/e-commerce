@@ -3,7 +3,7 @@ import { url } from '../../App';
 import { useFetch } from '../../hooks/useFetch';
 import { IProduct } from '../../interfaces/Product';
 import BoxProduct from './boxProduct';
-import { SBoxProducts } from './index.styled'
+import { Box } from "@mui/system";
 
 const BoxProducts = () => {
   const [products, setProducts] = useState<IProduct[] | any>(null);
@@ -18,16 +18,23 @@ const BoxProducts = () => {
 
   function showProducts() {
     return products && products.slice(0, 15).map((product: IProduct) => (
-      <BoxProduct key={product.id} product={product} />
+      <Box>
+        <BoxProduct key={product.id} product={product} />
+      </Box>
     ))
   }
 
   return (
-    <SBoxProducts>
+    <Box sx={{
+      display: "flex",
+      flexFlow: "row wrap",
+      justifyContent: "center",
+      gap: "10px",
+    }}>
       {loading && (<p>Loading...</p>)}
       {error && (<p>{error.message}</p>)}
       {showProducts()}
-    </SBoxProducts>
+    </Box>
   )
 }
 

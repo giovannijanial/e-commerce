@@ -28,10 +28,19 @@ const SearchPage = () => {
 
   return (
     <MainContainer>
-      <Typography variant='h3'>Results:</Typography>
-      <Grid container spacing={{ xs: 4 }} columns={{ xs: 4, sm: 8, md: 12 }} >
-        <Grid item xs={9} >
-
+      <Grid container spacing={{ xs: 4 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+        <Grid item xs={12}>
+          <Typography variant='h3'>Results:</Typography>
+        </Grid>
+        <Grid item xs={12} sm={12} md={12} sx={{
+          display: "flex",
+          flexFlow: "row wrap",
+          justifyContent: "center",
+          gap: "50px",
+        }}>
+          {loading && (<p>Loading...</p>)}
+          {error && (<p>{error.message}</p>)}
+          {showResults()}
         </Grid>
       </Grid>
     </MainContainer >

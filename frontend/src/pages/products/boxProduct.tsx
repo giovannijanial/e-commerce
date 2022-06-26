@@ -1,5 +1,5 @@
+import { SBoxProduct } from '../../components/productBox/index.styled'
 import { IProduct } from '../../interfaces/Product'
-import { SBoxProduct } from './index.styled'
 
 const BoxProduct = ({ product }: { product: IProduct }) => {
   return (

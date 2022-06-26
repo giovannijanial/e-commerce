@@ -7,3 +7,9 @@ export const StyledBoxMid = styled(Box)`
 	gap: 30px;
 	height: 100%;
 `;
+
+export const SProductBoxMain = styled(Box)`
+	width: 100%;
+	height: 100%;
+	background-color: ${theme.palette.background.default};
+`;
