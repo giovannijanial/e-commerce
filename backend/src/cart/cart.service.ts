@@ -137,14 +137,14 @@ export class CartService {
 
   findAll() {
     return this.cartRepository.find({
-      relations: ['user', 'CartProducts', 'CartProducts.product'],
+      relations: ['user', 'cartProducts', 'cartProducts.product'],
     });
   }
 
   findOne(id: string) {
     const cart = this.cartRepository.findOne({
       where: { id },
-      relations: ['user', 'CartProducts', 'CartProducts.product'],
+      relations: ['user', 'cartProducts', 'cartProducts.product'],
     });
 
     if (!cart) {

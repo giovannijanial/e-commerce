@@ -5,7 +5,7 @@ export const StyleTextField = styled(TextField)`
 	display: inline-flex;
 	flex-direction: column;
 	position: relative;
-	width: 90%;
+	width: 100%;
 	div {
 		border-radius: 1200px;
 		height: 50px;

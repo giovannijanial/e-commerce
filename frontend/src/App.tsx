@@ -7,8 +7,10 @@ import AboutPage from './pages/about/Index';
 import ContactPage from './pages/contact/Index';
 import HomePage from "./pages/home/Index";
 import LoginPage from './pages/login/Index';
+import NotFoundPage from './pages/notFound/Index';
 import { default as OrdersPage } from './pages/orders/Index';
 import ProductsPage from './pages/products/Index';
+import SearchPage from './pages/search/Index';
 import SignUpPage from './pages/signUp/Index';
 
 export const url = "http://localhost:3000";
@@ -29,6 +31,8 @@ function App() {
             <Route path='/contact' element={<ContactPage />} />
             <Route path='/login' element={<LoginPage />} />
             <Route path='/sign' element={<SignUpPage />} />
+            <Route path='/search' element={<SearchPage />} />
+            <Route path='*' element={<NotFoundPage />} />
           </Routes>
           <Footer />
         </BrowserRouter>
