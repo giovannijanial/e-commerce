@@ -62,6 +62,10 @@ export const GlobalStyle = createGlobalStyle`
     margin: 0px;
 		font-family: ${theme.typography.fontFamily};
 		font-size: 0.92em;
-		color:${theme.palette.text.primary}; ;
+		color:${theme.palette.text.primary};
   }
+	a {
+		text-decoration: none;
+		color: ${theme.palette.text.primary};
+	}
 `;

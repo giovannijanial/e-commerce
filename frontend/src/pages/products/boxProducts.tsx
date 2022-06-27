@@ -1,10 +1,10 @@
 import { Box } from "@mui/system";
 import { useEffect, useState } from 'react';
+import ReactLoading from 'react-loading';
 import { url } from '../../App';
+import ProductBox from "../../components/productBox/Index";
 import { useFetch } from '../../hooks/useFetch';
 import { IProduct } from '../../interfaces/Product';
-import BoxProduct from './boxProduct';
-import ReactLoading from 'react-loading';
 
 const BoxProducts = () => {
   const [products, setProducts] = useState<IProduct[] | any>(null);
@@ -20,7 +20,7 @@ const BoxProducts = () => {
   function showProducts() {
     return products && products.slice(0, 15).map((product: IProduct) => (
       <Box>
-        <BoxProduct key={product.id} product={product} />
+        <ProductBox key={product.id} product={product} />
       </Box>
     ))
   }

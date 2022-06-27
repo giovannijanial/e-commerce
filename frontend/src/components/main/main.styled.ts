@@ -5,6 +5,6 @@ export const MainContainer = styled(Grid)`
 	height: 100%;
 	display: flex;
 	justify-content: center;
-	padding: 30px;
+	padding: 30px 30px 30px 60px;
 	margin-bottom: 80px;
 `;

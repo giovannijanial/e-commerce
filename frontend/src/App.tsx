@@ -10,6 +10,7 @@ import LoginPage from './pages/login/Index';
 import NotFoundPage from './pages/notFound/Index';
 import { default as OrdersPage } from './pages/orders/Index';
 import ProductsPage from './pages/products/Index';
+import ProductPage from './pages/products/product/Index';
 import SearchPage from './pages/search/Index';
 import SignUpPage from './pages/signUp/Index';
 
@@ -26,6 +27,7 @@ function App() {
           <Routes>
             <Route path='/' element={<HomePage />} />
             <Route path='/products' element={<ProductsPage />} />
+            <Route path='/products/:id' element={<ProductPage />} />
             <Route path='/orders' element={<OrdersPage />} />
             <Route path='/about' element={<AboutPage />} />
             <Route path='/contact' element={<ContactPage />} />
