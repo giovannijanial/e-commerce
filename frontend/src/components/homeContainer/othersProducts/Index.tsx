@@ -5,6 +5,7 @@ import ProductItem from '../BoxProduct';
 import { StyledOthers } from './index.styled'
 import { useFetch } from '../../../hooks/useFetch';
 import { url } from '../../../App';
+import ReactLoading from 'react-loading';
 
 const HomeOthers = () => {
   const [products, setProducts] = useState<IProduct[] | any>(null);
@@ -29,6 +30,8 @@ const HomeOthers = () => {
           Others
         </Typography>
       </Grid>
+      {loading && (<ReactLoading type={'spin'} color={'red'} height={60} width={60} />)}
+      {error && (<p>{error.message}</p>)}
       {showOthersProducts()}
     </StyledOthers>
   )

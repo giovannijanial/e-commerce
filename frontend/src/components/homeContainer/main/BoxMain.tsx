@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react'
+import ReactLoading from 'react-loading'
+import { theme } from '../../../app.styled'
 import { IHttpConfig } from '../../../interfaces/HttpConfig'
 import { IProduct } from '../../../interfaces/Product'
 import { StyledBoxMid } from './boxMain.styled'
@@ -28,7 +30,7 @@ const BoxMain = ({ httpConfig, data, loading, error, locale }:
 
   return (
     <StyledBoxMid>
-      {loading && (<p>Loading...</p>)}
+      {loading && (<ReactLoading type={'spin'} color={'red'} height={60} width={60} />)}
       {error && (<p>{error.message}</p>)}
       {(locale === "left") ? showProductsLeft() : showProductsRight()}
     </StyledBoxMid>

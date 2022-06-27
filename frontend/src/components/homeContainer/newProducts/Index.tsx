@@ -1,5 +1,6 @@
 import { Grid, Typography } from '@mui/material'
 import { useEffect, useState } from 'react'
+import ReactLoading from 'react-loading'
 import { url } from '../../../App'
 import { useFetch } from '../../../hooks/useFetch'
 import { IProduct } from '../../../interfaces/Product'
@@ -30,6 +31,8 @@ const HomeNewProducts = () => {
           New Products
         </Typography>
       </Grid>
+      {loading && (<ReactLoading type={'spin'} color={'red'} height={60} width={60} />)}
+      {error && (<p>{error.message}</p>)}
       {showNewProducts()}
     </StyledNewProducts>
   )

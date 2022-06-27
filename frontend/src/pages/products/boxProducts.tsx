@@ -1,9 +1,10 @@
+import { Box } from "@mui/system";
 import { useEffect, useState } from 'react';
 import { url } from '../../App';
 import { useFetch } from '../../hooks/useFetch';
 import { IProduct } from '../../interfaces/Product';
 import BoxProduct from './boxProduct';
-import { Box } from "@mui/system";
+import ReactLoading from 'react-loading';
 
 const BoxProducts = () => {
   const [products, setProducts] = useState<IProduct[] | any>(null);
@@ -31,7 +32,7 @@ const BoxProducts = () => {
       justifyContent: "center",
       gap: "10px",
     }}>
-      {loading && (<p>Loading...</p>)}
+      {loading && (<ReactLoading type={'spin'} color={'red'} height={60} width={60} />)}
       {error && (<p>{error.message}</p>)}
       {showProducts()}
     </Box>
