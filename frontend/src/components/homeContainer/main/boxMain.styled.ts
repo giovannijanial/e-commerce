@@ -4,7 +4,7 @@ import { theme } from "../../../app.styled";
 export const StyledBoxMid = styled(Box)`
 	display: flex;
 	flex-direction: column;
-	gap: 30px;
+	gap: 10px;
 	height: 100%;
 `;
 

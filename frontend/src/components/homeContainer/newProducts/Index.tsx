@@ -1,10 +1,9 @@
-import { Grid, Typography } from '@mui/material'
+import { CircularProgress, Grid, Typography } from '@mui/material'
 import { useEffect, useState } from 'react'
-import ReactLoading from 'react-loading'
 import { url } from '../../../App'
 import { useFetch } from '../../../hooks/useFetch'
 import { IProduct } from '../../../interfaces/Product'
-import ProductItem from '../BoxProduct'
+import ProductItemCard from '../BoxProduct'
 import { StyledNewProducts } from './index.styled'
 
 const HomeNewProducts = () => {
@@ -20,7 +19,7 @@ const HomeNewProducts = () => {
 
   function showNewProducts() {
     return products && products.slice(7, 10).map((product: IProduct) => (
-      <ProductItem key={product.id} product={product} />
+      <ProductItemCard key={product.id} product={product} />
     ))
   }
 
@@ -31,7 +30,7 @@ const HomeNewProducts = () => {
           New Products
         </Typography>
       </Grid>
-      {loading && (<ReactLoading type={'spin'} color={'red'} height={60} width={60} />)}
+      {loading && (<CircularProgress color="primary" />)}
       {error && (<p>{error.message}</p>)}
       {showNewProducts()}
     </StyledNewProducts>

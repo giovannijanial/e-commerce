@@ -1,8 +1,8 @@
+import { CircularProgress } from "@mui/material";
 import { Box } from "@mui/system";
 import { useEffect, useState } from 'react';
-import ReactLoading from 'react-loading';
 import { url } from '../../App';
-import ProductBox from "../../components/productBox/Index";
+import ProductCard from "../../components/productCard/Index";
 import { useFetch } from '../../hooks/useFetch';
 import { IProduct } from '../../interfaces/Product';
 
@@ -20,7 +20,7 @@ const BoxProducts = () => {
   function showProducts() {
     return products && products.slice(0, 15).map((product: IProduct) => (
       <Box>
-        <ProductBox key={product.id} product={product} />
+        <ProductCard key={product.id} product={product} />
       </Box>
     ))
   }
@@ -30,9 +30,9 @@ const BoxProducts = () => {
       display: "flex",
       flexFlow: "row wrap",
       justifyContent: "center",
-      gap: "10px",
+      gap: "20px",
     }}>
-      {loading && (<ReactLoading type={'spin'} color={'red'} height={60} width={60} />)}
+      {loading && (<CircularProgress color="primary" />)}
       {error && (<p>{error.message}</p>)}
       {showProducts()}
     </Box>

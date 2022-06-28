@@ -1,11 +1,10 @@
-import { Grid, Typography } from '@mui/material'
+import { CircularProgress, Grid, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { IProduct } from '../../../interfaces/Product';
-import ProductItem from '../BoxProduct';
-import { StyledOthers } from './index.styled'
-import { useFetch } from '../../../hooks/useFetch';
 import { url } from '../../../App';
-import ReactLoading from 'react-loading';
+import { useFetch } from '../../../hooks/useFetch';
+import { IProduct } from '../../../interfaces/Product';
+import ProductItemCard from '../BoxProduct';
+import { StyledOthers } from './index.styled';
 
 const HomeOthers = () => {
   const [products, setProducts] = useState<IProduct[] | any>(null);
@@ -20,17 +19,18 @@ const HomeOthers = () => {
 
   function showOthersProducts() {
     return products && products.slice(13, 22).map((product: IProduct) => (
-      <ProductItem key={product.id} product={product} />
+      <ProductItemCard key={product.id} product={product} />
     ))
   }
   return (
-    <StyledOthers container spacing={{ xs: 4 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+    <StyledOthers container spacing={{ xs: 4 }} columns={{ xs: 4, sm: 8, md: 12 }}
+      sx={{ marginBottom: 20 }}>
       <Grid item md={12}>
         <Typography variant="h2" component="h4">
           Others
         </Typography>
       </Grid>
-      {loading && (<ReactLoading type={'spin'} color={'red'} height={60} width={60} />)}
+      {loading && (<CircularProgress color="primary" />)}
       {error && (<p>{error.message}</p>)}
       {showOthersProducts()}
     </StyledOthers>

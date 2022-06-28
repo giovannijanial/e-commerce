@@ -1,11 +1,10 @@
-import { Grid, Typography } from '@mui/material'
+import { CircularProgress, Grid, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
-import ReactLoading from 'react-loading';
 import { url } from '../../../App';
 import { useFetch } from '../../../hooks/useFetch';
 import { IProduct } from '../../../interfaces/Product';
-import ProductItem from '../BoxProduct';
-import { StyledTopSelling } from './index.styled'
+import ProductItemCard from '../BoxProduct';
+import { StyledTopSelling } from './index.styled';
 
 const HomeTopSelling = () => {
   const [products, setProducts] = useState<IProduct[] | any>(null);
@@ -20,7 +19,7 @@ const HomeTopSelling = () => {
 
   function showTopProducts() {
     return products && products.slice(10, 13).map((product: IProduct) => (
-      <ProductItem key={product.id} product={product} />
+      <ProductItemCard key={product.id} product={product} />
     ))
   }
   return (
@@ -30,7 +29,7 @@ const HomeTopSelling = () => {
           Top Sellings
         </Typography>
       </Grid>
-      {loading && (<ReactLoading type={'spin'} color={'red'} height={60} width={60} />)}
+      {loading && (<CircularProgress color="primary" />)}
       {error && (<p>{error.message}</p>)}
       {showTopProducts()}
     </StyledTopSelling>

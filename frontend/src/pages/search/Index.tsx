@@ -1,13 +1,11 @@
-import { Grid, Typography } from '@mui/material';
+import { CircularProgress, Grid, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
-import ReactLoading from 'react-loading';
 import { useSearchParams } from 'react-router-dom';
 import { url } from '../../App';
 import { MainContainer } from '../../components/main/main.styled';
-import ProductBox from '../../components/productBox/Index';
+import ProductCard from '../../components/productCard/Index';
 import { useFetch } from '../../hooks/useFetch';
 import { IProduct } from '../../interfaces/Product';
-import { SBoxProducts } from '../products/index.styled';
 
 const SearchPage = () => {
   const [result, setResult] = useState<IProduct[]>();
@@ -22,7 +20,7 @@ const SearchPage = () => {
 
   function showResults() {
     return result && result.map((product: IProduct) => (
-      <ProductBox key={product.id} product={product} data={data} />
+      <ProductCard key={product.id} product={product} />
     ))
   }
 
@@ -38,7 +36,7 @@ const SearchPage = () => {
           justifyContent: "center",
           gap: "50px",
         }}>
-          {loading && (<p>Loading...</p>)}
+          {loading && (<CircularProgress color="primary" />)}
           {error && (<p>{error.message}</p>)}
           {showResults()}
         </Grid>
