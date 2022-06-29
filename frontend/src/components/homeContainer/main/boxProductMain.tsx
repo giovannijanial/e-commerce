@@ -1,4 +1,5 @@
 import { Card, CardActionArea, CardContent, CardMedia, Typography } from "@mui/material"
+import { Link } from "react-router-dom"
 import { theme } from "../../../app.styled"
 import { IProduct } from "../../../interfaces/Product"
 import FavoriteRating from "../../productCard/Rating"
@@ -7,7 +8,7 @@ import { SProductBoxMain } from "./boxMain.styled"
 const ProductBoxMain = ({ product, data }: { product: IProduct, data: any }) => {
   return (
     <Card>
-      <CardActionArea>
+      <CardActionArea component={Link} to={`/products/${product.id}`}>
         <CardMedia
           component="img"
           height="100%"

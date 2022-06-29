@@ -1,5 +1,6 @@
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import { Card, CardActions, CardActionArea, CardContent, CardMedia, Grid, IconButton, Typography } from '@mui/material';
+import { Link } from 'react-router-dom';
 import { theme } from '../../app.styled';
 import { IProduct } from '../../interfaces/Product';
 import FavoriteRating from '../productCard/Rating';
@@ -8,7 +9,7 @@ const ProductItemCard = ({ product }: { product: IProduct }) => {
   return (
     <Grid item md={4} sm={8} xs={12}>
       <Card>
-        <CardActionArea>
+        <CardActionArea component={Link} to={`/products/${product.id}`}>
           <CardMedia
             component="img"
             height="350"

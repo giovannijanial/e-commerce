@@ -1,5 +1,6 @@
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import { Card, CardActionArea, CardActions, CardContent, CardMedia, IconButton, Typography } from '@mui/material';
+import { Link } from 'react-router-dom';
 import { theme } from '../../app.styled';
 import { IProduct } from '../../interfaces/Product';
 import FavoriteRating from './Rating';
@@ -7,7 +8,7 @@ import FavoriteRating from './Rating';
 const ProductCard = ({ product }: { product: IProduct }) => {
   return (
     <Card sx={{ maxWidth: 345 }}>
-      <CardActionArea>
+      <CardActionArea component={Link} to={`/products/${product.id}`}>
         <CardMedia
           component="img"
           width="250"
@@ -33,7 +34,6 @@ const ProductCard = ({ product }: { product: IProduct }) => {
           <AddShoppingCartIcon />
         </IconButton>
       </CardActions>
-
     </Card >
 
   )

@@ -21,6 +21,9 @@ const Navgation = () => {
       <StyledItemBox>
         <NavLink to="/contact">Contact</NavLink>
       </StyledItemBox>
+      <StyledItemBox>
+        <NavLink to="/dashboard">Dashboard</NavLink>
+      </StyledItemBox>
     </StyledBoxNavgation>
   )
 }

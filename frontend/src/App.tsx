@@ -5,6 +5,7 @@ import Footer from "./components/footer/Footer";
 import Header from "./components/header/Index";
 import AboutPage from './pages/about/Index';
 import ContactPage from './pages/contact/Index';
+import DashBoardPage from './pages/dashboard/Index';
 import HomePage from "./pages/home/Index";
 import LoginPage from './pages/login/Index';
 import NotFoundPage from './pages/notFound/Index';
@@ -34,6 +35,7 @@ function App() {
             <Route path='/login' element={<LoginPage />} />
             <Route path='/sign' element={<SignUpPage />} />
             <Route path='/search' element={<SearchPage />} />
+            <Route path='/dashboard' element={<DashBoardPage />} />
             <Route path='*' element={<NotFoundPage />} />
           </Routes>
           <Footer />

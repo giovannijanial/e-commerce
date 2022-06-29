@@ -8,6 +8,8 @@ import { useFetch } from '../../../hooks/useFetch';
 import { IProduct } from '../../../interfaces/Product'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import InfoProduct from './InfoProduct';
+import FavoriteRating from '../../../components/productCard/Rating';
+import BreadCrumb from '../../../components/breadcrumb/Index';
 
 const ProductPage = () => {
   const [product, setProduct] = useState<IProduct>();
@@ -19,14 +21,17 @@ const ProductPage = () => {
   }, [data])
 
   return (
-    <MainContainer>
+    <MainContainer sx={{ flexDirection: "column", alignItems: "center" }}>
+      <Box sx={{ alignSelf: "flex-start" }}>
+        <BreadCrumb product={product?.name} />
+      </Box>
       <Grid container spacing={4} bgcolor={theme.palette.background.default}
         sx={{
           marginTop: "10px",
           padding: "10px",
           display: "flex",
           justifyContent: "center",
-          maxWidth: "1280px"
+          maxWidth: "1360px"
         }}>
         <Grid item xs={12}
           sx={{ display: "flex", justifyContent: "center" }}>
@@ -47,6 +52,7 @@ const ProductPage = () => {
             industry.Lorem Ipsum has been the industry's standard dummy text
             ever since the 1500s, when an unknown printer took a galley of type
             and scrambled it to make a type specimen book. </Typography>
+          <FavoriteRating />
           <Box sx={{
             marginTop: "40px",
             marginBottom: "120px",
