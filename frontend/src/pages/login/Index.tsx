@@ -56,8 +56,18 @@ export default function LoginPage() {
       setUserName("");
       setPassword("");
       setSucces(true);
-    } catch (error) {
+    } catch (error: Error | any) {
+      if (!error?.response) {
+        setErrorMessage("Sem resposta do servidor!");
+      }
 
+      if (error?.response?.status === 400) {
+        setErrorMessage("Usuário ou senha inválido!")
+      }
+
+      if (error?.response?.status === 401) {
+        setErrorMessage("Sem autorização!")
+      }
     }
 
 
@@ -91,6 +101,8 @@ export default function LoginPage() {
             autoFocus
             value={userName}
             onChange={(e) => setUserName(e.target.value)}
+            error={!!errorMessage}
+            helperText={errorMessage}
           />
           <TextField
             margin="normal"
@@ -103,6 +115,8 @@ export default function LoginPage() {
             autoComplete="current-password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            error={!!errorMessage}
+            helperText={errorMessage}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
