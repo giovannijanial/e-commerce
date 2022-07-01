@@ -20,6 +20,12 @@ export class ProductController {
     return this.productService.findAll();
   }
 
+  @Get('categories')
+  findAllCategories() {
+    console.log('aqui');
+    return this.productService.findAllCategories();
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.productService.findOne(+id);
@@ -39,4 +45,6 @@ export class ProductController {
   remove(@Param('id') id: string) {
     return this.productService.remove(+id);
   }
+
+  //categories
 }

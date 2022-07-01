@@ -1,5 +1,6 @@
-import { IsNumber, IsObject, IsString } from 'class-validator';
+import { IsArray, IsNumber, IsObject, IsString } from 'class-validator';
 import { CartProductEntity } from 'src/cart-product/entities/cart-product.entity';
+import { CategoryEntity } from '../entities/category.entity';
 
 export class CreateProductDto {
   @IsString()
@@ -10,6 +11,9 @@ export class CreateProductDto {
 
   @IsNumber()
   quantity: number;
+
+  @IsArray()
+  categories: CategoryEntity[];
 
   @IsObject()
   cartItems: CartProductEntity[];
