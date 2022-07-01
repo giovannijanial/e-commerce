@@ -7,18 +7,60 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+import { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { MainContainer } from '../../components/main/main.styled';
+import AuthContext from '../../contexts/authProvider';
+import axios from '../../api/axios';
+import { url } from '../../App';
 
+const LOGIN_URL = "http://localhost:3000/auth/login"
 
 export default function LoginPage() {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [succes, setSucces] = useState(false);
+
+  //const { setAuth } = useContext(AuthContext);
+
+  useEffect(() => {
+    setErrorMessage("");
+  }, [userName, password])
+
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+
+    const login = {
+      username: userName,
+      password
+    }
+
+    try {
+      const res = await fetch(LOGIN_URL,
+        {
+          method: "POST",
+          headers: { "Content-type": "application/json" },
+          body: JSON.stringify(login),
+        },
+
+      );
+      const json = await res.json();
+
+      console.log(JSON.stringify(json?.data))
+      console.log(JSON.stringify(json))
+      console.log(json?.data?.accessToken)
+      console.log(json?.data?.roles)
+
+      setUserName("");
+      setPassword("");
+      setSucces(true);
+    } catch (error) {
+
+    }
+
+
   };
 
   return (
@@ -42,11 +84,13 @@ export default function LoginPage() {
             margin="normal"
             required
             fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
+            id="userName"
+            label="UserName"
+            name="userName"
+            autoComplete="userName"
             autoFocus
+            value={userName}
+            onChange={(e) => setUserName(e.target.value)}
           />
           <TextField
             margin="normal"
@@ -57,6 +101,8 @@ export default function LoginPage() {
             type="password"
             id="password"
             autoComplete="current-password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
