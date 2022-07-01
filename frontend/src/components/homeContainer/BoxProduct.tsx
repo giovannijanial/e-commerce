@@ -1,5 +1,5 @@
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import { Card, CardActions, CardActionArea, CardContent, CardMedia, Grid, IconButton, Typography } from '@mui/material';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Grid, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { theme } from '../../app.styled';
 import { IProduct } from '../../interfaces/Product';
@@ -30,9 +30,9 @@ const ProductItemCard = ({ product }: { product: IProduct }) => {
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <IconButton color='primary' aria-label="add to shopping cart" size='small'>
-            <AddShoppingCartIcon />
-          </IconButton>
+          <Button fullWidth variant="contained" startIcon={<ShoppingCartIcon />}>
+            Comprar
+          </Button>
         </CardActions>
       </Card >
     </Grid>
