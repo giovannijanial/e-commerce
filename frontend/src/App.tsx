@@ -14,6 +14,7 @@ import ProductsPage from './pages/products/Index';
 import ProductPage from './pages/products/product/Index';
 import SearchPage from './pages/search/Index';
 import SignUpPage from './pages/signUp/Index';
+import RequireAuthPage from './pages/requireAuth/Index';
 
 export const url = "http://localhost:3000";
 
@@ -26,6 +27,7 @@ function App() {
         <BrowserRouter>
           <Header />
           <Routes>
+            {/* public routes */}
             <Route path='/' element={<HomePage />} />
             <Route path='/products' element={<ProductsPage />} />
             <Route path='/products/:id' element={<ProductPage />} />
@@ -35,7 +37,12 @@ function App() {
             <Route path='/login' element={<LoginPage />} />
             <Route path='/sign' element={<SignUpPage />} />
             <Route path='/search' element={<SearchPage />} />
-            <Route path='/dashboard' element={<DashBoardPage />} />
+
+            {/* admin routes */}
+            <Route element={<RequireAuthPage />}>
+              <Route path='/dashboard' element={<DashBoardPage />} />
+            </Route>
+
             <Route path='*' element={<NotFoundPage />} />
           </Routes>
           <Footer />

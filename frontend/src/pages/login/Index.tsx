@@ -7,12 +7,10 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import { useState, useEffect, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { MainContainer } from '../../components/main/main.styled';
-import AuthContext from '../../contexts/authProvider';
-import axios from '../../api/axios';
-import { url } from '../../App';
+import useAuth from "../../hooks/useAuth";
 
 const LOGIN_URL = "http://localhost:3000/auth/login"
 
@@ -20,9 +18,12 @@ export default function LoginPage() {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const [succes, setSucces] = useState(false);
 
-  //const { setAuth } = useContext(AuthContext);
+  const { addAuth, auth } = useAuth();
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
 
   useEffect(() => {
     setErrorMessage("");
@@ -46,17 +47,16 @@ export default function LoginPage() {
         },
 
       );
-      const json = await res.json();
 
-      console.log(JSON.stringify(json?.data))
-      console.log(JSON.stringify(json))
-      console.log(json?.data?.accessToken)
-      console.log(json?.data?.roles)
+      const json = await res.json();
+      const token = json?.token;
+      addAuth(login, token)
 
       setUserName("");
       setPassword("");
-      setSucces(true);
+      navigate(from, { replace: true })
     } catch (error: Error | any) {
+
       if (!error?.response) {
         setErrorMessage("Sem resposta do servidor!");
       }
