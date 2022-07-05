@@ -7,11 +7,11 @@ import FormControlLabel from '@mui/material/FormControlLabel'
 import Grid from '@mui/material/Grid'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
-import { ChangeEvent, FormEvent, useCallback, useState } from 'react'
-import { Link } from 'react-router-dom'
-import { url } from '../../App'
+import { ChangeEvent, FormEvent, useCallback, useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { MainContainer } from '../../components/main/main.styled'
 import { useUser } from '../../hooks/useUser'
+
 
 export default function SignUpPage() {
   const [firstName, setFirstName] = useState("");
@@ -21,7 +21,20 @@ export default function SignUpPage() {
   const [age, setAge] = useState(0);
   const [password, setpassword] = useState("");
 
-  const { createUser, errorMessage } = useUser();
+  const navigate = useNavigate();
+  const { createUser, error, loading, success } = useUser();
+
+  useEffect(() => {
+    if (success) {
+      setFirstName('');
+      setLastName('');
+      setUsername('');
+      setEmail('');
+      setAge(0);
+      setpassword('');
+      navigate("/");
+    }
+  }, [success])
 
   const handleSubmit = useCallback((event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -39,13 +52,7 @@ export default function SignUpPage() {
 
     createUser(user)
 
-    setFirstName('');
-    setLastName('');
-    setUsername('');
-    setEmail('');
-    setAge(0);
-    setpassword('');
-  }, []);
+  }, [createUser, firstName, lastName, username, email, age, password]);
 
   return (
     <MainContainer>
@@ -119,6 +126,8 @@ export default function SignUpPage() {
                 autoComplete="email"
                 onChange={(e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
                 value={email}
+                error={error.includes("email must be an email")}
+                helperText={error[0]}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -144,6 +153,8 @@ export default function SignUpPage() {
                 autoComplete="new-password"
                 onChange={(e: ChangeEvent<HTMLInputElement>) => setpassword(e.target.value)}
                 value={password}
+                error={error.includes("password should not be empty")}
+                helperText={error[1]}
               />
             </Grid>
             <Grid item xs={12}>

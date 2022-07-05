@@ -5,8 +5,9 @@ import { UserService } from "../services/userService"
 
 export const useUser = () => {
   const [users, setUsers] = useState<IUser[]>([]);
-  const [errorMessage, setErrorMessage] = useState<AxiosError>();
-  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<String[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const getAllUsers = useCallback(async () => {
     setLoading(true);
@@ -15,7 +16,7 @@ export const useUser = () => {
       setUsers(data);
 
     } catch (error: AxiosError | any) {
-      setErrorMessage(error)
+      setError(error.response.data?.message)
     } finally {
       setLoading(false);
     }
@@ -26,11 +27,13 @@ export const useUser = () => {
     setLoading(true);
     try {
       const res = await UserService.createUser(user)
-
+      setSuccess(true);
     } catch (error: AxiosError | any) {
-      if (axios.isAxiosError(error)) {
-        setErrorMessage(error)
-
+      if (!error?.response) {
+        setError(["Sem resposta do servidor!"])
+      }
+      if (error.response.status === 400) {
+        setError(error.response.data?.message)
       }
     } finally {
       setLoading(false)
@@ -41,7 +44,8 @@ export const useUser = () => {
 
   return {
     users,
-    errorMessage,
+    error,
+    success,
     loading,
     getAllUsers,
     createUser
