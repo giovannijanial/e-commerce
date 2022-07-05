@@ -1,7 +1,6 @@
 import { useCallback, useState } from "react"
 import { IProduct } from "../interfaces/Product";
 import { ProductService } from "../services/productService";
-import { UserService } from "../services/userService"
 
 export const useProduct = () => {
   const [products, setProducts] = useState<IProduct[]>([]);
@@ -13,8 +12,6 @@ export const useProduct = () => {
   const getAll = useCallback(async () => {
     setLoading(true);
     const { status, data } = await ProductService.getAll()
-
-    console.log(data);
 
     if (status !== 200) {
       setError(new Error)

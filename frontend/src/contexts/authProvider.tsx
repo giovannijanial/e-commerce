@@ -1,16 +1,8 @@
 import { createContext, ReactNode, useState } from "react";
+import { IAuth, ILogin } from "../interfaces/Auth";
 
 interface Props {
   children: ReactNode;
-}
-
-export interface ILogin {
-  username: string,
-  password: string,
-}
-export interface IAuth {
-  login: ILogin,
-  token: string,
 }
 export interface IAuthContext {
   auth: IAuth

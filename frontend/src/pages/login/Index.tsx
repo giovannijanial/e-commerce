@@ -10,20 +10,21 @@ import Typography from '@mui/material/Typography';
 import { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { MainContainer } from '../../components/main/main.styled';
-import useAuth from "../../hooks/useAuth";
-
-const LOGIN_URL = "http://localhost:3000/auth/login"
+import { useAuth } from '../../hooks/useAuth';
+import { ILogin } from '../../interfaces/Auth';
+import { LocationProps } from '../../interfaces/Location';
 
 export default function LoginPage() {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
-  const { addAuth, auth } = useAuth();
+  const { authLogin, errorMessage: ErrorM } = useAuth();
 
   const navigate = useNavigate();
-  const location = useLocation();
-  const from = location.state?.from?.pathname || "/";
+  const location = useLocation() as unknown as LocationProps;
+
+  const from = location.state?.from?.pathname || '/';
 
   useEffect(() => {
     setErrorMessage("");
@@ -33,43 +34,17 @@ export default function LoginPage() {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const login = {
+    const login: ILogin = {
       username: userName,
       password
     }
 
-    try {
-      const res = await fetch(LOGIN_URL,
-        {
-          method: "POST",
-          headers: { "Content-type": "application/json" },
-          body: JSON.stringify(login),
-        },
+    await authLogin(login)
+    console.log(ErrorM)
 
-      );
-
-      const json = await res.json();
-      const token = json?.token;
-      addAuth(login, token)
-
-      setUserName("");
-      setPassword("");
-      navigate(from, { replace: true })
-    } catch (error: Error | any) {
-
-      if (!error?.response) {
-        setErrorMessage("Sem resposta do servidor!");
-      }
-
-      if (error?.response?.status === 400) {
-        setErrorMessage("Usuário ou senha inválido!")
-      }
-
-      if (error?.response?.status === 401) {
-        setErrorMessage("Sem autorização!")
-      }
-    }
-
+    setUserName("");
+    setPassword("");
+    navigate(from, { replace: true })
 
   };
 

@@ -1,12 +1,12 @@
+import { useContext } from "react";
 import { useLocation, Navigate, Outlet } from "react-router-dom"
-import useAuth from "../../hooks/useAuth";
+import AuthContext from "../../contexts/authProvider";
 
 
 const RequireAuthPage = () => {
-  const { auth } = useAuth();
+  const { auth } = useContext(AuthContext);
   const location = useLocation();
 
-  console.log("user", auth)
   return (
     auth?.token
       ? <Outlet />

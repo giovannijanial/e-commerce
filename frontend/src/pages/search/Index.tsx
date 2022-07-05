@@ -8,7 +8,6 @@ import { useProduct } from '../../hooks/useProduct';
 import { IProduct } from '../../interfaces/Product';
 
 const SearchPage = () => {
-  const [result, setResult] = useState<IProduct[]>();
   const [searchParams] = useSearchParams();
   const urlSearch = url + "/product/?" + searchParams;
 
@@ -16,11 +15,10 @@ const SearchPage = () => {
 
   useEffect(() => {
     getAll()
-    setResult(products)
   }, [getAll])
 
   function showResults() {
-    return result && result.map((product: IProduct) => (
+    return products && products.map((product: IProduct) => (
       <ProductCard key={product.id} product={product} />
     ))
   }

@@ -8,7 +8,6 @@ const Search = () => {
   const navigate = useNavigate();
   const [query, setQuery] = useState<String>("");
 
-  console.log(query)
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     navigate("search?q=" + query)

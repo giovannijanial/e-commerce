@@ -8,7 +8,7 @@ import FavoriteRating from './Rating';
 
 const ProductCard = ({ product }: { product: IProduct }) => {
   return (
-    <Card sx={{ maxWidth: 300, minWidth: 300, minHeight: 400, maxHeight: 400 }}>
+    <Card sx={{ maxWidth: 290, minWidth: 290, minHeight: 400, maxHeight: 400 }}>
       <CardActionArea component={Link} to={`/products/${product.id}`}>
         <CardMedia
           component="img"

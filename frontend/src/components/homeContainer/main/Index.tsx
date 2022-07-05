@@ -5,7 +5,6 @@ import BoxMain from './BoxMain'
 import ListCategories from './ListCategories'
 
 const HomeMain = () => {
-  //const { data, loading, error, httpConfig } = useFetch(`${url}/product`);
   const { getAll, products, loading, error } = useProduct();
 
   useEffect(() => {

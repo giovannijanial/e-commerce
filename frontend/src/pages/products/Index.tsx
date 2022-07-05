@@ -5,7 +5,7 @@ import BoxProducts from './boxProducts'
 
 const ProductsPage = () => {
   return (
-    <MainContainer container spacing={{ xs: 4 }} columns={{ xs: 4, sm: 8, md: 12 }} >
+    <MainContainer container spacing={{ xs: 4 }} >
       <Grid item xs={12} >
         <Typography variant="h3" component="h4">
           Products
