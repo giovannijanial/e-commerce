@@ -1,21 +1,16 @@
 import { CircularProgress, Grid, Typography } from '@mui/material';
-import { useEffect, useState } from 'react';
-import { url } from '../../../App';
-import { useFetch } from '../../../hooks/useFetch';
+import { useEffect } from 'react';
+import { useProduct } from '../../../hooks/useProduct';
 import { IProduct } from '../../../interfaces/Product';
 import ProductItemCard from '../BoxProduct';
 import { StyledTopSelling } from './index.styled';
 
 const HomeTopSelling = () => {
-  const [products, setProducts] = useState<IProduct[] | any>(null);
-
-  const { data, loading, error, httpConfig } = useFetch(`${url}/product`);
+  const { getAll, products, loading, error } = useProduct();
 
   useEffect(() => {
-    if (data) {
-      setProducts(data);
-    }
-  }, [data])
+    getAll()
+  }, [getAll])
 
   function showTopProducts() {
     return products && products.slice(10, 13).map((product: IProduct) => (

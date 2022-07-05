@@ -4,21 +4,24 @@ import { useParams } from 'react-router-dom';
 import { url } from '../../../App';
 import { theme } from '../../../app.styled';
 import { MainContainer } from '../../../components/main/main.styled'
-import { useFetch } from '../../../hooks/useFetch';
+
 import { IProduct } from '../../../interfaces/Product'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import InfoProduct from './InfoProduct';
 import FavoriteRating from '../../../components/productCard/Rating';
 import BreadCrumb from '../../../components/breadcrumb/Index';
+import { useProduct } from '../../../hooks/useProduct';
 
 const ProductPage = () => {
-  const [product, setProduct] = useState<IProduct>();
   const { id } = useParams();
-  const { data, loading, error } = useFetch(`${url}/product/${id}`)
+
+  const { getOne, product } = useProduct();
 
   useEffect(() => {
-    setProduct(data)
-  }, [data])
+    if (id) {
+      getOne(+id)
+    }
+  }, [getOne])
 
   return (
     <MainContainer sx={{ flexDirection: "column", alignItems: "center" }}>

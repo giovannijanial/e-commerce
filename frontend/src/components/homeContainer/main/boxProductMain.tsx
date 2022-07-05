@@ -5,7 +5,7 @@ import { IProduct } from "../../../interfaces/Product"
 import FavoriteRating from "../../productCard/Rating"
 import { SProductBoxMain } from "./boxMain.styled"
 
-const ProductBoxMain = ({ product, data }: { product: IProduct, data: any }) => {
+const ProductBoxMain = ({ product }: { product: IProduct }) => {
   return (
     <Card>
       <CardActionArea component={Link} to={`/products/${product.id}`}>

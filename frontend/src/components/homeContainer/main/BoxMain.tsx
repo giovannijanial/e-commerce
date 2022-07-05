@@ -5,25 +5,17 @@ import { IProduct } from '../../../interfaces/Product'
 import { StyledBoxMid } from './boxMain.styled'
 import ProductBoxMain from './boxProductMain'
 
-const BoxMain = ({ httpConfig, data, loading, error, locale }:
-  { httpConfig: IHttpConfig, data: any, loading: Boolean, error: any, locale: String }) => {
-
-  const [products, setProducts] = useState<IProduct[] | any>(null);
-
-  useEffect(() => {
-    if (data) {
-      setProducts(data);
-    }
-  }, [data])
+const BoxMain = ({ products, loading, error, locale }:
+  { products: IProduct[], loading: Boolean, error: any, locale: String }) => {
 
   function showProductsLeft() {
     return products && products.slice(0, 2).map((product: IProduct) => (
-      <ProductBoxMain key={product.id} product={product} data={data} />
+      <ProductBoxMain key={product.id} product={product} />
     ))
   }
   function showProductsRight() {
     return products && products.slice(3, 6).map((product: IProduct) => (
-      <ProductBoxMain key={product.id} product={product} data={data} />
+      <ProductBoxMain key={product.id} product={product} />
     ))
   }
 

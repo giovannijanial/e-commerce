@@ -4,7 +4,7 @@ import { useSearchParams } from 'react-router-dom';
 import { url } from '../../App';
 import { MainContainer } from '../../components/main/main.styled';
 import ProductCard from '../../components/productCard/Index';
-import { useFetch } from '../../hooks/useFetch';
+import { useProduct } from '../../hooks/useProduct';
 import { IProduct } from '../../interfaces/Product';
 
 const SearchPage = () => {
@@ -12,11 +12,12 @@ const SearchPage = () => {
   const [searchParams] = useSearchParams();
   const urlSearch = url + "/product/?" + searchParams;
 
-  const { data, loading, error, httpConfig } = useFetch(urlSearch)
+  const { getAll, products, loading, error } = useProduct();
 
   useEffect(() => {
-    setResult(data);
-  }, [data])
+    getAll()
+    setResult(products)
+  }, [getAll])
 
   function showResults() {
     return result && result.map((product: IProduct) => (

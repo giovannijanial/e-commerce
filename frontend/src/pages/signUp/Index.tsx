@@ -11,18 +11,17 @@ import { ChangeEvent, FormEvent, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { url } from '../../App'
 import { MainContainer } from '../../components/main/main.styled'
-import { useFetch } from '../../hooks/useFetch'
+import { useUser } from '../../hooks/useUser'
 
 export default function SignUpPage() {
-  const [firstName, setFirstName] = useState<String>("");
-  const [lastName, setLastName] = useState<String>("");
-  const [username, setUsername] = useState<String>("");
-  const [email, setEmail] = useState<String>("");
-  const [age, setAge] = useState<Number>(0);
-  const [password, setpassword] = useState<String>("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [age, setAge] = useState(0);
+  const [password, setpassword] = useState("");
 
-  const urlUser = `${url}/user`
-  const { httpConfig, loading } = useFetch(urlUser);
+  const { createUser } = useUser();
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -38,7 +37,7 @@ export default function SignUpPage() {
       carts: {},
     }
 
-    httpConfig(user, "POST");
+    createUser(user)
 
     setFirstName('');
     setLastName('');

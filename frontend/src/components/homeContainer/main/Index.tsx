@@ -1,11 +1,16 @@
 import { Grid } from '@mui/material'
-import { url } from '../../../App'
-import { useFetch } from '../../../hooks/useFetch'
+import { useEffect } from 'react'
+import { useProduct } from '../../../hooks/useProduct'
 import BoxMain from './BoxMain'
 import ListCategories from './ListCategories'
 
 const HomeMain = () => {
-  const { data, loading, error, httpConfig } = useFetch(`${url}/product`);
+  //const { data, loading, error, httpConfig } = useFetch(`${url}/product`);
+  const { getAll, products, loading, error } = useProduct();
+
+  useEffect(() => {
+    getAll();
+  }, [])
 
   return (
     <Grid container spacing={{ xs: 4 }} columns={{ xs: 4, sm: 8, md: 12 }}>
@@ -13,10 +18,10 @@ const HomeMain = () => {
         <ListCategories />
       </Grid>
       <Grid item md={5} sm={8} xs={12}>
-        <BoxMain httpConfig={httpConfig} data={data} loading={loading} error={error} locale={"left"} />
+        <BoxMain products={products} loading={loading} error={error} locale={"left"} />
       </Grid>
       <Grid item md={4} sm={8} xs={12}>
-        <BoxMain httpConfig={httpConfig} data={data} loading={loading} error={error} locale={"right"} />
+        <BoxMain products={products} loading={loading} error={error} locale={"right"} />
       </Grid>
     </Grid>
   )

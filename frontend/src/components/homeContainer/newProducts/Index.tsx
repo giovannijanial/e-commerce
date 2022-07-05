@@ -1,21 +1,16 @@
 import { CircularProgress, Grid, Typography } from '@mui/material'
-import { useEffect, useState } from 'react'
-import { url } from '../../../App'
-import { useFetch } from '../../../hooks/useFetch'
+import { useEffect } from 'react'
 import { IProduct } from '../../../interfaces/Product'
 import ProductItemCard from '../BoxProduct'
 import { StyledNewProducts } from './index.styled'
+import { useProduct } from '../../../hooks/useProduct'
 
 const HomeNewProducts = () => {
-  const [products, setProducts] = useState<IProduct[] | any>(null);
-
-  const { data, loading, error, httpConfig } = useFetch(`${url}/product`);
+  const { getAll, products, loading, error } = useProduct();
 
   useEffect(() => {
-    if (data) {
-      setProducts(data);
-    }
-  }, [data])
+    getAll()
+  }, [getAll])
 
   function showNewProducts() {
     return products && products.slice(7, 10).map((product: IProduct) => (

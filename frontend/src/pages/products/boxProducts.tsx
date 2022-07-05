@@ -1,21 +1,16 @@
 import { CircularProgress } from "@mui/material";
 import { Box } from "@mui/system";
-import { useEffect, useState } from 'react';
-import { url } from '../../App';
+import { useEffect } from 'react';
 import ProductCard from "../../components/productCard/Index";
-import { useFetch } from '../../hooks/useFetch';
+import { useProduct } from "../../hooks/useProduct";
 import { IProduct } from '../../interfaces/Product';
 
 const BoxProducts = () => {
-  const [products, setProducts] = useState<IProduct[] | any>(null);
-
-  const { data, loading, error, httpConfig } = useFetch(`${url}/product`);
+  const { getAll, products, loading, error } = useProduct();
 
   useEffect(() => {
-    if (data) {
-      setProducts(data);
-    }
-  }, [data])
+    getAll()
+  }, [getAll])
 
   function showProducts() {
     return products && products.slice(0, 15).map((product: IProduct) => (
