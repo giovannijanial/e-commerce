@@ -8,7 +8,7 @@ import { AuthService } from "../services/authService";
 
 export const useAuth = () => {
   const [login, setLogin] = useState<ILogin>();
-  const [errorMessage, setErrorMessage] = useState("");
+  const [error, setError] = useState("ssss");
   const [loading, setLoading] = useState<boolean>(false);
 
   const { addAuth } = useContext(AuthContext);
@@ -23,20 +23,20 @@ export const useAuth = () => {
     } catch (error: AxiosError | any) {
 
       if (!error?.response) {
-        setErrorMessage("Sem resposta do servidor!")
+        setError("Sem resposta do servidor!")
       }
       if (error.response.status === 401) {
-        setErrorMessage(error.response.data?.message)
+        setError("babla")
       }
     } finally {
       setLoading(false)
     }
 
-
   }, []);
 
   return {
     authLogin,
-    errorMessage
+    error,
+    loading,
   }
 }

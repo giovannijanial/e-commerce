@@ -1,3 +1,4 @@
+import { ErrorOutlineOutlined } from '@mui/icons-material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
@@ -7,7 +8,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { MainContainer } from '../../components/main/main.styled';
 import { useAuth } from '../../hooks/useAuth';
@@ -19,7 +20,7 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
-  const { authLogin, errorMessage: ErrorM } = useAuth();
+  const { authLogin, error, loading } = useAuth();
 
   const navigate = useNavigate();
   const location = useLocation() as unknown as LocationProps;
@@ -30,8 +31,7 @@ export default function LoginPage() {
     setErrorMessage("");
   }, [userName, password])
 
-
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = useCallback(async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const login: ILogin = {
@@ -40,13 +40,12 @@ export default function LoginPage() {
     }
 
     await authLogin(login)
-    console.log(ErrorM)
 
     setUserName("");
     setPassword("");
     navigate(from, { replace: true })
+  }, [authLogin, userName, password]);
 
-  };
 
   return (
     <MainContainer>

@@ -7,7 +7,7 @@ import FormControlLabel from '@mui/material/FormControlLabel'
 import Grid from '@mui/material/Grid'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
-import { ChangeEvent, FormEvent, useState } from 'react'
+import { ChangeEvent, FormEvent, useCallback, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { url } from '../../App'
 import { MainContainer } from '../../components/main/main.styled'
@@ -21,9 +21,9 @@ export default function SignUpPage() {
   const [age, setAge] = useState(0);
   const [password, setpassword] = useState("");
 
-  const { createUser } = useUser();
+  const { createUser, errorMessage } = useUser();
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = useCallback((event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const user = {
@@ -45,7 +45,7 @@ export default function SignUpPage() {
     setEmail('');
     setAge(0);
     setpassword('');
-  };
+  }, []);
 
   return (
     <MainContainer>
