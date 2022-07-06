@@ -83,7 +83,7 @@ function DashboardContent() {
 
     <Box sx={{ display: 'flex' }}>
 
-      <AppBar position="absolute" open={open}>
+      <AppBar open={open}>
         <Toolbar
           sx={{
             pr: '24px', // keep right padding when drawer closed
