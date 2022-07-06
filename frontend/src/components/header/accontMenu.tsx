@@ -16,7 +16,7 @@ import { StyledIconButon } from './buttons.styled';
 
 export default function AccountMenu() {
 
-  const { auth, addAuth } = useContext(AuthContext);
+  const { auth, logout } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -32,12 +32,7 @@ export default function AccountMenu() {
 
   const handleLogout = () => {
 
-    const logout = {
-      username: "",
-      password: "",
-    }
-
-    addAuth(logout, "")
+    logout()
     navigate("/");
   }
 
@@ -92,7 +87,7 @@ export default function AccountMenu() {
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
         <MenuItem>
-          <Avatar /> {auth.login.username}
+          <Avatar /> {auth.user.firstName}
         </MenuItem>
         <Divider />
         <MenuItem>

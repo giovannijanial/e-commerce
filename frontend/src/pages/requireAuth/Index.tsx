@@ -7,6 +7,8 @@ const RequireAuthPage = () => {
   const { auth } = useContext(AuthContext);
   const location = useLocation();
 
+  console.log(auth)
+
   return (
     auth?.token
       ? <Outlet />
