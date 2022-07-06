@@ -1,4 +1,4 @@
-import axios, { AxiosError } from "axios";
+import { AxiosError } from "axios";
 import { useCallback, useContext, useState } from "react";
 import AuthContext from "../contexts/authProvider";
 import { ILogin } from "../interfaces/Auth";

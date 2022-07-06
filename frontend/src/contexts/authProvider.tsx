@@ -20,6 +20,7 @@ export const AuthProvider = ({ children }: Props) => {
   const [auth, setAuth] = useState(initialState.auth);
 
   const addAuth = (login: ILogin, token: string) => {
+    console.log(login, token)
     setAuth({ login, token })
   }
   return (
