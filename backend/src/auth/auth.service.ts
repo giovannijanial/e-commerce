@@ -32,6 +32,15 @@ export class AuthService {
     return user;
   }
 
+  async getUserAuthenticated(username: string) {
+    const user = await this.userService.findOneByUserName(username);
+
+    if (!user) {
+      return null;
+    }
+    return user;
+  }
+
   async saveToken(hash: string, username: string) {
     const token = await this.tokenRepository.findOne({ where: { username } });
 
