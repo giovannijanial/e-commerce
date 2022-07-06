@@ -19,7 +19,7 @@ const Buttons = () => {
           </ StyledIconButon>
         </Link>
       ) : (
-        <AccountMenu />
+        <AccountMenu role='other' />
       )}
 
       <StyledIconButon aria-label='account' size='large' color='secondary'>

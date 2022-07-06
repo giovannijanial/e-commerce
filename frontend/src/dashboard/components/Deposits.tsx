@@ -7,7 +7,7 @@ function preventDefault(event: React.MouseEvent) {
   event.preventDefault();
 }
 
-export default function Deposits() {
+export default function DashDeposits() {
   return (
     <React.Fragment>
       <Title>Recent Deposits</Title>

@@ -14,7 +14,11 @@ import { useNavigate } from 'react-router-dom';
 import AuthContext from '../../contexts/authProvider';
 import { StyledIconButon } from './buttons.styled';
 
-export default function AccountMenu() {
+interface Props {
+  role: string
+}
+
+export default function AccountMenu({ role }: Props) {
 
   const { auth, logout } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -40,6 +44,7 @@ export default function AccountMenu() {
     <>
       <Tooltip title="Account">
         <StyledIconButon
+          id={role}
           onClick={handleClick}
           sx={{ ml: 2 }}
           size='large'

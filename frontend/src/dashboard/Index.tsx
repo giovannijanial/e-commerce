@@ -1,6 +1,4 @@
-import * as React from 'react';
-import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
+import { styled } from '@mui/material/styles';
 import MuiDrawer from '@mui/material/Drawer';
 import Box from '@mui/material/Box';
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
@@ -13,13 +11,16 @@ import Badge from '@mui/material/Badge';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import Link from '@mui/material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import { mainListItems, secondaryListItems } from './ListItems';
-import Deposits from './Deposits';
-import Orders from './Orders';
+import AccountMenu from '../components/header/accontMenu';
+import { useState } from 'react';
+import { DashListItems } from './components/ListItems';
+import DashProducts from './components/Products';
+import DashDeposits from './components/Deposits';
+import DashOrders from './components/Orders';
+
 
 const drawerWidth: number = 240;
 
@@ -71,18 +72,14 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
-const mdTheme = createTheme();
-
 function DashboardContent() {
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = useState(false);
   const toggleDrawer = () => {
     setOpen(!open);
   };
 
   return (
-
     <Box sx={{ display: 'flex' }}>
-
       <AppBar open={open}>
         <Toolbar
           sx={{
@@ -108,13 +105,21 @@ function DashboardContent() {
             noWrap
             sx={{ flexGrow: 1 }}
           >
-            Dashboard
+            E-Commerce Dashboard
           </Typography>
-          <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
+          <Box sx={{
+            width: "100px",
+            display: "flex",
+            justifyContent: "space-around"
+          }}>
+            <AccountMenu role="admin" />
+            <IconButton color="inherit">
+              <Badge badgeContent={4} color="secondary">
+                <NotificationsIcon />
+              </Badge>
+            </IconButton>
+
+          </Box>
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>
@@ -132,9 +137,8 @@ function DashboardContent() {
         </Toolbar>
         <Divider />
         <List component="nav">
-          {mainListItems}
+          {DashListItems}
           <Divider sx={{ my: 1 }} />
-          {secondaryListItems}
         </List>
       </Drawer>
       <Box
@@ -159,9 +163,10 @@ function DashboardContent() {
                   p: 2,
                   display: 'flex',
                   flexDirection: 'column',
-                  height: 240,
+                  height: 340,
                 }}
               >
+                <DashProducts />
               </Paper>
             </Grid>
             {/* Recent Deposits */}
@@ -174,20 +179,20 @@ function DashboardContent() {
                   height: 240,
                 }}
               >
-                <Deposits />
+                <DashDeposits />
               </Paper>
             </Grid>
             {/* Recent Orders */}
             <Grid item xs={12}>
               <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                <Orders />
+                <DashOrders />
               </Paper>
             </Grid>
           </Grid>
 
         </Container>
       </Box>
-    </Box>
+    </Box >
 
   );
 }
