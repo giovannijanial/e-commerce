@@ -6,6 +6,8 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import PeopleIcon from '@mui/icons-material/People';
 import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
+import ListButtonProduct from './ButtonProducts';
+import ListButtonUser from './ButtonUsers';
 
 
 export const DashListItems = (
@@ -16,23 +18,17 @@ export const DashListItems = (
       </ListItemIcon>
       <ListItemText primary="Dashboard" />
     </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <AppRegistrationIcon />
-      </ListItemIcon>
-      <ListItemText primary="Products" />
-    </ListItemButton>
+
+    <ListButtonProduct />
+
     <ListItemButton>
       <ListItemIcon>
         <ShoppingCartIcon />
       </ListItemIcon>
       <ListItemText primary="Orders" />
     </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <PeopleIcon />
-      </ListItemIcon>
-      <ListItemText primary="Users" />
-    </ListItemButton>
+
+    <ListButtonUser />
+
   </React.Fragment>
 );

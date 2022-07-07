@@ -5,7 +5,7 @@ import Footer from "./components/footer/Footer";
 import Header from "./components/header/Index";
 import AboutPage from './pages/about/Index';
 import ContactPage from './pages/contact/Index';
-import DashBoardPage from './dashboard/Index';
+import DashBoardPage from './dashboard/pages/home/Index';
 import HomePage from "./pages/home/Index";
 import LoginPage from './pages/login/Index';
 import NotFoundPage from './pages/notFound/Index';
@@ -17,6 +17,8 @@ import SignUpPage from './pages/signUp/Index';
 import RequireAuthPage from './pages/requireAuth/Index';
 import { useContext } from 'react';
 import AuthContext from './contexts/authProvider';
+import DashBoardNavegation from './dashboard/components/navgation/Index';
+import DashHomePage from './dashboard/pages/home/Index';
 
 export const url = "http://localhost:3000";
 
@@ -29,8 +31,9 @@ function App() {
         <GlobalStyle />
         {auth.user.role === "admin" ? (
           <BrowserRouter>
+            <DashBoardNavegation />
             <Routes>
-              <Route path='/' element={<DashBoardPage />} />
+              <Route path='/' element={<DashHomePage />} />
             </Routes>
           </BrowserRouter>
         ) : (

@@ -1,7 +1,17 @@
+import { IProduct } from './Product';
 import { IUser } from './User';
 
-export interface ICarts {
-  user: IUser;
+export interface ICartItem {
+  id: number;
+  price: number;
   quantity: number;
-  productId: number;
+  product: IProduct;
+}
+export interface ICart {
+  id: string;
+  quantityProducts: number;
+  total: number;
+  cartStatus: string;
+  user: IUser;
+  cartProducts: ICartItem[];
 }
