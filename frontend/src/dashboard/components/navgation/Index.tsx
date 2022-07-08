@@ -73,7 +73,7 @@ function DashboardContent() {
   };
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <>
       <AppBar open={open}>
         <Toolbar
           sx={{
@@ -135,7 +135,7 @@ function DashboardContent() {
           <Divider sx={{ my: 1 }} />
         </List>
       </Drawer>
-    </Box >
+    </>
 
   );
 }

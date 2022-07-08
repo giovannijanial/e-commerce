@@ -1,25 +1,34 @@
-import * as React from 'react';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import * as React from 'react';
+import { NavLink } from 'react-router-dom';
+import AppRegistrationIcon from '@mui/icons-material/AppRegistration';;
 import PeopleIcon from '@mui/icons-material/People';
-import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
-import ListButtonProduct from './ButtonProducts';
-import ListButtonUser from './ButtonUsers';
 
 
 export const DashListItems = (
   <React.Fragment>
-    <ListItemButton>
-      <ListItemIcon>
-        <DashboardIcon />
-      </ListItemIcon>
-      <ListItemText primary="Dashboard" />
-    </ListItemButton>
+    <NavLink to="/">
+      <ListItemButton>
+        <ListItemIcon>
+          <DashboardIcon />
+        </ListItemIcon>
+        <ListItemText primary="Dashboard" />
+      </ListItemButton>
+    </NavLink>
 
-    <ListButtonProduct />
+
+    <NavLink to="/dash/products">
+      <ListItemButton>
+        <ListItemIcon>
+          <AppRegistrationIcon />
+        </ListItemIcon>
+        <ListItemText primary="Products" />
+      </ListItemButton>
+    </NavLink>
 
     <ListItemButton>
       <ListItemIcon>
@@ -28,7 +37,12 @@ export const DashListItems = (
       <ListItemText primary="Orders" />
     </ListItemButton>
 
-    <ListButtonUser />
+    <ListItemButton>
+      <ListItemIcon>
+        <PeopleIcon />
+      </ListItemIcon>
+      <ListItemText primary="Users" />
+    </ListItemButton>
 
   </React.Fragment>
 );

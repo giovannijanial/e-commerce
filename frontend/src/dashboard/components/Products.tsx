@@ -1,4 +1,4 @@
-import { CircularProgress } from '@mui/material';
+import { CircularProgress, Typography } from '@mui/material';
 import Link from '@mui/material/Link';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -6,6 +6,8 @@ import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { Fragment, useEffect } from 'react';
+import { NavLink } from 'react-router-dom';
+import { theme } from '../../app.styled';
 import { useProduct } from '../../hooks/useProduct';
 import Title from './Title';
 
@@ -31,7 +33,7 @@ const DashProducts = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {products.slice(1, 7).map((product) => (
+          {products.slice(0, 7).map((product) => (
             <TableRow key={product.id}>
               <TableCell>{product.id}</TableCell>
               <TableCell>{product.name}</TableCell>
@@ -40,9 +42,9 @@ const DashProducts = () => {
           ))}
         </TableBody>
       </Table>
-      <Link color="primary" href="#" sx={{ mt: 3 }}>
-        See more products
-      </Link>
+      <NavLink to="/dash/products" style={{ marginTop: "30px" }}>
+        <Typography sx={{ color: theme.palette.primary.main, textDecoration: "underline" }}>See all products</Typography>
+      </NavLink>
     </Fragment>
   )
 }

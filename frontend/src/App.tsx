@@ -19,6 +19,8 @@ import { useContext } from 'react';
 import AuthContext from './contexts/authProvider';
 import DashBoardNavegation from './dashboard/components/navgation/Index';
 import DashHomePage from './dashboard/pages/home/Index';
+import DashProductPage from './dashboard/pages/products/Index';
+import DashAddProductPage from './dashboard/pages/products/AddProduct';
 
 export const url = "http://localhost:3000";
 
@@ -34,6 +36,8 @@ function App() {
             <DashBoardNavegation />
             <Routes>
               <Route path='/' element={<DashHomePage />} />
+              <Route path='/dash/products' element={<DashProductPage />} />
+              <Route path='/dash/products/add' element={<DashAddProductPage />} />
             </Routes>
           </BrowserRouter>
         ) : (

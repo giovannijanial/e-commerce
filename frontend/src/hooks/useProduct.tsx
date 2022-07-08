@@ -34,12 +34,25 @@ export const useProduct = () => {
     }
   }, [])
 
+  const remove = useCallback(async (id: number) => {
+    setLoading(true);
+    try {
+      const { status, data } = await ProductService.remove(id)
+
+    } catch (error) {
+      setError(new Error)
+    } finally {
+      setLoading(false);
+    }
+  }, [])
+
   return {
     products,
     error,
     loading,
     getAll,
     getOne,
-    product
+    product,
+    remove
   }
 }

@@ -24,9 +24,10 @@ const DashHomePage = () => {
       <Toolbar />
       <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
         <Grid container spacing={3}>
-          {/* Chart */}
+          {/* Top Products */}
           <Grid item xs={12} md={8} lg={9}>
             <Paper
+              elevation={2}
               sx={{
                 p: 2,
                 display: 'flex',
@@ -37,9 +38,10 @@ const DashHomePage = () => {
               <DashProducts />
             </Paper>
           </Grid>
-          {/* Recent Deposits */}
+          {/* Orders Values */}
           <Grid item xs={12} md={4} lg={3}>
             <Paper
+              elevation={2}
               sx={{
                 p: 2,
                 display: 'flex',
@@ -52,7 +54,14 @@ const DashHomePage = () => {
           </Grid>
           {/* Recent Orders */}
           <Grid item xs={12}>
-            <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
+            <Paper
+              elevation={2}
+              sx={{
+                p: 2,
+                display: 'flex',
+                flexDirection: 'column'
+              }}
+            >
               <DashOrders />
             </Paper>
           </Grid>
