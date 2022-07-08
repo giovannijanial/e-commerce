@@ -13,6 +13,8 @@ export default function TableProducts() {
 
   const { getAll, products, loading, error, remove } = useProduct();
 
+
+
   const [rows, setRows] = useState<IProduct[]>(products);
 
   useEffect(() => {
@@ -48,7 +50,7 @@ export default function TableProducts() {
       renderCell: (params) => (
         <>
           {params.value.map((cat: ICategory, index: number) => (
-            index !== 1 ? (<p>{cat.name}</p>) : (<p>, {cat.name}</p>)
+            index !== 1 ? (<p key={index}>{cat.name}</p>) : (<p key={index}>, {cat.name}</p>)
 
           ))}
         </>
@@ -95,7 +97,6 @@ export default function TableProducts() {
       }
     }}>
       <DataGrid
-        error={error}
         loading={loading}
         rows={products}
         columns={columns}

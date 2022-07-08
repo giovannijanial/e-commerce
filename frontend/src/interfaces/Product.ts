@@ -4,11 +4,11 @@ export interface ICategory {
 }
 
 export interface IProduct {
-  id: number;
+  id?: number;
   name: string;
   price: number;
   quantity: number;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
   categories: ICategory[];
 }
