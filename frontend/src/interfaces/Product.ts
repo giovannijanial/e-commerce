@@ -8,6 +8,7 @@ export interface IProduct {
   name: string;
   price: number;
   quantity: number;
+  cartItems: Object;
   createdAt?: Date;
   updatedAt?: Date;
   categories: ICategory[];

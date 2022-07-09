@@ -4,7 +4,7 @@ import NumberFormat, { InputAttributes } from 'react-number-format';
 import { useNavigate } from 'react-router-dom';
 import { useCategory } from '../../../../hooks/useCategory';
 import { useProduct } from '../../../../hooks/useProduct';
-import { ICategory } from '../../../../interfaces/Product';
+import { ICategory, IProduct } from '../../../../interfaces/Product';
 import { DashBoxMain } from '../../../components/main/main.styled'
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
@@ -47,17 +47,17 @@ const DashAddProductPage = () => {
   const handleSubmit = useCallback((event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const product = {
+    const product: IProduct = {
       name,
       price: parseFloat(priceFormat.price),
       quantity,
       categories: newCategories,
+      cartItems: {}
     }
 
-    console.log(product)
+    //console.log(product)
 
-
-    //create(product)
+    create(product)
 
   }, [create, name, priceFormat, quantity, newCategories]);
 
@@ -157,13 +157,15 @@ const DashAddProductPage = () => {
               />
             </Grid>
           </Grid>
-          <Button
-            type="submit"
-            variant="contained"
-            sx={{ mt: 3, mb: 2, width: 600 }}
-          >
-            Add Product
-          </Button>
+          {!loading ? (
+            <Button type="submit" variant="contained" sx={{ mt: 3, mb: 2, width: 600 }}>
+              Add Product
+            </Button>
+          ) : (
+            <Button disabled={true} variant="contained" sx={{ mt: 3, mb: 2, width: 600 }}>
+              Aguarde...
+            </Button>
+          )}
         </Box>
       </Container>
     </DashBoxMain>
