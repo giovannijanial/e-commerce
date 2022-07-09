@@ -20,7 +20,7 @@ import AuthContext from './contexts/authProvider';
 import DashBoardNavegation from './dashboard/components/navgation/Index';
 import DashHomePage from './dashboard/pages/home/Index';
 import DashProductPage from './dashboard/pages/products/Index';
-import DashAddProductPage from './dashboard/pages/products/AddProduct';
+import DashAddProductPage from './dashboard/pages/products/addProduct/Index';
 
 export const url = "http://localhost:3000";
 
