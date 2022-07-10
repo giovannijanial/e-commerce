@@ -10,27 +10,25 @@ import { theme } from '../../../app.styled';
 import DialogDelete from '../../components/dialogs/DeleteDialog';
 
 export default function TableProducts() {
-  const { getAll, products, loading, error, remove } = useProduct();
-  const [rows, setRows] = useState<IProduct[]>(products);
+  const { getAll, products, loading, error, remove, setProduct } = useProduct();
+  const [rows, setRows] = useState<IProduct[]>([]);
   const [openDialogDelete, setopenDialogDelete] = useState(false);
+  const [currentId, setCurrentId] = useState<GridRowId>(0)
 
-  const handleClickOpen = () => {
+  const handleClickOpen = (id: GridRowId) => () => {
     setopenDialogDelete(true);
+    setCurrentId(id)
   };
+
   const handleClose = () => {
     setopenDialogDelete(false);
   };
 
-  useEffect(() => {
-    getAll()
-  }, [getAll])
-
-  const deleteProduct = useCallback(
-    (id: GridRowId) => () => {
-      remove(+id);
-    },
-    [],
-  );
+  const deleteProduct = useCallback((id: GridRowId) => async () => {
+    await remove(+id);
+    await getAll();
+    setopenDialogDelete(false);
+  }, [remove, getAll]);
 
   const editProduct = useCallback(
     (id: GridRowId) => () => {
@@ -41,7 +39,9 @@ export default function TableProducts() {
     [],
   );
 
-
+  useEffect(() => {
+    getAll()
+  }, [getAll])
 
   const columns: GridColumns<IProduct> = [
     { field: 'id', headerName: 'ID', width: 70, headerClassName: 'header' },
@@ -81,7 +81,7 @@ export default function TableProducts() {
         <GridActionsCellItem
           icon={<DeleteIcon />}
           label="Delete"
-          onClick={handleClickOpen}
+          onClick={handleClickOpen(params.id)}
         />,
         <GridActionsCellItem
           icon={<EditIcon />}
@@ -115,7 +115,7 @@ export default function TableProducts() {
           },
         }}
       />
-      <DialogDelete dialog={openDialogDelete} onClose={handleClose} onConfirm={deleteProduct} />
+      <DialogDelete dialog={openDialogDelete} onClose={handleClose} onConfirm={deleteProduct} id={currentId} />
     </Box>
   );
 }

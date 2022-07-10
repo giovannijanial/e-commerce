@@ -6,6 +6,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 import { TransitionProps } from '@mui/material/transitions';
+import { GridRowId } from '@mui/x-data-grid';
 import { forwardRef, useState } from 'react';
 
 const Transition = forwardRef(function Transition(
@@ -21,17 +22,17 @@ interface Props {
   dialog: boolean,
   onClose: any,
   onConfirm: any,
+  id: GridRowId
 }
 
-export default function DialogDelete({ dialog, onClose, onConfirm }: Props) {
-  console.log("aqui")
+export default function DialogDelete({ dialog, onClose, onConfirm, id }: Props) {
   return (
     <div>
       <Dialog
         open={dialog}
         TransitionComponent={Transition}
         keepMounted
-        onClose={close}
+        onClose={onClose}
         aria-describedby="alert-dialog-slide-description"
       >
         <DialogTitle>{"Use Google's location service?"}</DialogTitle>
@@ -42,8 +43,8 @@ export default function DialogDelete({ dialog, onClose, onConfirm }: Props) {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={close}>Disagree</Button>
-          <Button onClick={close}>Agree</Button>
+          <Button onClick={onClose}>Disagree</Button>
+          <Button onClick={onConfirm(id)}>Agree</Button>
         </DialogActions>
       </Dialog>
     </div>

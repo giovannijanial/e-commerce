@@ -18,7 +18,6 @@ export const useProduct = () => {
     if (status !== 200) {
       setError(["error"])
     };
-
     setProducts(data);
     setLoading(false);
   }, []);
@@ -75,6 +74,7 @@ export const useProduct = () => {
     product,
     create,
     remove,
-    success
+    success,
+    setProduct
   }
 }
