@@ -7,15 +7,19 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { Box, CircularProgress } from '@mui/material';
 import { theme } from '../../../app.styled';
+import DialogDelete from '../../components/dialogs/DeleteDialog';
 
 export default function TableProducts() {
-
-
   const { getAll, products, loading, error, remove } = useProduct();
-
-
-
   const [rows, setRows] = useState<IProduct[]>(products);
+  const [openDialogDelete, setopenDialogDelete] = useState(false);
+
+  const handleClickOpen = () => {
+    setopenDialogDelete(true);
+  };
+  const handleClose = () => {
+    setopenDialogDelete(false);
+  };
 
   useEffect(() => {
     getAll()
@@ -77,7 +81,7 @@ export default function TableProducts() {
         <GridActionsCellItem
           icon={<DeleteIcon />}
           label="Delete"
-          onClick={deleteProduct(params.id)}
+          onClick={handleClickOpen}
         />,
         <GridActionsCellItem
           icon={<EditIcon />}
@@ -111,6 +115,7 @@ export default function TableProducts() {
           },
         }}
       />
+      <DialogDelete dialog={openDialogDelete} onClose={handleClose} onConfirm={deleteProduct} />
     </Box>
   );
 }

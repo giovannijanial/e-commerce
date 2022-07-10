@@ -22,7 +22,7 @@ const DashProducts = () => {
   return (
     <Fragment>
       {loading && (<CircularProgress color="primary" />)}
-      {error && (<p>{error.message}</p>)}
+      {error && (<p>{error[0]}</p>)}
       <Title>Top Products</Title>
       <Table size="small">
         <TableHead>
@@ -33,7 +33,7 @@ const DashProducts = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {products.slice(0, 7).map((product) => (
+          {products.slice(0, 6).map((product) => (
             <TableRow key={product.id}>
               <TableCell>{product.id}</TableCell>
               <TableCell>{product.name}</TableCell>
@@ -42,7 +42,7 @@ const DashProducts = () => {
           ))}
         </TableBody>
       </Table>
-      <NavLink to="/dash/products" style={{ marginTop: "30px" }}>
+      <NavLink to="/dash/products" style={{ marginTop: "20px" }}>
         <Typography sx={{ color: theme.palette.primary.main, textDecoration: "underline" }}>See all products</Typography>
       </NavLink>
     </Fragment>

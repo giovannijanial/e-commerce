@@ -134,6 +134,7 @@ const DashAddProductPage = () => {
                 id="categories"
                 options={categories}
                 disableCloseOnSelect
+                isOptionEqualToValue={(option, value) => option.id === value.id}
                 getOptionLabel={(category) => category.name}
                 renderOption={(props, category, { selected }) => (
                   <li {...props}>
