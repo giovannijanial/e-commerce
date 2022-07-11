@@ -1,4 +1,3 @@
-
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { Box } from '@mui/material';
@@ -9,36 +8,58 @@ import { useProduct } from '../../../hooks/useProduct';
 import { ICategory, IProduct } from '../../../interfaces/Product';
 import DialogDelete from '../../components/dialogs/DeleteDialog';
 import ArticleIcon from '@mui/icons-material/Article';
+import DialogDetailsProduct from './detailsProduct/Index';
+import DialogUpdateProduct from './updateProduct/Index';
 
 export default function TableProducts() {
   const { getAll, products, loading, error, remove, setProduct } = useProduct();
-  const [rows, setRows] = useState<IProduct[]>([]);
-  const [openDialogDelete, setopenDialogDelete] = useState(false);
+  const [openDialogDelete, setOpenDialogDelete] = useState(false);
+  const [openDialogDetails, setOpenDialogDetails] = useState(false);
+  const [openDialogUpdate, setOpenDialogUpdate] = useState(false);
   const [currentId, setCurrentId] = useState<GridRowId>(0)
+  const [currentProduct, setCurrentProduct] = useState<IProduct>();
 
-  const handleClickOpen = (id: GridRowId) => () => {
-    setopenDialogDelete(true);
+  // DELETE
+  const handleOpenDialogDelete = (id: GridRowId) => () => {
+    setOpenDialogDelete(true);
     setCurrentId(id)
   };
 
-  const handleClose = () => {
-    setopenDialogDelete(false);
+  const handleCloseDialogDelete = () => {
+    setOpenDialogDelete(false);
   };
 
   const deleteProduct = useCallback((id: GridRowId) => async () => {
     await remove(+id);
     await getAll();
-    setopenDialogDelete(false);
+    setOpenDialogDelete(false);
   }, [remove, getAll]);
 
-  const editProduct = useCallback(
-    (id: GridRowId) => () => {
-      setTimeout(() => {
-        setRows((prevRows) => prevRows.filter((row) => row.id !== id));
-      });
-    },
-    [],
-  );
+  //DETAILS
+  const handleOpenDialogDetails = (product: IProduct) => () => {
+    setOpenDialogDetails(true);
+    setCurrentProduct(product)
+  };
+
+  const handleCloseDialogDetails = () => {
+    setOpenDialogDetails(false);
+  };
+
+  // UPDATE
+  const handleOpenDialogUpdate = (product: IProduct) => () => {
+    setOpenDialogUpdate(true);
+    setCurrentProduct(product)
+  };
+
+  const handleCloseDialogUpdate = () => {
+    setOpenDialogUpdate(false);
+  };
+
+  const updateProduct = useCallback((id: GridRowId) => async () => {
+    //await remove(+id);
+    await getAll();
+    setOpenDialogDetails(false);
+  }, [remove, getAll]);
 
   useEffect(() => {
     getAll()
@@ -83,17 +104,17 @@ export default function TableProducts() {
           <GridActionsCellItem
             icon={<DeleteIcon />}
             label="Delete"
-            onClick={handleClickOpen(params.id)}
+            onClick={handleOpenDialogDelete(params.id)}
           />
           <GridActionsCellItem
             icon={<EditIcon />}
             label="Edit"
-            onClick={editProduct(params.id)}
+            onClick={handleOpenDialogUpdate(params.row)}
           />
           <GridActionsCellItem
             icon={<ArticleIcon />}
             label="Details"
-            onClick={editProduct(params.id)}
+            onClick={handleOpenDialogDetails(params.row)}
           />
         </Box>
       ],
@@ -123,7 +144,21 @@ export default function TableProducts() {
           },
         }}
       />
-      <DialogDelete dialog={openDialogDelete} onClose={handleClose} onConfirm={deleteProduct} id={currentId} />
+      <DialogDelete
+        dialog={openDialogDelete}
+        onClose={handleCloseDialogDelete}
+        onConfirm={deleteProduct}
+        id={currentId} />
+      <DialogUpdateProduct
+        dialog={openDialogUpdate}
+        setOpenDialogUpdate={setOpenDialogUpdate}
+        onConfirm={updateProduct}
+        currentProduct={currentProduct} />
+      <DialogDetailsProduct
+        dialog={openDialogDetails}
+        onClose={handleCloseDialogDetails}
+        onConfirm={updateProduct}
+        currentProduct={currentProduct} />
     </Box>
   );
 }
