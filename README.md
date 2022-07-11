@@ -3,7 +3,7 @@
 <p align="center">
   	<a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
 	<a href="https://pt-br.reactjs.org/" target="blank"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" width="200" alt="React Logo" /></a>
-	<p align="center">Aplicação construída em <b>typescript</b>, com o framework <b>Nest.JS</b> no backend e <b>React</b> no frontend.</p>
+	<p align="center">Aplicação construída em <b>typescript</b>, com o framework <b>Nest.JS</b> e <b>React</b>.</p>
 	<p align="center">Algumas dependências das utilizadas:</p>
 	<p align="center">
 	<img src="https://www.vectorlogo.zone/logos/sqlite/sqlite-icon.svg" width="60" alt="SQLite" />
