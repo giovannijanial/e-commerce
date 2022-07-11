@@ -1,13 +1,14 @@
 
-import { DataGrid, GridColDef, GridActionsCellItem, GridColumns, GridRowId } from '@mui/x-data-grid';
-import { useEffect, useState, useCallback } from 'react';
-import { useProduct } from '../../../hooks/useProduct';
-import { ICategory, IProduct } from '../../../interfaces/Product';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import { Box, CircularProgress } from '@mui/material';
+import { Box } from '@mui/material';
+import { DataGrid, GridActionsCellItem, GridColumns, GridRowId } from '@mui/x-data-grid';
+import { useCallback, useEffect, useState } from 'react';
 import { theme } from '../../../app.styled';
+import { useProduct } from '../../../hooks/useProduct';
+import { ICategory, IProduct } from '../../../interfaces/Product';
 import DialogDelete from '../../components/dialogs/DeleteDialog';
+import ArticleIcon from '@mui/icons-material/Article';
 
 export default function TableProducts() {
   const { getAll, products, loading, error, remove, setProduct } = useProduct();
@@ -60,7 +61,7 @@ export default function TableProducts() {
         </>
       )
       ,
-      width: 250
+      width: 230
     },
     {
       field: 'price',
@@ -76,18 +77,25 @@ export default function TableProducts() {
       type: 'actions',
       headerName: 'Actions',
       headerClassName: 'header',
-      width: 80,
+      width: 100,
       getActions: (params) => [
-        <GridActionsCellItem
-          icon={<DeleteIcon />}
-          label="Delete"
-          onClick={handleClickOpen(params.id)}
-        />,
-        <GridActionsCellItem
-          icon={<EditIcon />}
-          label="Toggle Admin"
-          onClick={editProduct(params.id)}
-        />,
+        <Box>
+          <GridActionsCellItem
+            icon={<DeleteIcon />}
+            label="Delete"
+            onClick={handleClickOpen(params.id)}
+          />
+          <GridActionsCellItem
+            icon={<EditIcon />}
+            label="Edit"
+            onClick={editProduct(params.id)}
+          />
+          <GridActionsCellItem
+            icon={<ArticleIcon />}
+            label="Details"
+            onClick={editProduct(params.id)}
+          />
+        </Box>
       ],
     },
   ];

@@ -7,7 +7,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 import { TransitionProps } from '@mui/material/transitions';
 import { GridRowId } from '@mui/x-data-grid';
-import { forwardRef, useState } from 'react';
+import { forwardRef } from 'react';
 
 const Transition = forwardRef(function Transition(
   props: TransitionProps & {
@@ -35,16 +35,15 @@ export default function DialogDelete({ dialog, onClose, onConfirm, id }: Props) 
         onClose={onClose}
         aria-describedby="alert-dialog-slide-description"
       >
-        <DialogTitle>{"Use Google's location service?"}</DialogTitle>
+        <DialogTitle>{"Delete Product"}</DialogTitle>
         <DialogContent>
-          <DialogContentText id="alert-dialog-slide-description">
-            Let Google help apps determine location. This means sending anonymous
-            location data to Google, even when no apps are running.
+          <DialogContentText id="alert-dialog">
+            Are you sure you want to delete the product {id}?
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={onClose}>Disagree</Button>
-          <Button onClick={onConfirm(id)}>Agree</Button>
+          <Button onClick={onClose}>Cancel</Button>
+          <Button onClick={onConfirm(id)}>Delete</Button>
         </DialogActions>
       </Dialog>
     </div>

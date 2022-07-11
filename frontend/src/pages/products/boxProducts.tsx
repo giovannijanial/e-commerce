@@ -28,7 +28,6 @@ const BoxProducts = () => {
       gap: "20px",
     }}>
       {loading && (<CircularProgress color="primary" />)}
-      {error && (<p>{error.message}</p>)}
       {showProducts()}
     </Box>
   )

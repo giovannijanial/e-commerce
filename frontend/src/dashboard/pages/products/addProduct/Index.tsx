@@ -1,7 +1,7 @@
 import { Box, Container, Grid, Toolbar, Typography, TextField, FormControlLabel, Button, Autocomplete, Checkbox } from '@mui/material'
 import { ChangeEvent, FormEvent, forwardRef, useCallback, useEffect, useState } from 'react'
 import NumberFormat, { InputAttributes } from 'react-number-format';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useCategory } from '../../../../hooks/useCategory';
 import { useProduct } from '../../../../hooks/useProduct';
 import { ICategory, IProduct } from '../../../../interfaces/Product';
@@ -9,6 +9,7 @@ import { DashBoxMain } from '../../../components/main/main.styled'
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import { NumberFormatCustom } from './priceFormat';
+import { width } from '@mui/system';
 
 interface IPriceFormat {
   price: string;
@@ -54,8 +55,6 @@ const DashAddProductPage = () => {
       categories: newCategories,
       cartItems: {}
     }
-
-    //console.log(product)
 
     create(product)
 
@@ -154,19 +153,27 @@ const DashAddProductPage = () => {
                 onChange={(e, value) => setNewCategories(value)}
                 fullWidth
                 aria-required
+
                 sx={{ marginTop: "15px" }}
               />
             </Grid>
           </Grid>
-          {!loading ? (
-            <Button type="submit" variant="contained" sx={{ mt: 3, mb: 2, width: 600 }}>
-              Add Product
-            </Button>
-          ) : (
-            <Button disabled={true} variant="contained" sx={{ mt: 3, mb: 2, width: 600 }}>
-              Aguarde...
-            </Button>
-          )}
+          <Box sx={{ display: "flex", justifyContent: "space-around", width: "600px" }}>
+            <NavLink to='/dash/products'>
+              <Button variant="contained" sx={{ mt: 3, mb: 2, width: 250 }}>
+                Back
+              </Button>
+            </NavLink>
+            {!loading ? (
+              <Button type="submit" variant="contained" sx={{ mt: 3, mb: 2, width: 250 }}>
+                Add Product
+              </Button>
+            ) : (
+              <Button disabled={true} variant="contained" sx={{ mt: 3, mb: 2, width: 250 }}>
+                Wait...
+              </Button>
+            )}
+          </Box>
         </Box>
       </Container>
     </DashBoxMain>
