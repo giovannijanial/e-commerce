@@ -10,6 +10,6 @@ export interface IProduct {
   quantity: number;
   cartItems: Object;
   createdAt?: Date;
-  updatedAt?: Date;
+  updateAt?: Date;
   categories: ICategory[];
 }

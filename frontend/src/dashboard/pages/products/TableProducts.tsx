@@ -51,19 +51,9 @@ export default function TableProducts() {
     setCurrentProduct(product)
   };
 
-  const handleCloseDialogUpdate = () => {
-    setOpenDialogUpdate(false);
-  };
-
-  const updateProduct = useCallback((id: GridRowId) => async () => {
-    //await remove(+id);
-    await getAll();
-    setOpenDialogDetails(false);
-  }, [remove, getAll]);
-
   useEffect(() => {
     getAll()
-  }, [getAll])
+  }, [getAll, openDialogUpdate])
 
   const columns: GridColumns<IProduct> = [
     { field: 'id', headerName: 'ID', width: 70, headerClassName: 'header' },
@@ -152,12 +142,10 @@ export default function TableProducts() {
       <DialogUpdateProduct
         dialog={openDialogUpdate}
         setOpenDialogUpdate={setOpenDialogUpdate}
-        onConfirm={updateProduct}
         currentProduct={currentProduct} />
       <DialogDetailsProduct
         dialog={openDialogDetails}
         onClose={handleCloseDialogDetails}
-        onConfirm={updateProduct}
         currentProduct={currentProduct} />
     </Box>
   );

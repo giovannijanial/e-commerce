@@ -12,17 +12,12 @@ import { IPriceFormat } from '../addProduct/Index';
 interface Props {
   dialog: boolean,
   onClose: any,
-  onConfirm: any,
   currentProduct?: IProduct,
 }
 
-export default function DialogDetailsProduct({ dialog, onClose, onConfirm, currentProduct }: Props) {
-  const [name, setName] = useState("");
-  const [image, setImage] = useState("");
-  const [priceFormat, setPriceFormat] = useState<IPriceFormat>({ price: "" });
-  const [quantity, setQuantity] = useState(0);
-  const [newCategories, setNewCategories] = useState<ICategory[]>([]);
+export default function DialogDetailsProduct({ dialog, onClose, currentProduct }: Props) {
 
+  console.log(currentProduct)
   return (
     <Box>
       <Dialog open={dialog} onClose={onClose} fullWidth maxWidth="lg">
@@ -99,7 +94,7 @@ export default function DialogDetailsProduct({ dialog, onClose, onConfirm, curre
                 InputProps={{
                   readOnly: true,
                 }}
-                value={currentProduct?.updatedAt}
+                value={currentProduct?.updateAt}
               />
             </Grid>
           </Grid>
