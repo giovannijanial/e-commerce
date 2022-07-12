@@ -11,6 +11,7 @@ import { ChangeEvent, FormEvent, useCallback, useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { MainContainer } from '../../components/main/main.styled'
 import { useUser } from '../../hooks/useUser'
+import { IUser } from '../../interfaces/User'
 
 
 export default function SignUpPage() {
@@ -22,7 +23,7 @@ export default function SignUpPage() {
   const [password, setpassword] = useState("");
 
   const navigate = useNavigate();
-  const { createUser, error, loading, success } = useUser();
+  const { create, error, loading, success } = useUser();
 
   useEffect(() => {
     if (success) {
@@ -39,7 +40,7 @@ export default function SignUpPage() {
   const handleSubmit = useCallback((event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const user = {
+    const user: IUser = {
       firstName,
       lastName,
       username,
@@ -47,12 +48,11 @@ export default function SignUpPage() {
       age,
       role: "user",
       password,
-      carts: {},
     }
 
-    createUser(user)
+    create(user)
 
-  }, [createUser, firstName, lastName, username, email, age, password]);
+  }, [create, firstName, lastName, username, email, age, password]);
 
   return (
     <MainContainer>

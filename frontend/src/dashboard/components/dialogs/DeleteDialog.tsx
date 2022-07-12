@@ -38,7 +38,7 @@ export default function DialogDelete({ dialog, onClose, onConfirm, id }: Props) 
         <DialogTitle>{"Delete Product"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog">
-            Are you sure you want to delete the product {id}?
+            Are you sure you want to delete the item {id}?
           </DialogContentText>
         </DialogContent>
         <DialogActions>

@@ -1,11 +1,19 @@
 import { ThemeProvider } from '@mui/material/styles';
+import { useContext } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { GlobalStyle, theme } from "./app.styled";
 import Footer from "./components/footer/Footer";
 import Header from "./components/header/Index";
+import AuthContext from './contexts/authProvider';
+import DashBoardNavegation from './dashboard/components/navgation/Index';
+import DashHomePage from './dashboard/pages/home/Index';
+import DashOrderPage from './dashboard/pages/orders/Index';
+import DashAddProductPage from './dashboard/pages/products/addProduct/Index';
+import DashProductPage from './dashboard/pages/products/Index';
+import DashAddUserPage from './dashboard/pages/users/addUser/Index';
+import DashUserPage from './dashboard/pages/users/Index';
 import AboutPage from './pages/about/Index';
 import ContactPage from './pages/contact/Index';
-import DashBoardPage from './dashboard/pages/home/Index';
 import HomePage from "./pages/home/Index";
 import LoginPage from './pages/login/Index';
 import NotFoundPage from './pages/notFound/Index';
@@ -14,13 +22,6 @@ import ProductsPage from './pages/products/Index';
 import ProductPage from './pages/products/product/Index';
 import SearchPage from './pages/search/Index';
 import SignUpPage from './pages/signUp/Index';
-import RequireAuthPage from './pages/requireAuth/Index';
-import { useContext } from 'react';
-import AuthContext from './contexts/authProvider';
-import DashBoardNavegation from './dashboard/components/navgation/Index';
-import DashHomePage from './dashboard/pages/home/Index';
-import DashProductPage from './dashboard/pages/products/Index';
-import DashAddProductPage from './dashboard/pages/products/addProduct/Index';
 
 export const url = "http://localhost:3000";
 
@@ -38,6 +39,9 @@ function App() {
               <Route path='/' element={<DashHomePage />} />
               <Route path='/dash/products' element={<DashProductPage />} />
               <Route path='/dash/products/add' element={<DashAddProductPage />} />
+              <Route path='/dash/users' element={<DashUserPage />} />
+              <Route path='/dash/users/add' element={<DashAddUserPage />} />
+              <Route path='/dash/orders' element={<DashOrderPage />} />
             </Routes>
           </BrowserRouter>
         ) : (
@@ -54,11 +58,6 @@ function App() {
               <Route path='/login' element={<LoginPage />} />
               <Route path='/sign' element={<SignUpPage />} />
               <Route path='/search' element={<SearchPage />} />
-
-              {/* admin routes */}
-              <Route element={<RequireAuthPage />}>
-                <Route path='/dashboard' element={<DashBoardPage />} />
-              </Route>
 
               <Route path='*' element={<NotFoundPage />} />
             </Routes>

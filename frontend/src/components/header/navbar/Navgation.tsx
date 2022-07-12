@@ -13,16 +13,10 @@ const Navgation = () => {
         <NavLink to="/products">Products</NavLink>
       </StyledItemBox>
       <StyledItemBox>
-        <NavLink to="/orders">Orders</NavLink>
-      </StyledItemBox>
-      <StyledItemBox>
         <NavLink to="/about">About</NavLink>
       </StyledItemBox>
       <StyledItemBox>
         <NavLink to="/contact">Contact</NavLink>
-      </StyledItemBox>
-      <StyledItemBox>
-        <NavLink to="/dashboard">Dashboard</NavLink>
       </StyledItemBox>
     </StyledBoxNavgation>
   )

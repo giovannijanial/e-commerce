@@ -30,19 +30,23 @@ export const DashListItems = (
       </ListItemButton>
     </NavLink>
 
-    <ListItemButton>
-      <ListItemIcon>
-        <ShoppingCartIcon />
-      </ListItemIcon>
-      <ListItemText primary="Orders" />
-    </ListItemButton>
+    <NavLink to="/dash/orders">
+      <ListItemButton>
+        <ListItemIcon>
+          <ShoppingCartIcon />
+        </ListItemIcon>
+        <ListItemText primary="Orders" />
+      </ListItemButton>
+    </NavLink>
 
-    <ListItemButton>
-      <ListItemIcon>
-        <PeopleIcon />
-      </ListItemIcon>
-      <ListItemText primary="Users" />
-    </ListItemButton>
+    <NavLink to="/dash/users">
+      <ListItemButton>
+        <ListItemIcon>
+          <PeopleIcon />
+        </ListItemIcon>
+        <ListItemText primary="Users" />
+      </ListItemButton>
+    </NavLink>
 
   </React.Fragment>
 );

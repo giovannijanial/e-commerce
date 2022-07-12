@@ -14,14 +14,13 @@ import { ICategory, IProduct } from '../../../../interfaces/Product';
 import { IPriceFormat } from '../addProduct/Index';
 import { NumberFormatCustom } from '../addProduct/priceFormat';
 
+const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
+const checkedIcon = <CheckBoxIcon fontSize="small" />;
 interface Props {
   dialog: boolean,
   setOpenDialogUpdate: any,
   currentProduct?: IProduct,
 }
-
-const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
-const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 export default function DialogUpdateProduct({ dialog, setOpenDialogUpdate, currentProduct }: Props) {
   const [name, setName] = useState("");

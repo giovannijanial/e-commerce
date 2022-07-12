@@ -100,14 +100,25 @@ export default function LoginPage() {
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
           />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 4, mb: 3 }}
-          >
-            Sign In
-          </Button>
+          {loading ? (
+            <Button
+              disabled
+              fullWidth
+              variant="contained"
+              sx={{ mt: 4, mb: 3 }}
+            >
+              Wait...
+            </Button>
+          ) : (
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 4, mb: 3 }}
+            >
+              Sign In
+            </Button>
+          )}
           <Grid container>
             <Grid item xs>
               <Link to="#">
