@@ -9,7 +9,7 @@ export const useCategory = () => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
-  const getAllCategories = useCallback(async () => {
+  const getAll = useCallback(async () => {
     setLoading(true);
     try {
       const { status, data } = await CategoryService.getAll()
@@ -23,7 +23,7 @@ export const useCategory = () => {
 
   }, []);
 
-  const createCategory = useCallback(async (category: ICategory) => {
+  const create = useCallback(async (category: ICategory) => {
     setLoading(true);
     try {
       const res = await CategoryService.create(category)
@@ -47,7 +47,7 @@ export const useCategory = () => {
     error,
     success,
     loading,
-    getAllCategories,
-    createCategory
+    getAll,
+    create
   }
 }

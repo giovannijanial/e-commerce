@@ -29,12 +29,12 @@ export default function DialogUpdateProduct({ dialog, setOpenDialogUpdate, curre
   const [quantity, setQuantity] = useState(0);
   const [newCategories, setNewCategories] = useState<ICategory[]>([]);
 
-  const { getAllCategories, categories } = useCategory();
+  const { getAll, categories } = useCategory();
   const { update, loading } = useProduct();
 
   useEffect(() => {
-    getAllCategories()
-  }, [getAllCategories])
+    getAll()
+  }, [getAll])
 
   useEffect(() => {
     if (currentProduct) {

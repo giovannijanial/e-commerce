@@ -26,11 +26,11 @@ const DashAddProductPage = () => {
 
   const navigate = useNavigate();
   const { create, error, loading, success } = useProduct();
-  const { getAllCategories, categories } = useCategory();
+  const { getAll, categories } = useCategory();
 
   useEffect(() => {
-    getAllCategories()
-  }, [getAllCategories])
+    getAll()
+  }, [getAll])
 
   useEffect(() => {
     if (success) {
