@@ -13,7 +13,7 @@
     <img src="https://jwt.io/img/pic_logo.svg" width="60" alt="JWToken" title="JWToken" />
     <img src="https://vitejs.dev/logo-with-shadow.png" width="60" alt="Vite" title="Vite"  />
     <img src="https://camo.githubusercontent.com/306dedb9426f1d93a981d305a0a18164932ece8dca4d5fd820b1d3c36625b218/68747470733a2f2f6d75692e636f6d2f7374617469632f6c6f676f2e737667" width="60" alt="Material UI"  title="Material UI"/>
-    <img src="https://axios-http.com/assets/logo.svg" width="60"  alt="Axios" title="Axios" />
+    <img src="https://user-images.githubusercontent.com/8939680/57233882-20344080-6fe5-11e9-9086-d20a955bed59.png" width="60"  alt="Axios" title="Axios" />
     <img src="https://styled-components.com/logo.png" width="60" alt="StyledComponents" title="Styled Components"  />
 </p>		
 
