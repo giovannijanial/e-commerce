@@ -17,7 +17,6 @@ export class ProductService {
   ) {}
 
   async create(createProductDto: CreateProductDto) {
-    console.log(createProductDto);
     const categories = await Promise.all(
       createProductDto.categories.map((category) =>
         this.preloadCategoryByName(category.name),
@@ -36,7 +35,6 @@ export class ProductService {
   }
 
   findAllCategories() {
-    console.log('aqui');
     return this.categoryRepository.find();
   }
 

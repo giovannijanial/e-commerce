@@ -1,3 +1,4 @@
+import { CartStatus } from '../enums/CartStatus';
 import { IProduct } from './Product';
 import { IUser } from './User';
 
@@ -8,10 +9,10 @@ export interface ICartItem {
   product: IProduct;
 }
 export interface ICart {
-  id: string;
+  id?: string;
   quantityProducts: number;
   total: number;
-  cartStatus: string;
-  user: IUser;
+  cartStatus?: CartStatus;
+  user?: IUser;
   cartProducts: ICartItem[];
 }

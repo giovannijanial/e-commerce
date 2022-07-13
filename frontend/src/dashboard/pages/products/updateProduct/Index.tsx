@@ -38,7 +38,6 @@ export default function DialogUpdateProduct({ dialog, setOpenDialogUpdate, curre
 
   useEffect(() => {
     if (currentProduct) {
-      console.log(currentProduct)
       setName(currentProduct?.name)
       setNewCategories(currentProduct?.categories)
       setPriceFormat({ price: currentProduct?.price.toString() })

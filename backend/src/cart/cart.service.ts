@@ -29,7 +29,7 @@ export class CartService {
     });
 
     if (!currentUser) {
-      throw new NotFoundException(`User ID ${user.id} not found!`);
+      throw new NotFoundException(`Not found!`);
     }
 
     const product = await this.productRepository.findOne({
@@ -94,10 +94,10 @@ export class CartService {
         quantity: quantity,
         price: product.price,
       });
-      this.cartProductRepository.save({ ...newItem });
+      await this.cartProductRepository.save({ ...newItem });
     } else {
       const newQuantity = currentItem.quantity + quantity;
-      this.cartProductRepository.update(currentItem.id, {
+      await this.cartProductRepository.update(currentItem.id, {
         quantity: newQuantity,
       });
     }
@@ -114,25 +114,29 @@ export class CartService {
     const cartProduct = await this.cartProductRepository.findOne({
       where: { id: itemId },
     });
+    if (!cartProduct) {
+      throw new NotFoundException(`Item ID ${id} not found!`);
+    }
     const removedItem = await this.cartProductRepository.remove(cartProduct);
-    this.updateCart(cart.id);
+    await this.updateCart(cart.id);
     return removedItem;
   }
 
   async updateCart(cartId: string) {
     const cart = await this.findOne(cartId);
-    const total = cart.cartProducts
-      .map((item) => item.price * item.quantity)
-      .reduce((x, y) => x + y);
+    if (cart.cartProducts.length) {
+      const total = cart.cartProducts
+        .map((item) => item.price * item.quantity)
+        .reduce((x, y) => x + y);
 
-    const quantity = cart.cartProducts.length;
+      const quantity = cart.cartProducts.length;
 
-    console.log(total);
-
-    return this.cartRepository.update(cart.id, {
-      total: total,
-      quantityProducts: quantity,
-    });
+      return this.cartRepository.update(cart.id, {
+        total: total,
+        quantityProducts: quantity,
+      });
+    }
+    return this.cartRepository.remove(cart);
   }
 
   findAll() {
@@ -146,7 +150,6 @@ export class CartService {
       where: { id },
       relations: ['user', 'cartProducts', 'cartProducts.product'],
     });
-
     if (!cart) {
       throw new NotFoundException(`Cart ID ${id} not found!`);
     }
@@ -154,10 +157,14 @@ export class CartService {
   }
 
   async remove(id: string) {
-    const cart = await this.cartRepository.find({ where: { id } });
+    const cart = await this.findOne(id);
 
     if (!cart) {
       throw new NotFoundException(`Cart ID ${id} not found!`);
+    }
+
+    for (const cartProduct of cart.cartProducts) {
+      await this.cartProductRepository.remove(cartProduct);
     }
 
     return this.cartRepository.remove(cart);

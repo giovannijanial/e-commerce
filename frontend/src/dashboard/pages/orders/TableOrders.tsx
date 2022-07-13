@@ -8,13 +8,13 @@ import { useCallback, useEffect, useState } from 'react';
 import { theme } from '../../../app.styled';
 import { useCart } from '../../../hooks/useCart';
 import { ICart, ICartItem } from '../../../interfaces/Cart';
-import { IUser } from '../../../interfaces/User';
 import DialogDelete from '../../components/dialogs/DeleteDialog';
-import DialogDetailsUser from './detailsOrder/Index';
-import DialogUpdateUser from './updateOrder/Index';
+import DialogDetailsOrder from './detailsOrder/Index';
+import DialogUpdateOrder from './updateOrder/Index';
 
 export default function TableOrders() {
   const { getAll, carts, loading, error, remove, setCart } = useCart();
+
   const [openDialogDelete, setOpenDialogDelete] = useState(false);
   const [openDialogDetails, setOpenDialogDetails] = useState(false);
   const [openDialogUpdate, setOpenDialogUpdate] = useState(false);
@@ -86,6 +86,8 @@ export default function TableOrders() {
       headerName: 'Status',
       width: 180,
       headerClassName: 'header',
+      align: "center",
+      headerAlign: "center",
       cellClassName: (params: GridCellParams<string>) => {
         return clsx('super-app', {
           wp: params.value === "waitingPayment",
@@ -151,15 +153,16 @@ export default function TableOrders() {
         dialog={openDialogDelete}
         onClose={handleCloseDialogDelete}
         onConfirm={deleteCart}
-        id={currentId} />
-      {/**<DialogUpdateCart
+        id={currentId}
+        loading={loading} />
+      <DialogUpdateOrder
         dialog={openDialogUpdate}
         setOpenDialogUpdate={setOpenDialogUpdate}
-        currentCart={currentCart} /> 
-      <DialogDetailsCart
+        currentCart={currentCart} />
+      <DialogDetailsOrder
         dialog={openDialogDetails}
         onClose={handleCloseDialogDetails}
-        currentCart={currentCart} />*/}
+        currentCart={currentCart} />
     </Box >
   );
 }

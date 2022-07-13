@@ -62,12 +62,21 @@ export default function TableProducts() {
     { field: 'lastName', headerName: 'Last Name', width: 230, headerClassName: 'header' },
     { field: 'username', headerName: 'Username', width: 130, headerClassName: 'header' },
     { field: 'email', headerName: 'Email', width: 230, headerClassName: 'header' },
-    { field: 'age', headerName: 'Age', width: 70, headerClassName: 'header' },
+    {
+      field: 'age',
+      headerName: 'Age',
+      width: 70,
+      headerClassName: 'header',
+      align: "center",
+      headerAlign: "center"
+    },
     {
       field: 'role',
       headerName: 'Role',
       width: 80,
       headerClassName: 'header',
+      align: "center",
+      headerAlign: "center",
       cellClassName: (params: GridCellParams<string>) => {
         return clsx('super-app', {
           admin: params.value === "admin",
@@ -132,7 +141,8 @@ export default function TableProducts() {
         dialog={openDialogDelete}
         onClose={handleCloseDialogDelete}
         onConfirm={deleteUser}
-        id={currentId} />
+        id={currentId}
+        loading={loading} />
       <DialogUpdateUser
         dialog={openDialogUpdate}
         setOpenDialogUpdate={setOpenDialogUpdate}

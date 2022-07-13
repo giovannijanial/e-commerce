@@ -5,9 +5,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import TextField from '@mui/material/TextField';
-import { useState } from 'react';
-import { ICategory, IProduct } from '../../../../interfaces/Product';
-import { IPriceFormat } from '../addProduct/Index';
+import { IProduct } from '../../../../interfaces/Product';
 
 interface Props {
   dialog: boolean,

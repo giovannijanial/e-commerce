@@ -1,15 +1,17 @@
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
-import { Autocomplete, Box, Grid } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import TextField from '@mui/material/TextField';
-import { ChangeEvent, FormEvent, useCallback, useEffect, useState } from 'react';
-import { useUser } from '../../../../hooks/useUser';
-import { ICart } from '../../../../interfaces/Cart';
+import { FormEvent, useCallback, useEffect, useState } from 'react';
+import { CartStatus } from '../../../../enums/CartStatus';
+import { useCart } from '../../../../hooks/useCart';
+import { ICart, ICartItem } from '../../../../interfaces/Cart';
 import { IUser } from '../../../../interfaces/User';
+import GridCartProducts from '../../../components/gridCartProducts/Index';
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
@@ -19,46 +21,55 @@ interface Props {
   currentCart?: ICart,
 }
 
-export default function DialogUpdateCart({ dialog, setOpenDialogUpdate, currentCart }: Props) {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [age, setAge] = useState(0);
-  const [role, setRole] = useState<string | null>("");
-  const [password, setpassword] = useState("");
+export default function DialogUpdateOrder({ dialog, setOpenDialogUpdate, currentCart }: Props) {
+  const [id, setId] = useState<string | undefined>("");
+  const [total, setTotal] = useState(0);
+  const [quantityProducts, setQuantityProducts] = useState(0);
+  const [cartStatus, setCartStatus] = useState<CartStatus>();
+  const [user, setUser] = useState<IUser | undefined>();
+  const [cartProducts, setCartProducts] = useState<ICartItem[]>([]);
 
-  const { update, loading } = useUser();
+  const { update, loading } = useCart();
 
   useEffect(() => {
-    if (currentUser) {
-      setFirstName(currentUser?.firstName)
-      setLastName(currentUser?.lastName)
-      setUsername(currentUser?.username)
-      setEmail(currentUser?.email)
-      setRole(currentUser?.role)
-      setAge(currentUser?.age)
+    if (currentCart) {
+      setId(currentCart?.id)
+      setTotal(currentCart?.total)
+      setQuantityProducts(currentCart?.quantityProducts)
+
+      if (currentCart?.cartStatus === CartStatus.WAITING_PAYMENT)
+        setCartStatus(CartStatus.WAITING_PAYMENT)
+      if (currentCart?.cartStatus === CartStatus.PAYD)
+        setCartStatus(CartStatus.PAYD)
+      if (currentCart?.cartStatus === CartStatus.SHIPPED)
+        setCartStatus(CartStatus.SHIPPED)
+      if (currentCart?.cartStatus === CartStatus.DELIVERED)
+        setCartStatus(CartStatus.DELIVERED)
+      if (currentCart?.cartStatus === CartStatus.CANCELED)
+        setCartStatus(CartStatus.CANCELED)
+
+      setUser(currentCart?.user)
+      setCartProducts(currentCart?.cartProducts)
     }
   }, [dialog])
 
   const handleSubmit = useCallback(async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const updateUser: IUser = {
-      firstName,
-      lastName,
-      username,
-      email,
-      age,
-      role
+    const updateCart: ICart = {
+      total,
+      quantityProducts,
+      cartStatus,
+      user,
+      cartProducts
     }
 
-    if (currentUser?.id) {
-      await update(currentUser?.id, updateUser);
+    if (currentCart?.id) {
+      await update(currentCart?.id, updateCart);
       setOpenDialogUpdate(false)
     }
 
-  }, [update, firstName, lastName, username, email, age, role]);
+  }, [update, total, quantityProducts, cartStatus, user, cartProducts]);
 
   const handleCloseDialogUpdate = () => {
     setOpenDialogUpdate(false);
@@ -67,38 +78,29 @@ export default function DialogUpdateCart({ dialog, setOpenDialogUpdate, currentC
   return (
     <Box>
       <Dialog open={dialog} onClose={setOpenDialogUpdate} fullWidth maxWidth="lg">
-        <DialogTitle>User Update</DialogTitle>
+        <DialogTitle>Order Update</DialogTitle>
         <DialogContent>
           <Box component="form" onSubmit={handleSubmit} sx={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
             <Grid container spacing={2} sx={{ mt: 1 }}>
-              <Grid item xs={6}>
+              <Grid item xs={4}>
                 <TextField
-                  name="firstName"
+                  name="id"
                   fullWidth
-                  id="firstName"
-                  label="First Name"
-                  value={firstName}
-                  onChange={(e: ChangeEvent<HTMLInputElement>) => setFirstName(e.target.value)}
+                  id="id"
+                  label="ID"
+                  value={id}
+                  InputProps={{
+                    readOnly: true,
+                  }}
                 />
               </Grid>
-              <Grid item xs={6}>
+              <Grid item xs={2}>
                 <TextField
-                  name="lastName"
+                  name="userId"
                   fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  value={lastName}
-                  onChange={(e: ChangeEvent<HTMLInputElement>) => setLastName(e.target.value)}
-                />
-              </Grid>
-              <Grid item xs={6}>
-                <TextField
-                  name="email"
-                  fullWidth
-                  id="email"
-                  label="Email"
-                  value={email}
-                  onChange={(e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
+                  id="userId"
+                  label="User ID"
+                  value={user?.id}
                 />
               </Grid>
               <Grid item xs={6}>
@@ -107,54 +109,40 @@ export default function DialogUpdateCart({ dialog, setOpenDialogUpdate, currentC
                   fullWidth
                   id="username"
                   label="Username"
-                  value={username}
-                  onChange={(e: ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}
+                  value={user?.username}
                 />
               </Grid>
               <Grid item xs={3}>
                 <TextField
-                  name="age"
+                  name="quantityProducts"
                   fullWidth
-                  id="age"
-                  label="Age"
-                  value={age}
-                  onChange={(e: ChangeEvent<HTMLInputElement>) => setAge(parseInt(e.target.value))}
+                  id="quantityProducts"
+                  label="Quantity Products"
+                  value={quantityProducts}
                 />
               </Grid>
-              <Grid item xs={9}>
-                <Autocomplete
-                  disablePortal
-                  id="role"
-                  options={["admin", "user"]}
+              <Grid item xs={3}>
+                <TextField
+                  name="total"
                   fullWidth
-                  renderInput={(params) => <TextField {...params} label="Role" />}
-                  value={role}
-                  onChange={(e, value) => setRole(value)}
+                  id="total"
+                  label="Total Value"
+                  value={total.toFixed(2)}
                 />
               </Grid>
               <Grid item xs={6}>
                 <TextField
-                  name="createdAt"
+                  name="status"
                   fullWidth
-                  id="createdAt"
-                  label="Created At"
-                  InputProps={{
-                    readOnly: true,
-                  }}
-                  value={currentUser?.createdAt}
+                  id="status"
+                  label="Cart Status"
+                  value={cartStatus}
                 />
               </Grid>
-              <Grid item xs={6}>
-                <TextField
-                  name="updatedAt"
-                  fullWidth
-                  id="updatedAt"
-                  label="Updated At"
-                  InputProps={{
-                    readOnly: true,
-                  }}
-                  value={currentUser?.updateAt}
-                />
+              <Grid item xs={12}>
+                {currentCart?.id && (
+                  <GridCartProducts cartId={currentCart.id} cartProducts={currentCart.cartProducts} origin="update" />
+                )}
               </Grid>
             </Grid>
             <Box sx={{ display: "flex", justifyContent: "space-around", width: "150px", mt: 2, alignSelf: "flex-end" }}>

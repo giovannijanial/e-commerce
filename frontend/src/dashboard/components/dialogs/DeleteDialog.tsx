@@ -22,10 +22,11 @@ interface Props {
   dialog: boolean,
   onClose: any,
   onConfirm: any,
-  id: GridRowId
+  id: GridRowId,
+  loading: boolean
 }
 
-export default function DialogDelete({ dialog, onClose, onConfirm, id }: Props) {
+export default function DialogDelete({ dialog, onClose, onConfirm, id, loading }: Props) {
   return (
     <div>
       <Dialog
@@ -43,9 +44,14 @@ export default function DialogDelete({ dialog, onClose, onConfirm, id }: Props) 
         </DialogContent>
         <DialogActions>
           <Button onClick={onClose}>Cancel</Button>
-          <Button onClick={onConfirm(id)}>Delete</Button>
+          {loading ? (
+            <Button disabled>Wait...</Button>
+          ) : (
+            <Button onClick={onConfirm(id)}>Delete</Button>
+          )}
+
         </DialogActions>
       </Dialog>
-    </div>
+    </div >
   );
 }

@@ -83,6 +83,18 @@ export const useCart = () => {
     }
   }, [])
 
+  const removeProduct = useCallback(async (id: string, idProduct: number) => {
+    setLoading(true);
+    try {
+      const { status, data } = await CartService.removeProduct(id, idProduct)
+
+    } catch (error) {
+      setError(["error"])
+    } finally {
+      setLoading(false);
+    }
+  }, [])
+
   return {
     carts,
     cart,
@@ -93,6 +105,7 @@ export const useCart = () => {
     create,
     update,
     remove,
-    setCart
+    setCart,
+    removeProduct
   }
 }

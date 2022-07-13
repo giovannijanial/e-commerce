@@ -138,7 +138,8 @@ export default function TableProducts() {
         dialog={openDialogDelete}
         onClose={handleCloseDialogDelete}
         onConfirm={deleteProduct}
-        id={currentId} />
+        id={currentId}
+        loading={loading} />
       <DialogUpdateProduct
         dialog={openDialogUpdate}
         setOpenDialogUpdate={setOpenDialogUpdate}
