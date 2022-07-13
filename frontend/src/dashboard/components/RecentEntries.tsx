@@ -4,10 +4,6 @@ import Title from './Title';
 import { useCart } from '../../hooks/useCart';
 import { Fragment, useEffect, useState } from 'react';
 
-function preventDefault(event: React.MouseEvent) {
-  event.preventDefault();
-}
-
 export default function DashRecentEntries() {
   const { getAll, carts, loading } = useCart();
   const [totalEntries, setTotalEntries] = useState(0);
@@ -16,21 +12,15 @@ export default function DashRecentEntries() {
   const now = new Date();
 
   useEffect(() => {
-    getAll()
-  }, [getAll])
+    let totalEntries = 0;
+    getAll();
 
-  useEffect(() => {
-
-    const recentTotalEntries = async () => {
-      let totalEntries = 0;
-      for (const cart of carts) {
-        totalEntries += cart.total;
-      }
-      setTotalEntries(totalEntries)
+    for (const cart of carts) {
+      totalEntries += cart.total;
     }
+    setTotalEntries(totalEntries)
     setDate(now);
-    recentTotalEntries()
-  }, [])
+  }, [getAll, carts])
 
 
   return (
@@ -43,7 +33,7 @@ export default function DashRecentEntries() {
         {date?.toLocaleDateString()}
       </Typography>
       <div>
-        <Link color="primary" href="#" onClick={preventDefault}>
+        <Link color="primary" href="#">
           View balance
         </Link>
       </div>
