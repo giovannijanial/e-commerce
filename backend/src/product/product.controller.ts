@@ -6,6 +6,7 @@ import {
   Param,
   Patch,
   Post,
+  Query,
 } from '@nestjs/common';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
@@ -26,9 +27,19 @@ export class ProductController {
     return this.productService.findAllCategories();
   }
 
+  @Get('search')
+  search(@Query('q') q: string) {
+    return this.productService.search(q);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.productService.findOne(+id);
+  }
+
+  @Get('categories/:category')
+  findByCategory(@Param('category') category: string) {
+    return this.productService.findByCategory(category);
   }
 
   @Post()

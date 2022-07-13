@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Like, Repository } from 'typeorm';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { CategoryEntity } from './entities/category.entity';
@@ -39,7 +39,7 @@ export class ProductService {
   }
 
   async findOne(id: number) {
-    const product = await this.productRepository.findOne({
+    const product = await this.productRepository.find({
       where: { id },
       relations: ['categories'],
     });
@@ -48,6 +48,31 @@ export class ProductService {
     }
 
     return product;
+  }
+
+  async search(q: string) {
+    console.log(q);
+    const products = await this.productRepository.find({
+      where: { name: Like(`%${q}%`) },
+      relations: ['categories'],
+    });
+    if (!products) {
+      throw new NotFoundException(`Search not found!`);
+    }
+
+    return products;
+  }
+
+  async findByCategory(category: string) {
+    const products = await this.categoryRepository.findOne({
+      where: { name: category },
+      relations: ['products'],
+    });
+    if (!products) {
+      throw new NotFoundException(`Category ID ${category} not found!`);
+    }
+
+    return products;
   }
 
   async update(id: number, updateProductDto: UpdateProductDto) {
