@@ -6,11 +6,14 @@ import { StyleTextField } from './search.styled';
 
 const Search = () => {
   const navigate = useNavigate();
-  const [query, setQuery] = useState<String>("");
+  const [query, setQuery] = useState("");
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    navigate("search?q=" + query)
+    navigate({
+      pathname: "/search",
+      search: `?q=${query}`
+    })
   }
 
   return (

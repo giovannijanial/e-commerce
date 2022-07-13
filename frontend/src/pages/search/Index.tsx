@@ -1,7 +1,6 @@
 import { CircularProgress, Grid, Typography } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { url } from '../../App';
 import { MainContainer } from '../../components/main/main.styled';
 import ProductCard from '../../components/productCard/Index';
 import { useProduct } from '../../hooks/useProduct';
@@ -9,13 +8,14 @@ import { IProduct } from '../../interfaces/Product';
 
 const SearchPage = () => {
   const [searchParams] = useSearchParams();
-  const urlSearch = url + "/product/?" + searchParams;
 
-  const { getAll, products, loading, error } = useProduct();
+  const query = searchParams.get("q")
+  const { products, loading, error, search } = useProduct();
 
   useEffect(() => {
-    getAll()
-  }, [getAll])
+    if (query)
+      search(query)
+  }, [query])
 
   function showResults() {
     return products && products.map((product: IProduct) => (
@@ -36,7 +36,7 @@ const SearchPage = () => {
           gap: "50px",
         }}>
           {loading && (<CircularProgress color="primary" />)}
-          {error && (<p>{error.message}</p>)}
+          {error && (<p>{error}</p>)}
           {showResults()}
         </Grid>
       </Grid>

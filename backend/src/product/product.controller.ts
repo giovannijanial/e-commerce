@@ -23,7 +23,6 @@ export class ProductController {
 
   @Get('categories')
   findAllCategories() {
-    console.log('aqui');
     return this.productService.findAllCategories();
   }
 

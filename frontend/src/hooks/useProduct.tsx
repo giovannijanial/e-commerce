@@ -35,6 +35,19 @@ export const useProduct = () => {
     }
   }, [])
 
+  const search = useCallback(async (query: string) => {
+    setLoading(true);
+    try {
+      const { status, data } = await ProductService.search(query)
+      setProducts(data);
+
+    } catch (error) {
+      setError(["error"])
+    } finally {
+      setLoading(false);
+    }
+  }, [])
+
   const create = useCallback(async (product: IProduct) => {
     setLoading(true);
     try {
@@ -89,6 +102,7 @@ export const useProduct = () => {
     loading,
     getAll,
     getOne,
+    search,
     product,
     create,
     update,

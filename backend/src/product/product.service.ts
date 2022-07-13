@@ -51,7 +51,6 @@ export class ProductService {
   }
 
   async search(q: string) {
-    console.log(q);
     const products = await this.productRepository.find({
       where: { name: Like(`%${q}%`) },
       relations: ['categories'],
