@@ -1,6 +1,13 @@
 import DraftsIcon from '@mui/icons-material/Drafts';
 import HardwareIcon from '@mui/icons-material/Hardware';
 import StorageIcon from '@mui/icons-material/Storage';
+import HeadsetIcon from '@mui/icons-material/Headset';
+import ChairIcon from '@mui/icons-material/Chair';
+import MemoryIcon from '@mui/icons-material/Memory';
+import MonitorIcon from '@mui/icons-material/Monitor';
+import KeyboardIcon from '@mui/icons-material/Keyboard';
+import TableRestaurantIcon from '@mui/icons-material/TableRestaurant';
+import PrecisionManufacturingIcon from '@mui/icons-material/PrecisionManufacturing';
 import { capitalize, ListItemIcon, ListItemText, ListSubheader } from "@mui/material";
 import List from '@mui/material/List';
 import { useState } from "react";
@@ -28,6 +35,13 @@ const ListCategories = ({ categories }: Props) => {
             <ListItemIcon>
               {category.name.includes("hardware") && (<HardwareIcon />)}
               {category.name.includes("armazenamento") && (<StorageIcon />)}
+              {category.name.includes("perife") && (<KeyboardIcon />)}
+              {category.name.includes("eletro") && (<PrecisionManufacturingIcon />)}
+              {category.name.includes("moveis") && (<TableRestaurantIcon />)}
+              {category.name.includes("headset") && (<HeadsetIcon />)}
+              {category.name.includes("cadeira") && (<ChairIcon />)}
+              {category.name.includes("proces") && (<MemoryIcon />)}
+              {category.name.includes("monit") && (<MonitorIcon />)}
             </ListItemIcon>
             <ListItemText primary={capitalize(category.name.toString())} />
           </StyledListItemButton>
