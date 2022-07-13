@@ -2,7 +2,7 @@ import ArticleIcon from '@mui/icons-material/Article';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { Box } from '@mui/material';
-import { DataGrid, GridActionsCellItem, GridCellParams, GridColumns, GridRowId } from '@mui/x-data-grid';
+import { DataGrid, GridActionsCellItem, GridCellParams, GridColumns, GridRowId, GridValueGetterParams } from '@mui/x-data-grid';
 import clsx from 'clsx';
 import { useCallback, useEffect, useState } from 'react';
 import { theme } from '../../../app.styled';
@@ -58,11 +58,11 @@ export default function TableOrders() {
   }, [getAll, openDialogUpdate])
 
   const columns: GridColumns<ICart> = [
-    { field: 'id', headerName: 'ID', width: 200, headerClassName: 'header' },
+    { field: 'id', headerName: 'ID', width: 140, headerClassName: 'header' },
     {
       field: 'user',
       headerName: 'Username',
-      width: 150,
+      width: 120,
       headerClassName: 'header',
       renderCell: (params) => (
         <p>{params.value.username}</p>
@@ -93,6 +93,16 @@ export default function TableOrders() {
           wp: params.value === "waitingPayment",
         });
       },
+    },
+    {
+      field: 'total',
+      headerName: 'Total Value',
+      width: 100,
+      headerClassName: 'header',
+      align: "center",
+      headerAlign: "center",
+      valueGetter: (params: GridValueGetterParams) =>
+        `${(params.row.total).toFixed(2)}`,
     },
     {
       field: 'actions',

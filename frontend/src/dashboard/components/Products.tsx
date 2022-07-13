@@ -37,7 +37,7 @@ const DashProducts = () => {
             <TableRow key={product.id}>
               <TableCell>{product.id}</TableCell>
               <TableCell>{product.name}</TableCell>
-              <TableCell align="right">{`R$${product.price}`}</TableCell>
+              <TableCell align="right">{`R$${(product.price).toFixed(2)}`}</TableCell>
             </TableRow>
           ))}
         </TableBody>

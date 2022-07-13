@@ -2,9 +2,9 @@ import { Box, Toolbar } from '@mui/material';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import DashDeposits from '../../components/Deposits';
 import DashOrders from '../../components/Orders';
 import DashProducts from '../../components/Products';
+import DashRecentEntries from '../../components/RecentEntries';
 
 
 const DashHomePage = () => {
@@ -49,7 +49,7 @@ const DashHomePage = () => {
                 height: 240,
               }}
             >
-              <DashDeposits />
+              <DashRecentEntries />
             </Paper>
           </Grid>
           {/* Recent Orders */}
