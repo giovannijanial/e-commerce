@@ -1,16 +1,18 @@
 import { CircularProgress } from "@mui/material";
 import { Box } from "@mui/system";
 import { useEffect } from 'react';
+import { useParams } from "react-router-dom";
 import ProductCard from "../../components/productCard/Index";
 import { useProduct } from "../../hooks/useProduct";
 import { IProduct } from '../../interfaces/Product';
 
 const BoxProducts = () => {
-  const { getAll, products, loading, error } = useProduct();
+  const { getAll, getByCategory, products, loading, error } = useProduct();
+  const { category } = useParams();
 
   useEffect(() => {
-    getAll()
-  }, [getAll])
+    category ? getByCategory(category) : getAll();
+  }, [getAll, getByCategory, category])
 
   function showProducts() {
     return products && products.slice(0, 15).map((product: IProduct) => (
@@ -27,8 +29,12 @@ const BoxProducts = () => {
       justifyContent: "center",
       gap: "20px",
     }}>
-      {loading && (<CircularProgress color="primary" />)}
-      {showProducts()}
+      {loading ? (
+        <CircularProgress color="primary" />
+      ) : (
+        showProducts()
+      )}
+
     </Box>
   )
 }

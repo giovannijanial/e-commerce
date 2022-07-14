@@ -39,7 +39,8 @@ export const useProduct = () => {
     setLoading(true);
     try {
       const { status, data } = await ProductService.getByCategory(category)
-      setProducts(data);
+      if (data.products)
+        setProducts(data.products);
 
     } catch (error) {
       setError(["error"])
@@ -115,6 +116,7 @@ export const useProduct = () => {
     loading,
     getAll,
     getOne,
+    getByCategory,
     search,
     product,
     create,

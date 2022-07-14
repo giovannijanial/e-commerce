@@ -1,16 +1,13 @@
-import { Button, Grid, Typography, Box, Tabs, Tab } from '@mui/material';
-import { useEffect, useState } from 'react'
+import { Box, Button, Grid, Typography } from '@mui/material';
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { url } from '../../../App';
 import { theme } from '../../../app.styled';
-import { MainContainer } from '../../../components/main/main.styled'
-
-import { IProduct } from '../../../interfaces/Product'
+import { MainContainer } from '../../../components/main/main.styled';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import InfoProduct from './InfoProduct';
-import FavoriteRating from '../../../components/productCard/Rating';
 import BreadCrumb from '../../../components/breadcrumb/Index';
+import FavoriteRating from '../../../components/productCard/Rating';
 import { useProduct } from '../../../hooks/useProduct';
+import InfoProduct from './InfoProduct';
 
 const ProductPage = () => {
   const { id } = useParams();

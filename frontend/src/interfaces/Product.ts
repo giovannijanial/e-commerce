@@ -1,6 +1,7 @@
 export interface ICategory {
   id: number;
   name: string;
+  products?: IProduct[];
 }
 
 export interface IProduct {

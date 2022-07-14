@@ -1,10 +1,10 @@
-import { IProduct } from '../interfaces/Product';
+import { ICategory, IProduct } from '../interfaces/Product';
 import { Api } from '../providers';
 
 const getAll = () => Api.get<IProduct[]>('product');
 const getOne = (id: number) => Api.get<IProduct>(`product/${id}`);
 const getByCategory = (category: string) =>
-  Api.get<IProduct[]>(`product/categories/${category}`);
+  Api.get<ICategory>(`product/categories/${category}`);
 const search = (query: string) =>
   Api.get<IProduct[]>(`product/search?q=${query}`);
 const create = (product: IProduct) => Api.post<IProduct>('product', product);

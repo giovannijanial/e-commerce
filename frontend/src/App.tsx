@@ -51,6 +51,7 @@ function App() {
               {/* public routes */}
               <Route path='/' element={<HomePage />} />
               <Route path='/products' element={<ProductsPage />} />
+              <Route path='/products/category/:category' element={<ProductsPage />} />
               <Route path='/products/:id' element={<ProductPage />} />
               <Route path='/orders' element={<OrdersPage />} />
               <Route path='/about' element={<AboutPage />} />
