@@ -83,13 +83,17 @@ export class ProductService {
         ),
       ));
 
-    await this.findOne(id);
-    // return this.userRepository.update(id, { ...updateUserDto });
-
-    return this.productRepository.update(id, {
+    const product = await this.productRepository.preload({
+      id: +id,
       ...updateProductDto,
       categories,
     });
+
+    if (!product) {
+      throw new NotFoundException(`Product ${id} not found!`);
+    }
+
+    return this.productRepository.save(product);
   }
 
   async remove(id: number) {
