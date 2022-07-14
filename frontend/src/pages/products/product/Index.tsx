@@ -39,7 +39,7 @@ const ProductPage = () => {
       <Grid container spacing={4} bgcolor={theme.palette.background.default}
         sx={{
           marginTop: "10px",
-          padding: "10px",
+          padding: "10px 20px",
           display: "flex",
           justifyContent: "center",
           maxWidth: "1360px"

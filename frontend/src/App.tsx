@@ -13,6 +13,7 @@ import DashProductPage from './dashboard/pages/products/Index';
 import DashAddUserPage from './dashboard/pages/users/addUser/Index';
 import DashUserPage from './dashboard/pages/users/Index';
 import AboutPage from './pages/about/Index';
+import CartPage from './pages/cart/Index';
 import ContactPage from './pages/contact/Index';
 import HomePage from "./pages/home/Index";
 import LoginPage from './pages/login/Index';
@@ -40,7 +41,6 @@ function App() {
               <Route path='/dash/products' element={<DashProductPage />} />
               <Route path='/dash/products/add' element={<DashAddProductPage />} />
               <Route path='/dash/users' element={<DashUserPage />} />
-              <Route path='/dash/users/add' element={<DashAddUserPage />} />
               <Route path='/dash/orders' element={<DashOrderPage />} />
             </Routes>
           </BrowserRouter>
@@ -58,6 +58,7 @@ function App() {
               <Route path='/contact' element={<ContactPage />} />
               <Route path='/login' element={<LoginPage />} />
               <Route path='/sign' element={<SignUpPage />} />
+              <Route path='/cart' element={<CartPage />} />
               <Route path='/search' element={<SearchPage />} />
 
               <Route path='*' element={<NotFoundPage />} />

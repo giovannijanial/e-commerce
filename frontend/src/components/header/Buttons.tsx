@@ -13,21 +13,38 @@ const Buttons = () => {
   return (
     <SyledBox>
       {!auth.token ? (
-        <Link to="/login">
-          <StyledIconButon aria-label='account' size='large' color='secondary'>
-            <AccountCircleIcon fontSize='inherit' />
-          </ StyledIconButon>
-        </Link>
+        <>
+          <Link to="/login">
+            <StyledIconButon aria-label='account' size='large' color='secondary'>
+              <AccountCircleIcon fontSize='inherit' />
+            </ StyledIconButon>
+          </Link>
+          <Link to="/login">
+            <StyledIconButon aria-label='cart' size='large' color='secondary'>
+              <ShoppingCartIcon fontSize='inherit' />
+            </ StyledIconButon>
+          </Link>
+          <Link to="/login">
+            <StyledIconButon aria-label='account' size='large' color='secondary'>
+              <FavoriteIcon fontSize='inherit' />
+            </ StyledIconButon>
+          </Link>
+        </>
       ) : (
-        <AccountMenu role='other' />
+        <>
+          <AccountMenu role='user' />
+          <StyledIconButon aria-label='account' size='large' color='secondary'>
+            <FavoriteIcon fontSize='inherit' />
+          </ StyledIconButon>
+          <Link to="/cart">
+            <StyledIconButon aria-label='cart' size='large' color='secondary'>
+              <ShoppingCartIcon fontSize='inherit' />
+            </ StyledIconButon>
+          </Link>
+        </>
+
       )}
 
-      <StyledIconButon aria-label='account' size='large' color='secondary'>
-        <FavoriteIcon fontSize='inherit' />
-      </ StyledIconButon>
-      <StyledIconButon aria-label='cart' size='large' color='secondary'>
-        <ShoppingCartIcon fontSize='inherit' />
-      </ StyledIconButon>
     </SyledBox>
   )
 }
