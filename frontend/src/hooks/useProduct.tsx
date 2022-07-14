@@ -35,6 +35,19 @@ export const useProduct = () => {
     }
   }, [])
 
+  const getByCategory = useCallback(async (category: string) => {
+    setLoading(true);
+    try {
+      const { status, data } = await ProductService.getByCategory(category)
+      setProducts(data);
+
+    } catch (error) {
+      setError(["error"])
+    } finally {
+      setLoading(false);
+    }
+  }, [])
+
   const search = useCallback(async (query: string) => {
     setLoading(true);
     try {

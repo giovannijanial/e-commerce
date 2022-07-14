@@ -10,10 +10,11 @@ import TableRestaurantIcon from '@mui/icons-material/TableRestaurant';
 import PrecisionManufacturingIcon from '@mui/icons-material/PrecisionManufacturing';
 import { capitalize, ListItemIcon, ListItemText, ListSubheader } from "@mui/material";
 import List from '@mui/material/List';
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { theme } from '../../../app.styled';
 import { ICategory } from '../../../interfaces/Product';
 import { StyledListItemButton } from "./listCategories.styled";
+import { useNavigate } from 'react-router-dom';
 
 interface Props {
   categories: ICategory[];
@@ -21,17 +22,19 @@ interface Props {
 
 const ListCategories = ({ categories }: Props) => {
   const [open, setOpen] = useState(true);
+  const navigate = useNavigate();
 
-  const handleClick = () => {
-    setOpen(!open);
-  };
+  const onClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    console.log(e);
+  }
 
   function renderItems() {
 
     return (
       <>
         {categories.map((category) => (
-          <StyledListItemButton>
+          <StyledListItemButton onClick={onClick}>
             <ListItemIcon>
               {category.name.includes("hardware") && (<HardwareIcon />)}
               {category.name.includes("armazenamento") && (<StorageIcon />)}
@@ -53,7 +56,7 @@ const ListCategories = ({ categories }: Props) => {
   return (
     <List
       sx={{ width: "100%", maxWidth: "360px", bgcolor: "backgroud.paper" }}
-      component="nav"
+      component="div"
       aria-labelledby="nested-list-subheader"
       subheader={
         <ListSubheader
