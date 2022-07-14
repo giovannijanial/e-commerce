@@ -14,7 +14,7 @@ const ProductCard = ({ product }: { product: IProduct }) => {
           component="img"
           width="250"
           height="200"
-          image="/static/images/cards/contemplative-reptile.jpg"
+          image=""
           alt="image"
         />
         <CardContent>

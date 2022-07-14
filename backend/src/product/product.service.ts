@@ -39,7 +39,7 @@ export class ProductService {
   }
 
   async findOne(id: number) {
-    const product = await this.productRepository.find({
+    const product = await this.productRepository.findOne({
       where: { id },
       relations: ['categories'],
     });
@@ -83,10 +83,10 @@ export class ProductService {
         ),
       ));
 
-    const product = await this.findOne(id);
+    await this.findOne(id);
+    // return this.userRepository.update(id, { ...updateUserDto });
 
-    return this.productRepository.save({
-      ...product,
+    return this.productRepository.update(id, {
       ...updateProductDto,
       categories,
     });

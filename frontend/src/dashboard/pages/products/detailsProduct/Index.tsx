@@ -14,8 +14,6 @@ interface Props {
 }
 
 export default function DialogDetailsProduct({ dialog, onClose, currentProduct }: Props) {
-
-  console.log(currentProduct)
   return (
     <Box>
       <Dialog open={dialog} onClose={onClose} fullWidth maxWidth="lg">

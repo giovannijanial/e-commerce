@@ -7,8 +7,8 @@ export const useProduct = () => {
   const [products, setProducts] = useState<IProduct[]>([]);
   const [product, setProduct] = useState<IProduct>();
   const [error, setError] = useState<string[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [success, setSuccess] = useState<boolean>(false);
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
 
 
   const getAll = useCallback(async () => {
@@ -25,7 +25,7 @@ export const useProduct = () => {
   const getOne = useCallback(async (id: number) => {
     setLoading(true);
     try {
-      const { status, data } = await ProductService.getOne(id)
+      const { status, data } = await ProductService.getOne(id);
       setProduct(data);
 
     } catch (error) {

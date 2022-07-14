@@ -33,7 +33,7 @@ export default function SignUpPage() {
       setEmail('');
       setAge(0);
       setpassword('');
-      navigate("/");
+      navigate("/login");
     }
   }, [success])
 
@@ -48,8 +48,8 @@ export default function SignUpPage() {
       age,
       role: "user",
       password,
+      carts: [],
     }
-
     create(user)
 
   }, [create, firstName, lastName, username, email, age, password]);
