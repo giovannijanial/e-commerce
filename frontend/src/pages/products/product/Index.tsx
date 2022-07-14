@@ -1,4 +1,4 @@
-import { Box, Button, Grid, Typography } from '@mui/material';
+import { Box, Button, Divider, Grid, Typography } from '@mui/material';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { theme } from '../../../app.styled';
@@ -20,7 +20,17 @@ const ProductPage = () => {
     }
   }, [getOne])
 
-  console.log(product)
+  const getPriceWithoutPromo = (): number => {
+    if (product?.price)
+      return parseFloat(((product?.price * 0.15) + product?.price).toFixed(2));
+    return 0;
+  }
+
+  const getInstallments = (): number => {
+    const priceWithoutPromo = getPriceWithoutPromo();
+    return parseFloat((priceWithoutPromo / 10).toFixed(2));
+  }
+
   return (
     <MainContainer sx={{ flexDirection: "column", alignItems: "center" }}>
       <Box sx={{ alignSelf: "flex-start" }}>
@@ -35,7 +45,7 @@ const ProductPage = () => {
           maxWidth: "1360px"
         }}>
         <Grid item xs={12}
-          sx={{ display: "flex", justifyContent: "center" }}>
+          sx={{ display: "flex", justifyContent: "flex-start" }}>
           <Typography variant='h3'>
             {product?.name}
           </Typography>
@@ -46,8 +56,7 @@ const ProductPage = () => {
         <Grid item xs={6}
           sx={{
             display: "flex",
-            justifyContent: "center",
-            flexDirection: "column"
+            flexDirection: "column",
           }}>
           <Typography variant='body1'>Desc: Lorem Ipsum is simply dummy text of the printing and typesetting
             industry.Lorem Ipsum has been the industry's standard dummy text
@@ -56,16 +65,31 @@ const ProductPage = () => {
           <FavoriteRating />
           <Box sx={{
             marginTop: "40px",
-            marginBottom: "120px",
+            marginBottom: "20px",
             display: "flex",
-            justifyContent: "space-around",
+            justifyContent: "space-between",
+            alignItems: "center"
           }}>
-            <Typography variant='h4' color={theme.palette.primary.main}>
-              R$ {product?.price}
-            </Typography>
-            <Button variant="contained" endIcon={<ShoppingCartIcon />}>
-              Comprar
+            <Box>
+              <Typography variant='h3' color={theme.palette.primary.main}>
+                <b>R$ {(product?.price)?.toFixed(2)}</b>
+              </Typography>
+              <Typography variant='body1'>À vista no PIX com até <b>15% OFF</b>.</Typography>
+            </Box>
+            <Button variant="contained" endIcon={<ShoppingCartIcon />} sx={{ width: 250, height: 60, fontSize: "1.2em" }}>
+              <b>Comprar</b>
             </Button>
+          </Box>
+          <Box sx={{ display: "flex", flexDirection: "column" }}>
+            <Typography variant='body1'>
+              <b>R$ {getPriceWithoutPromo()}</b>
+            </Typography>
+            <Typography variant='body1'>
+              Em até 10x de <b>R${getInstallments()}</b> sem juros no cartão
+            </Typography>
+            <Typography variant='body1'>
+              Ou em 1x no cartão com até 10% OFF
+            </Typography>
           </Box>
         </Grid>
         <Grid item xs={12}>

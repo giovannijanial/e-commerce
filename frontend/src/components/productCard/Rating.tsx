@@ -7,10 +7,10 @@ const FavoriteRating = () => {
     <>
       <StyledRating
         name="read-only"
-        readOnly
-        defaultValue={2}
-        getLabelText={(value: number) => `${value} Heart${value !== 1 ? 's' : ''}`}
+        defaultValue={4.5}
         precision={0.5}
+        readOnly
+        getLabelText={(value: number) => `${value} Heart${value !== 1 ? 's' : ''}`}
         icon={<FavoriteIcon fontSize="inherit" />}
         emptyIcon={<FavoriteBorderIcon fontSize="inherit" />}
       />
