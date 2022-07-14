@@ -1,9 +1,16 @@
-import { Box, Container, Fab, Toolbar } from '@mui/material'
-import TableProducts from './TableUsers'
 import AddIcon from '@mui/icons-material/Add';
-import { NavLink } from 'react-router-dom';
+import { Box, Container, Fab, Toolbar } from '@mui/material';
+import { useState } from 'react';
+import DialogCreateUser from './addUser/Index';
+import TableProducts from './TableUsers';
 
 const DashUserPage = () => {
+  const [openDialogCreate, setOpenDialogCreate] = useState(false);
+
+  const handleOpenDialogCreate = () => () => {
+    setOpenDialogCreate(true);
+  };
+
   return (
     <Box
       component="main"
@@ -19,19 +26,24 @@ const DashUserPage = () => {
     >
       <Toolbar />
       <Container maxWidth="lg" sx={{ mt: 4, mb: 4, display: "flex", flexDirection: "column" }}>
-        <TableProducts />
+        <TableProducts dialogCreate={openDialogCreate} />
         <Box sx={{
           mt: 3,
           alignSelf: "flex-end"
         }}>
-          <NavLink to='/dash/users/add'>
-            <Fab color="primary" aria-label="add" variant="extended">
-              <AddIcon />
-              Add User
-            </Fab>
-          </NavLink>
+          <Fab
+            color="primary"
+            aria-label="add"
+            variant="extended"
+            onClick={handleOpenDialogCreate()}>
+            <AddIcon />
+            Add User
+          </Fab>
         </Box>
       </Container>
+      <DialogCreateUser
+        dialog={openDialogCreate}
+        setOpenDialogUpdate={setOpenDialogCreate} />
     </Box>
   )
 }

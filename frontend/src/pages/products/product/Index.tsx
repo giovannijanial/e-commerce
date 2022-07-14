@@ -20,10 +20,11 @@ const ProductPage = () => {
     }
   }, [getOne])
 
+  console.log(product)
   return (
     <MainContainer sx={{ flexDirection: "column", alignItems: "center" }}>
       <Box sx={{ alignSelf: "flex-start" }}>
-        <BreadCrumb product={product?.name} />
+        <BreadCrumb category={product?.categories[0].name} product={product?.name} />
       </Box>
       <Grid container spacing={4} bgcolor={theme.palette.background.default}
         sx={{

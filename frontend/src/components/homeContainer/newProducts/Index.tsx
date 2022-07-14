@@ -26,7 +26,7 @@ const HomeNewProducts = () => {
         </Typography>
       </Grid>
       {loading && (<CircularProgress color="primary" />)}
-      {error && (<p>{error.message}</p>)}
+      {error && (<p>{error[0]}</p>)}
       {showNewProducts()}
     </StyledNewProducts>
   )

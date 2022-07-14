@@ -1,5 +1,3 @@
-import CheckBoxIcon from '@mui/icons-material/CheckBox';
-import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import { Autocomplete, Box, Grid } from '@mui/material';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
@@ -10,8 +8,6 @@ import { ChangeEvent, FormEvent, useCallback, useEffect, useState } from 'react'
 import { useUser } from '../../../../hooks/useUser';
 import { IUser } from '../../../../interfaces/User';
 
-const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
-const checkedIcon = <CheckBoxIcon fontSize="small" />;
 interface Props {
   dialog: boolean,
   setOpenDialogUpdate: any,

@@ -71,7 +71,7 @@ export default function SignUpPage() {
         <Typography component="h1" variant="h3">
           Sign up
         </Typography>
-        <Box component="form" noValidate onSubmit={handleSubmit}
+        <Box component="form" onSubmit={handleSubmit}
           sx={{
             mt: 10, display: 'flex',
             flexDirection: 'column',

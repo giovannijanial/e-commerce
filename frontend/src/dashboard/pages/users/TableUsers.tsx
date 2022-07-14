@@ -12,8 +12,12 @@ import DialogDelete from '../../components/dialogs/DeleteDialog';
 import DialogDetailsUser from './detailsUser/Index';
 import DialogUpdateUser from './updateUser/Index';
 
-export default function TableProducts() {
-  const { getAll, users, loading, error, remove, setUser } = useUser();
+interface Props {
+  dialogCreate: boolean;
+}
+
+export default function TableProducts({ dialogCreate }: Props) {
+  const { getAll, users, loading, error, remove } = useUser();
   const [openDialogDelete, setOpenDialogDelete] = useState(false);
   const [openDialogDetails, setOpenDialogDetails] = useState(false);
   const [openDialogUpdate, setOpenDialogUpdate] = useState(false);
@@ -54,7 +58,7 @@ export default function TableProducts() {
 
   useEffect(() => {
     getAll()
-  }, [getAll, openDialogUpdate])
+  }, [getAll, openDialogUpdate, dialogCreate])
 
   const columns: GridColumns<IUser> = [
     { field: 'id', headerName: 'ID', width: 70, headerClassName: 'header' },

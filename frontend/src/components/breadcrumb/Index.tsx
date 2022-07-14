@@ -4,12 +4,14 @@ import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import { Link } from 'react-router-dom';
+import { capitalize } from '@mui/material';
 
 interface Props {
   product?: string;
+  category?: string;
 }
 
-export default function BreadCrumb({ product }: Props) {
+export default function BreadCrumb({ product, category }: Props) {
   const breadcrumbs = [
     <Link key="1" color="inherit" to="/">
       Home
@@ -21,7 +23,14 @@ export default function BreadCrumb({ product }: Props) {
     >
       Products
     </Link>,
-    <Typography key="3" color="text.primary">
+    <Link
+      key="3"
+      color="inherit"
+      to={`/products/category/${category}`}
+    >
+      {category}
+    </Link >,
+    <Typography key="4" color="text.primary">
       {product}
     </Typography>,
   ];
