@@ -8,7 +8,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { theme } from '../../../app.styled';
 import { useUser } from '../../../hooks/useUser';
 import { IUser } from '../../../interfaces/User';
-import DialogDelete from '../../components/dialogs/DeleteDialog';
+import DialogDelete from '../../../components/dialogs/DeleteDialog';
 import DialogDetailsUser from './detailsUser/Index';
 import DialogUpdateUser from './updateUser/Index';
 

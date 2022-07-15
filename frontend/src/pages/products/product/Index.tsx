@@ -1,17 +1,16 @@
-import { Box, Button, Divider, Grid, Typography } from '@mui/material';
+import { Box, Grid, Typography } from '@mui/material';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { theme } from '../../../app.styled';
-import { MainContainer } from '../../../components/main/main.styled';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import BreadCrumb from '../../../components/breadcrumb/Index';
+import BuyButton from '../../../components/buyButton/Index';
+import { MainContainer } from '../../../components/main/main.styled';
 import FavoriteRating from '../../../components/productCard/Rating';
 import { useProduct } from '../../../hooks/useProduct';
 import InfoProduct from './InfoProduct';
 
 const ProductPage = () => {
   const { id } = useParams();
-
   const { getOne, product } = useProduct();
 
   useEffect(() => {
@@ -76,9 +75,7 @@ const ProductPage = () => {
               </Typography>
               <Typography variant='body1'>À vista no PIX com até <b>15% OFF</b>.</Typography>
             </Box>
-            <Button variant="contained" endIcon={<ShoppingCartIcon />} sx={{ width: 250, height: 60, fontSize: "1.2em" }}>
-              <b>Comprar</b>
-            </Button>
+            {product && (<BuyButton origin='info' product={product} />)}
           </Box>
           <Box sx={{ display: "flex", flexDirection: "column" }}>
             <Typography variant='body1'>

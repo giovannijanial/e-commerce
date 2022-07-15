@@ -7,7 +7,7 @@ import { useCart } from '../../../hooks/useCart';
 import { useProduct } from '../../../hooks/useProduct';
 import { ICartItem } from '../../../interfaces/Cart';
 import { ICategory, IProduct } from '../../../interfaces/Product';
-import DialogDelete from '../../components/dialogs/DeleteDialog';
+import DialogDelete from '../../../components/dialogs/DeleteDialog';
 
 interface Props {
   cartId: string;

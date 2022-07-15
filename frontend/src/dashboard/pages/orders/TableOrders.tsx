@@ -8,7 +8,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { theme } from '../../../app.styled';
 import { useCart } from '../../../hooks/useCart';
 import { ICart, ICartItem } from '../../../interfaces/Cart';
-import DialogDelete from '../../components/dialogs/DeleteDialog';
+import DialogDelete from '../../../components/dialogs/DeleteDialog';
 import DialogDetailsOrder from './detailsOrder/Index';
 import DialogUpdateOrder from './updateOrder/Index';
 

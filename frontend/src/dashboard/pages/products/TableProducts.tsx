@@ -6,7 +6,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { theme } from '../../../app.styled';
 import { useProduct } from '../../../hooks/useProduct';
 import { ICategory, IProduct } from '../../../interfaces/Product';
-import DialogDelete from '../../components/dialogs/DeleteDialog';
+import DialogDelete from '../../../components/dialogs/DeleteDialog';
 import ArticleIcon from '@mui/icons-material/Article';
 import DialogDetailsProduct from './detailsProduct/Index';
 import DialogUpdateProduct from './updateProduct/Index';

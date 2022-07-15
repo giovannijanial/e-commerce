@@ -1,11 +1,12 @@
 import { CircularProgress, Grid, Typography } from '@mui/material'
 import { useEffect } from 'react'
+import { useProduct } from '../../../hooks/useProduct'
 import { IProduct } from '../../../interfaces/Product'
 import ProductItemCard from '../BoxProduct'
 import { StyledNewProducts } from './index.styled'
-import { useProduct } from '../../../hooks/useProduct'
 
 const HomeNewProducts = () => {
+
   const { getAll, products, loading, error } = useProduct();
 
   useEffect(() => {

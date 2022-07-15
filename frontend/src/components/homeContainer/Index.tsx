@@ -1,4 +1,6 @@
 
+import { useState } from 'react'
+import DialogContinueCart from '../dialogs/ContinueCartDialog'
 import { SHomeContainer } from './index.styled'
 import HomeMain from './main/Index'
 import HomeNewProducts from './newProducts/Index'
@@ -7,6 +9,7 @@ import HomeTopSelling from './topSelling/Index'
 
 
 const HomeContainer = () => {
+
   return (
     <SHomeContainer>
       <HomeMain />

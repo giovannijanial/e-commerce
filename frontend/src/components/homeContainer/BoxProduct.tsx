@@ -1,12 +1,13 @@
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import { Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Grid, Typography } from '@mui/material';
+import { Card, CardActionArea, CardActions, CardContent, CardMedia, Grid, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { Link } from 'react-router-dom';
 import { theme } from '../../app.styled';
 import { IProduct } from '../../interfaces/Product';
+import BuyButton from '../buyButton/Index';
 import FavoriteRating from '../productCard/Rating';
 
 const ProductItemCard = ({ product }: { product: IProduct }) => {
+
   return (
     <Grid item md={4} sm={8} xs={12}>
       <Card sx={{ maxHeight: 650 }}>
@@ -41,9 +42,7 @@ const ProductItemCard = ({ product }: { product: IProduct }) => {
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <Button fullWidth variant="contained" startIcon={<ShoppingCartIcon />}>
-            Comprar
-          </Button>
+          <BuyButton origin="card" product={product} />
         </CardActions>
       </Card >
     </Grid >

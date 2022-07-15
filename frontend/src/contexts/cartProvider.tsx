@@ -1,13 +1,8 @@
-import { createContext, ReactNode, useContext, useState } from "react";
-import { useCart } from "../hooks/useCart";
-import { IAuth, ILogin } from "../interfaces/Auth";
-import { ICart, ICartItem } from "../interfaces/Cart";
+import { createContext, ReactNode, useState } from "react";
+import { ICart } from "../interfaces/Cart";
 import { IProduct } from "../interfaces/Product";
 import { IUser } from "../interfaces/User";
-import { AuthService } from "../services/authService";
 import { CartService } from "../services/cartService";
-import { ProductService } from "../services/productService";
-import AuthContext from "./authProvider";
 
 interface Props {
   children: ReactNode;
@@ -15,13 +10,8 @@ interface Props {
 export interface ICartContext {
   cart: ICart,
   setActiveCart: (idCartActive: string) => void,
-  addProduct: (user: IUser, idProduct: number, quantity: number) => void,
+  addProduct: (user: IUser, product: IProduct, quantity: number) => void,
   removeProduct: (idCart: string, idProduct: number) => void,
-}
-
-const findProduct = async (idProduct: number): Promise<IProduct> => {
-  const { data } = await ProductService.getOne(idProduct)
-  return data;
 }
 
 const findCartActive = async (cartId: string): Promise<ICart> => {
@@ -52,16 +42,13 @@ export const CartProvider = ({ children }: Props) => {
     setCart(cartActive);
   }
 
-  const addProduct = async (user: IUser, idProduct: number, quantity: number) => {
-    const product = await findProduct(idProduct);
-    const cartProducts: ICartItem[] = [{
-      price: product.price,
-      quantity,
-      product
-    }]
-    const quantityProducts = quantity;
-    const total = quantity * product.price;
-    setCart({ user, cartProducts, quantityProducts, total })
+  const addProduct = async (user: IUser, product: IProduct, quantity: number) => {
+    const updatedCart: ICart = {
+      ...cart,
+      quantityProducts: cart.quantityProducts + quantity,
+      cartProducts: [...cart.cartProducts, { price: product.price, quantity, product }]
+    }
+    setCart(updatedCart);
   }
 
   const removeProduct = () => {
