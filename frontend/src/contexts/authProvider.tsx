@@ -1,7 +1,10 @@
-import { createContext, ReactNode, useState } from "react";
+import { createContext, ReactNode, useContext, useState } from "react";
+import { CartStatus } from "../enums/CartStatus";
 import { IAuth, ILogin } from "../interfaces/Auth";
+import { ICart } from "../interfaces/Cart";
 import { IUser } from "../interfaces/User";
 import { AuthService } from "../services/authService";
+import CartContext from "./cartProvider";
 
 interface Props {
   children: ReactNode;
@@ -15,6 +18,14 @@ export interface IAuthContext {
 const findUserAuthenticated = async (username: string): Promise<IUser> => {
   const { data } = await AuthService.getUserAuthenticated(username);
   return data;
+}
+
+const findCartActive = (user: IUser) => {
+  const cartActive = user.carts?.find((cart) => cart.cartStatus === CartStatus.WAITING_PAYMENT);
+  if (cartActive)
+    return cartActive;
+  else
+    return null;
 }
 
 const userInitialState: IUser = {

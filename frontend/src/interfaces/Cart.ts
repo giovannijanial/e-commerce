@@ -3,7 +3,7 @@ import { IProduct } from './Product';
 import { IUser } from './User';
 
 export interface ICartItem {
-  id: number;
+  id?: number;
   price: number;
   quantity: number;
   product: IProduct;
