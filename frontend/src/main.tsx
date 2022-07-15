@@ -6,10 +6,10 @@ import { CartProvider } from './contexts/cartProvider'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <AuthProvider>
-      <CartProvider>
+    <CartProvider>
+      <AuthProvider>
         <App />
-      </CartProvider>
-    </AuthProvider>
+      </AuthProvider>
+    </CartProvider>
   </React.StrictMode>
 )

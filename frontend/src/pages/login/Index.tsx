@@ -7,12 +7,14 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import { FormEvent, useCallback, useEffect, useState } from 'react';
+import { FormEvent, useCallback, useContext, useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { MainContainer } from '../../components/main/main.styled';
 import { useAuth } from '../../hooks/useAuth';
 import { ILogin } from '../../interfaces/Auth';
 import { LocationProps } from '../../interfaces/Location';
+import AuthContext from '../../contexts/authProvider';
+import CartContext from '../../contexts/cartProvider';
 
 export default function LoginPage() {
   const [userName, setUserName] = useState("");

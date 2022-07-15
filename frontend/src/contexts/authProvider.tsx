@@ -1,5 +1,6 @@
 import { createContext, ReactNode, useContext, useState } from "react";
 import { CartStatus } from "../enums/CartStatus";
+import { useCart } from "../hooks/useCart";
 import { IAuth, ILogin } from "../interfaces/Auth";
 import { ICart } from "../interfaces/Cart";
 import { IUser } from "../interfaces/User";
@@ -18,14 +19,6 @@ export interface IAuthContext {
 const findUserAuthenticated = async (username: string): Promise<IUser> => {
   const { data } = await AuthService.getUserAuthenticated(username);
   return data;
-}
-
-const findCartActive = (user: IUser) => {
-  const cartActive = user.carts?.find((cart) => cart.cartStatus === CartStatus.WAITING_PAYMENT);
-  if (cartActive)
-    return cartActive;
-  else
-    return null;
 }
 
 const userInitialState: IUser = {
@@ -48,10 +41,21 @@ const AuthContext = createContext<IAuthContext>(initialState);
 
 export const AuthProvider = ({ children }: Props) => {
   const [auth, setAuth] = useState(initialState.auth);
+  const { setActiveCart } = useContext(CartContext);
+
 
   const addAuth = async (login: ILogin, token: string) => {
     const user = await findUserAuthenticated(login.username)
     setAuth({ user, token })
+    getCartActive(user);
+  }
+
+  const getCartActive = async (user: IUser) => {
+    if (user) {
+      const cartIdActive = user.carts?.find((cart) => cart.cartStatus === CartStatus.WAITING_PAYMENT)
+      if (cartIdActive?.id)
+        setActiveCart(cartIdActive?.id);
+    }
   }
 
   const logout = () => {

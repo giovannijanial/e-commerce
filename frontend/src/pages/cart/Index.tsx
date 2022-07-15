@@ -7,20 +7,7 @@ import { CartStatus } from '../../enums/CartStatus'
 import { useCart } from '../../hooks/useCart'
 
 const CartPage = () => {
-  const { auth } = useContext(AuthContext);
-  const { getOne, cart } = useCart();
-
-
-  useEffect(() => {
-    const getCartActive = async () => {
-      if (auth.user) {
-        const cartIdActive = auth.user.carts?.find((cart) => cart.cartStatus === CartStatus.WAITING_PAYMENT)
-        if (cartIdActive?.id)
-          await getOne(cartIdActive.id)
-      }
-    }
-    getCartActive();
-  }, [])
+  const { cart } = useContext(CartContext);
 
   return (
     <MainContainer sx={{ flexDirection: "column", alignItems: "center" }}>

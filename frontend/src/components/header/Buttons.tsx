@@ -6,9 +6,12 @@ import { Link } from 'react-router-dom';
 import AuthContext from '../../contexts/authProvider';
 import { useContext } from 'react';
 import AccountMenu from './accontMenu';
+import CartContext from '../../contexts/cartProvider';
+import { Badge } from '@mui/material';
 
 const Buttons = () => {
   const { auth } = useContext(AuthContext);
+  const { cart } = useContext(CartContext);
 
   return (
     <SyledBox>
@@ -20,13 +23,13 @@ const Buttons = () => {
             </ StyledIconButon>
           </Link>
           <Link to="/login">
-            <StyledIconButon aria-label='cart' size='large' color='secondary'>
-              <ShoppingCartIcon fontSize='inherit' />
+            <StyledIconButon aria-label='account' size='large' color='secondary'>
+              <FavoriteIcon fontSize='inherit' />
             </ StyledIconButon>
           </Link>
           <Link to="/login">
-            <StyledIconButon aria-label='account' size='large' color='secondary'>
-              <FavoriteIcon fontSize='inherit' />
+            <StyledIconButon aria-label='cart' size='large' color='secondary'>
+              <ShoppingCartIcon fontSize='inherit' />
             </ StyledIconButon>
           </Link>
         </>
@@ -38,7 +41,9 @@ const Buttons = () => {
           </ StyledIconButon>
           <Link to="/cart">
             <StyledIconButon aria-label='cart' size='large' color='secondary'>
-              <ShoppingCartIcon fontSize='inherit' />
+              <Badge badgeContent={`${cart.quantityProducts}`} color="primary">
+                <ShoppingCartIcon fontSize='inherit' />
+              </Badge>
             </ StyledIconButon>
           </Link>
         </>

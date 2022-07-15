@@ -37,6 +37,10 @@ export const useCart = () => {
     }
   }, [])
 
+  const getActiveCart = useCallback(async (userId: number) => {
+
+  }, [])
+
   const create = useCallback(async (cart: ICart) => {
     setLoading(true);
     try {

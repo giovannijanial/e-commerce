@@ -1,11 +1,13 @@
 import axios, { AxiosError } from "axios";
 import { useCallback, useState } from "react"
+import { CartStatus } from "../enums/CartStatus";
 import { IUser } from "../interfaces/User";
 import { UserService } from "../services/userService"
 
 export const useUser = () => {
   const [users, setUsers] = useState<IUser[]>([]);
-  const [user, setUser] = useState<IUser>()
+  const [user, setUser] = useState<IUser>();
+  const [cartIdActive, setCartIdActive] = useState("");
   const [error, setError] = useState<String[]>([]);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -36,6 +38,13 @@ export const useUser = () => {
       setLoading(false);
     }
   }, [])
+
+  const getCartIdActive = useCallback((user: IUser) => {
+    const cartIdActive = user.carts?.find((cart) => cart.cartStatus === CartStatus.WAITING_PAYMENT)
+    if (cartIdActive?.id)
+      setCartIdActive(cartIdActive.id);
+  }, [])
+
 
   const create = useCallback(async (user: IUser) => {
     setLoading(true);
@@ -93,6 +102,8 @@ export const useUser = () => {
     create,
     update,
     remove,
-    setUser
+    setUser,
+    getCartIdActive,
+    cartIdActive
   }
 }

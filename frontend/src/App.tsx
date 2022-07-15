@@ -10,7 +10,6 @@ import DashHomePage from './dashboard/pages/home/Index';
 import DashOrderPage from './dashboard/pages/orders/Index';
 import DashAddProductPage from './dashboard/pages/products/addProduct/Index';
 import DashProductPage from './dashboard/pages/products/Index';
-import DashAddUserPage from './dashboard/pages/users/addUser/Index';
 import DashUserPage from './dashboard/pages/users/Index';
 import AboutPage from './pages/about/Index';
 import CartPage from './pages/cart/Index';
