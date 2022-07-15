@@ -37,12 +37,17 @@ const CartContext = createContext<ICartContext>(initialState);
 export const CartProvider = ({ children }: Props) => {
   const [cart, setCart] = useState(initialState.cart);
 
+  const verifyCartProduct = () => {
+
+  }
+
   const setActiveCart = async (idCartActive: string) => {
     const cartActive = await findCartActive(idCartActive);
     setCart(cartActive);
   }
 
   const addProduct = async (user: IUser, product: IProduct, quantity: number) => {
+
     const updatedCart: ICart = {
       ...cart,
       quantityProducts: cart.quantityProducts + quantity,
