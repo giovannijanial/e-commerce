@@ -26,7 +26,7 @@ const ListCategories = ({ categories }: Props) => {
     return (
       <>
         {categories.map((category) => (
-          <Link to={`/products/category/${category.name.toString()}`}>
+          <Link key={category.id} to={`/products/category/${category.name.toString()}`}>
             <StyledListItemButton>
               <ListItemIcon>
                 {category.name.includes("hardware") && (<HardwareIcon />)}

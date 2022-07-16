@@ -13,7 +13,10 @@ const CartPage = () => {
     <MainContainer sx={{ flexDirection: "column", alignItems: "center" }}>
       <Typography variant='h3'>
         {cart && cart.cartProducts.map((cartProducts) => (
-          <p>{cartProducts.product.name}</p>
+          <div key={cartProducts.id}>
+            <p>{cartProducts.product.name}</p>
+            <p>{cartProducts.quantity}</p>
+          </div>
         ))}
       </Typography>
     </MainContainer>

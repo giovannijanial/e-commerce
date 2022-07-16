@@ -37,8 +37,9 @@ const CartContext = createContext<ICartContext>(initialState);
 export const CartProvider = ({ children }: Props) => {
   const [cart, setCart] = useState(initialState.cart);
 
-  const verifyCartProduct = () => {
-
+  const verifyCartProduct = (product: IProduct) => {
+    const productIndex = cart.cartProducts.findIndex((cartItem) => cartItem.product.id === product.id);
+    return productIndex;
   }
 
   const setActiveCart = async (idCartActive: string) => {
@@ -48,12 +49,23 @@ export const CartProvider = ({ children }: Props) => {
 
   const addProduct = async (user: IUser, product: IProduct, quantity: number) => {
 
-    const updatedCart: ICart = {
-      ...cart,
-      quantityProducts: cart.quantityProducts + quantity,
-      cartProducts: [...cart.cartProducts, { price: product.price, quantity, product }]
+
+    const productIndex = verifyCartProduct(product);
+    if (productIndex < 0) {
+      const updatedCart = {
+        ...cart,
+        quantityProducts: cart.quantityProducts + quantity,
+        cartProducts: [...cart.cartProducts, { price: product.price, quantity, product }]
+      }
+      setCart(updatedCart)
     }
-    setCart(updatedCart);
+    else {
+      const oldCartProducts = cart.cartProducts;
+      oldCartProducts[productIndex].quantity = cart.cartProducts[productIndex].quantity + 1;
+      setCart({ ...cart, cartProducts: oldCartProducts })
+    }
+
+
   }
 
   const removeProduct = () => {
