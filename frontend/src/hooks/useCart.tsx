@@ -1,6 +1,9 @@
 import { AxiosError } from "axios";
-import { useCallback, useState } from "react"
+import { useCallback, useContext, useState } from "react"
+import CartContext from "../contexts/cartProvider";
 import { ICart } from "../interfaces/Cart";
+import { IProduct } from "../interfaces/Product";
+import { IUser } from "../interfaces/User";
 import { CartService } from "../services/cartService";
 
 export const useCart = () => {
@@ -9,6 +12,8 @@ export const useCart = () => {
   const [error, setError] = useState<String[]>([]);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+
+  const { addProduct } = useContext(CartContext);
 
 
   const getAll = useCallback(async () => {
@@ -41,10 +46,16 @@ export const useCart = () => {
 
   }, [])
 
-  const create = useCallback(async (cart: ICart) => {
+  const create = useCallback(async (user: IUser, product: IProduct, quantity: number) => {
     setLoading(true);
     try {
-      const res = await CartService.create(cart)
+      const body = {
+        user,
+        productId: product.id,
+        quantity
+      }
+      const res = await CartService.create(body)
+      addProduct(user, product, 1);
       setSuccess(true);
     } catch (error: AxiosError | any) {
       if (!error?.response) {

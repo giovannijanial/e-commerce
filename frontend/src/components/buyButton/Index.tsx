@@ -6,6 +6,7 @@ import CartContext from "../../contexts/cartProvider";
 import { IProduct } from "../../interfaces/Product";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import DialogContinueCart from "../dialogs/ContinueCartDialog";
+import { useCart } from "../../hooks/useCart";
 
 interface Props {
   product: IProduct,
@@ -14,7 +15,7 @@ interface Props {
 
 export default function BuyButton({ product, origin }: Props) {
   const { auth } = useContext(AuthContext);
-  const { addProduct } = useContext(CartContext);
+  const { create, loading, error } = useCart();
   const [openDialogCart, setOpenDialogCart] = useState(false);
 
   const navigate = useNavigate();
@@ -25,8 +26,10 @@ export default function BuyButton({ product, origin }: Props) {
 
   const handleButton = () => {
     if (auth.token) {
-      addProduct(auth.user, product, 1);
-      setOpenDialogCart(true);
+      if (product.id) {
+        create(auth.user, product, 1)
+        setOpenDialogCart(true);
+      }
     }
     else {
       navigate("/login")

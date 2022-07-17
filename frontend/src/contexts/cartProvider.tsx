@@ -49,7 +49,6 @@ export const CartProvider = ({ children }: Props) => {
 
   const addProduct = async (user: IUser, product: IProduct, quantity: number) => {
 
-
     const productIndex = verifyCartProduct(product);
     if (productIndex < 0) {
       const updatedCart = {
@@ -64,7 +63,6 @@ export const CartProvider = ({ children }: Props) => {
       oldCartProducts[productIndex].quantity = cart.cartProducts[productIndex].quantity + 1;
       setCart({ ...cart, cartProducts: oldCartProducts })
     }
-
 
   }
 

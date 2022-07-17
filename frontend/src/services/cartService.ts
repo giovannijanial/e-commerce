@@ -3,7 +3,7 @@ import { Api } from '../providers';
 
 const getAll = () => Api.get<ICart[]>('cart');
 const getOne = (id: string) => Api.get<ICart>(`cart/${id}`);
-const create = (cart: ICart) => Api.post<ICart>('cart', cart);
+const create = (body: any) => Api.post<ICart>('cart', body);
 const update = (id: string, cart: ICart) =>
   Api.patch<ICart>(`cart/${id}`, cart);
 const remove = (id: string) => Api.delete<ICart>(`cart/${id}`);
