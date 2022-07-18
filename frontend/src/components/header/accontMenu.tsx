@@ -12,6 +12,7 @@ import Tooltip from '@mui/material/Tooltip';
 import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AuthContext from '../../contexts/authProvider';
+import CartContext from '../../contexts/cartProvider';
 import { StyledIconButon } from './buttons.styled';
 
 interface Props {
@@ -21,6 +22,7 @@ interface Props {
 export default function AccountMenu({ role }: Props) {
 
   const { auth, logout } = useContext(AuthContext);
+  const { logoutCart } = useContext(CartContext)
   const navigate = useNavigate();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -36,7 +38,8 @@ export default function AccountMenu({ role }: Props) {
 
   const handleLogout = () => {
 
-    logout()
+    logout();
+    logoutCart();
     navigate("/");
   }
 

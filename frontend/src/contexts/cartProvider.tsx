@@ -10,6 +10,7 @@ interface Props {
 export interface ICartContext {
   cart: ICart,
   setActiveCart: (idCartActive: string) => void,
+  logoutCart: () => void,
   addProduct: (user: IUser, product: IProduct, quantity: number) => void,
   removeProduct: (idCart: string, idProduct: number) => void,
 }
@@ -28,6 +29,7 @@ const cartInitialState: ICart = {
 const initialState = {
   cart: cartInitialState,
   setActiveCart: () => { },
+  logoutCart: () => { },
   addProduct: () => { },
   removeProduct: () => { }
 }
@@ -45,6 +47,10 @@ export const CartProvider = ({ children }: Props) => {
   const setActiveCart = async (idCartActive: string) => {
     const cartActive = await findCartActive(idCartActive);
     setCart(cartActive);
+  }
+
+  const logoutCart = async () => {
+    setCart(initialState.cart);
   }
 
   const addProduct = async (user: IUser, product: IProduct, quantity: number) => {
@@ -71,7 +77,7 @@ export const CartProvider = ({ children }: Props) => {
   }
 
   return (
-    <CartContext.Provider value={{ cart, addProduct, removeProduct, setActiveCart }}>
+    <CartContext.Provider value={{ cart, addProduct, removeProduct, setActiveCart, logoutCart }}>
       {children}
     </CartContext.Provider >
   )

@@ -13,7 +13,7 @@ export const useCart = () => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
-  const { addProduct } = useContext(CartContext);
+  const { addProduct, setActiveCart } = useContext(CartContext);
 
 
   const getAll = useCallback(async () => {
@@ -56,6 +56,8 @@ export const useCart = () => {
       }
       const res = await CartService.create(body)
       addProduct(user, product, 1);
+      if (res.data.id)
+        setActiveCart(res?.data?.id);
       setSuccess(true);
     } catch (error: AxiosError | any) {
       if (!error?.response) {
