@@ -15,7 +15,7 @@ interface Props {
 
 export default function BuyButton({ product, origin }: Props) {
   const { auth } = useContext(AuthContext);
-  const { create, loading, error } = useCart();
+  const { create } = useCart();
   const [openDialogCart, setOpenDialogCart] = useState(false);
 
   const navigate = useNavigate();

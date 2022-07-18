@@ -1,4 +1,4 @@
-import { Box, Grid, Typography } from '@mui/material'
+import { Box, CircularProgress, Grid, Typography } from '@mui/material'
 import { useContext, useEffect } from 'react'
 import { theme } from '../../app.styled'
 import { MainContainer } from '../../components/main/main.styled'
@@ -9,7 +9,7 @@ import CartResume from './CartResume'
 
 const CartPage = () => {
   const { cart } = useContext(CartContext);
-  const { getOne, cart: currentCart, loading, error, remove, setCart } = useCart();
+  const { getOne, cart: currentCart, loading, error, remove } = useCart();
 
   useEffect(() => {
     if (cart?.id)

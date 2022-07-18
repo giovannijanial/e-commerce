@@ -7,10 +7,31 @@ import {
   Patch,
   Post,
   Query,
+  UploadedFile,
+  UseInterceptors,
 } from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { diskStorage } from 'multer';
+import { extname } from 'path';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { ProductService } from './product.service';
+import { v4 as uuidv4 } from 'uuid';
+
+export const storage = {
+  storage: diskStorage({
+    destination: './uploads/imgs-product',
+    filename: (req, file, cb) => {
+      const filename = `${file.originalname.substring(
+        0,
+        file.originalname.length - 4,
+      )}-${uuidv4()}`;
+      const extension = `${extname(file.originalname)}`;
+
+      cb(null, `${filename}${extension}`);
+    },
+  }),
+};
 
 @Controller('product')
 export class ProductController {
@@ -44,6 +65,12 @@ export class ProductController {
   @Post()
   create(@Body() createProductDto: CreateProductDto) {
     return this.productService.create(createProductDto);
+  }
+
+  @Post('upload')
+  @UseInterceptors(FileInterceptor('file', storage))
+  uploadFile(@UploadedFile() file: Express.Multer.File, @Body() data) {
+    return this.productService.update(+data.id, { image: file.filename });
   }
 
   @Patch(':id')

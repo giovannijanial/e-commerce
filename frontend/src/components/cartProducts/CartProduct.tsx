@@ -70,7 +70,7 @@ const CartProduct = ({ cartProduct }: Props) => {
         )}
       </Grid>
       <Grid item xs={2} sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-        {quantity && (<Typography color={theme.palette.primary.main}><b>{(quantity * cartProduct.price).toFixed(2)}</b></Typography>)}
+        {quantity && (<Typography color={theme.palette.primary.main}><b>R${(quantity * cartProduct.price).toFixed(2)}</b></Typography>)}
       </Grid>
       <Grid item xs={12}>
         <Divider />

@@ -12,6 +12,9 @@ export class CreateProductDto {
   @IsNumber()
   quantity: number;
 
+  @IsString()
+  image: string;
+
   @IsArray()
   categories: CategoryEntity[];
 

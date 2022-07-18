@@ -42,10 +42,6 @@ export const useCart = () => {
     }
   }, [])
 
-  const getActiveCart = useCallback(async (userId: number) => {
-
-  }, [])
-
   const create = useCallback(async (user: IUser, product: IProduct, quantity: number) => {
     setLoading(true);
     try {
@@ -55,10 +51,11 @@ export const useCart = () => {
         quantity
       }
       const res = await CartService.create(body)
-      addProduct(user, product, 1);
-      if (res.data.id)
-        setActiveCart(res?.data?.id);
-      setSuccess(true);
+      if (res.data.id) {
+        setActiveCart(res.data.id);
+        addProduct(user, product, 1);
+        setSuccess(true);
+      }
     } catch (error: AxiosError | any) {
       if (!error?.response) {
         setError(["Sem resposta do servidor!"])
