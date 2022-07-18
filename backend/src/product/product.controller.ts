@@ -7,12 +7,13 @@ import {
   Patch,
   Post,
   Query,
+  Res,
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
-import { extname } from 'path';
+import { extname, join } from 'path';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { ProductService } from './product.service';
@@ -71,6 +72,11 @@ export class ProductController {
   @UseInterceptors(FileInterceptor('file', storage))
   uploadFile(@UploadedFile() file: Express.Multer.File, @Body() data) {
     return this.productService.update(+data.id, { image: file.filename });
+  }
+
+  @Get('image/:image')
+  findProductImage(@Param('image') image: string, @Res() res) {
+    return res.sendFile(join(process.cwd(), 'uploads/imgs-product/' + image));
   }
 
   @Patch(':id')

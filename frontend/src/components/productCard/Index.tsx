@@ -1,22 +1,41 @@
 
 import { Card, CardActionArea, CardActions, CardContent, CardMedia, Typography } from '@mui/material';
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { theme } from '../../app.styled';
+import { useProduct } from '../../hooks/useProduct';
 import { IProduct } from '../../interfaces/Product';
 import BuyButton from '../buyButton/Index';
 import FavoriteRating from './Rating';
 
 const ProductCard = ({ product }: { product: IProduct }) => {
 
+  const { getImage, image } = useProduct();
+
+  useEffect(() => {
+    if (product.image)
+      getImage(product.image);
+  }, [getImage])
+
   return (
     <>
       <Card sx={{ maxWidth: 290, minWidth: 290, minHeight: 400, maxHeight: 400 }}>
-        <CardActionArea component={Link} to={`/products/${product.id}`}>
+        <CardActionArea
+          component={Link}
+          to={`/products/${product.id}`}
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItemns: "center"
+          }}>
           <CardMedia
             component="img"
-            width="250"
-            height="200"
-            image=""
+            style={{
+              width: "auto",
+              maxHeight: "200px"
+            }}
+            src={`data:image/jpeg;base64, ${image}`}
             alt="image"
           />
           <CardContent>

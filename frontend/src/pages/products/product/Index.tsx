@@ -1,4 +1,4 @@
-import { Box, Grid, Typography } from '@mui/material';
+import { Avatar, Box, Grid, Typography } from '@mui/material';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { theme } from '../../../app.styled';
@@ -11,13 +11,15 @@ import InfoProduct from './InfoProduct';
 
 const ProductPage = () => {
   const { id } = useParams();
-  const { getOne, product } = useProduct();
+  const { getOne, product, getImage, image } = useProduct();
 
   useEffect(() => {
     if (id) {
       getOne(+id)
+      if (product?.image)
+        getImage(product.image);
     }
-  }, [getOne])
+  }, [getOne, getImage, product, image])
 
   const getPriceWithoutPromo = (): number => {
     if (product?.price)
@@ -35,13 +37,14 @@ const ProductPage = () => {
       <Box sx={{ alignSelf: "flex-start" }}>
         <BreadCrumb category={product?.categories[0].name} product={product?.name} />
       </Box>
-      <Grid container spacing={4} bgcolor={theme.palette.background.default}
+      <Grid container spacing={4} bgcolor={theme.palette.background.paper}
         sx={{
           marginTop: "10px",
           padding: "10px 20px",
           display: "flex",
           justifyContent: "center",
-          maxWidth: "1360px"
+          maxWidth: "1360px",
+          boxShadow: "0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12)"
         }}>
         <Grid item xs={12}
           sx={{ display: "flex", justifyContent: "flex-start" }}>
@@ -49,8 +52,12 @@ const ProductPage = () => {
             {product?.name}
           </Typography>
         </Grid>
-        <Grid item xs={6}>
-          <p>image</p>
+        <Grid item xs={6} sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+          <Avatar
+            variant="square"
+            sx={{ width: 500, height: 500 }}
+            src={`data:image/jpeg;base64, ${image}`}
+          />
         </Grid>
         <Grid item xs={6}
           sx={{

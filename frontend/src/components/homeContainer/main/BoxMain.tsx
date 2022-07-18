@@ -10,12 +10,12 @@ const BoxMain = ({ products, loading, error, locale }:
 
   function showProductsLeft() {
     return products && products.slice(0, 2).map((product: IProduct) => (
-      <ProductBoxMain key={product.id} product={product} />
+      <ProductBoxMain key={product.id} product={product} locale={"left"} />
     ))
   }
   function showProductsRight() {
-    return products && products.slice(3, 6).map((product: IProduct) => (
-      <ProductBoxMain key={product.id} product={product} />
+    return products && products.slice(2, 5).map((product: IProduct) => (
+      <ProductBoxMain key={product.id} product={product} locale={"right"} />
     ))
   }
 

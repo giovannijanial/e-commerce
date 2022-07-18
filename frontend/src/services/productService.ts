@@ -3,6 +3,10 @@ import { Api } from '../providers';
 
 const getAll = () => Api.get<IProduct[]>('product');
 const getOne = (id: number) => Api.get<IProduct>(`product/${id}`);
+const getImage = (image: string) =>
+  Api.get(`product/image/${image}`, {
+    responseType: 'arraybuffer'
+  });
 const getByCategory = (category: string) =>
   Api.get<ICategory>(`product/categories/${category}`);
 const search = (query: string) =>
@@ -15,6 +19,7 @@ const remove = (id: number) => Api.delete<IProduct>(`product/${id}`);
 export const ProductService = {
   getAll,
   getOne,
+  getImage,
   getByCategory,
   search,
   create,

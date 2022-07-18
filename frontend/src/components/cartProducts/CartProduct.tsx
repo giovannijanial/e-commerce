@@ -4,6 +4,7 @@ import { Avatar, Button, ButtonGroup, Divider, Grid, Typography } from '@mui/mat
 import { Box } from '@mui/system';
 import { useState, useEffect } from 'react';
 import { theme } from '../../app.styled';
+import { useProduct } from '../../hooks/useProduct';
 import { ICartItem } from "../../interfaces/Cart";
 
 interface Props {
@@ -12,6 +13,13 @@ interface Props {
 
 const CartProduct = ({ cartProduct }: Props) => {
   const [quantity, setQuantity] = useState<number>();
+
+  const { getImage, image } = useProduct();
+
+  useEffect(() => {
+    if (cartProduct.product.image)
+      getImage(cartProduct.product.image);
+  }, [getImage, image])
 
   useEffect(() => {
     setQuantity(cartProduct.quantity)
@@ -27,11 +35,10 @@ const CartProduct = ({ cartProduct }: Props) => {
       setQuantity(quantity + 1)
   }
 
-
   return (
     <>
       <Grid item xs={1} sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-        <Avatar variant="square" sx={{ width: 70, height: 70 }} />
+        <Avatar variant="square" sx={{ width: 70, height: 70 }} src={`data:image/jpeg;base64, ${image}`} />
       </Grid>
       <Grid item xs={6} sx={{ display: "flex", justifyContent: "flex-start", alignItems: "center" }}>
         <Typography>{cartProduct.product.name}</Typography>
