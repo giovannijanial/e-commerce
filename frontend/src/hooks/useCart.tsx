@@ -53,7 +53,6 @@ export const useCart = () => {
       const res = await CartService.create(body)
       if (res.data.id) {
         setActiveCart(res.data.id);
-        addProduct(user, product, 1);
         setSuccess(true);
       }
     } catch (error: AxiosError | any) {

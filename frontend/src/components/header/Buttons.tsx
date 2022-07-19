@@ -13,6 +13,7 @@ const Buttons = () => {
   const { auth } = useContext(AuthContext);
   const { cart } = useContext(CartContext);
 
+  console.log(cart);
   return (
     <SyledBox>
       {!auth.token ? (

@@ -15,6 +15,7 @@ interface Props {
 
 export default function BuyButton({ product, origin }: Props) {
   const { auth } = useContext(AuthContext);
+  const { addProduct } = useContext(CartContext);
   const { create } = useCart();
   const [openDialogCart, setOpenDialogCart] = useState(false);
 
@@ -28,6 +29,7 @@ export default function BuyButton({ product, origin }: Props) {
     if (auth.token) {
       if (product.id) {
         create(auth.user, product, 1)
+        addProduct(auth.user, product, 1);
         setOpenDialogCart(true);
       }
     }
