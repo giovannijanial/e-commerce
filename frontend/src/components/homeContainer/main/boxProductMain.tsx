@@ -38,7 +38,7 @@ const ProductBoxMain = ({ product, locale }: Props) => {
             alt="image"
             style={{
               width: "auto",
-              maxHeight: "116px"
+              maxHeight: "82px"
             }}
           />
         ) : (
@@ -48,7 +48,7 @@ const ProductBoxMain = ({ product, locale }: Props) => {
             alt="image"
             style={{
               width: "auto",
-              maxHeight: "250px"
+              maxHeight: "200px"
             }}
           />
         )}
@@ -73,7 +73,7 @@ const ProductBoxMain = ({ product, locale }: Props) => {
               gutterBottom variant="h6"
               component="div"
               color={theme.palette.primary.main}>
-              R$ {product.price}
+              R$ {product.price.toFixed(2)}
             </Typography>
           </Box>
         </CardContent>

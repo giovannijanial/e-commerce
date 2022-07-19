@@ -56,7 +56,7 @@ const ProductItemCard = ({ product }: { product: IProduct }) => {
                 gutterBottom variant="h5"
                 component="div"
                 color={theme.palette.primary.main}>
-                R$ {product.price}
+                R$ {product.price.toFixed(2)}
               </Typography>
             </Box>
           </CardContent>

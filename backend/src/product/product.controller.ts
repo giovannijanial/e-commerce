@@ -1,9 +1,12 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   Body,
   Controller,
+  DefaultValuePipe,
   Delete,
   Get,
   Param,
+  ParseIntPipe,
   Patch,
   Post,
   Query,
@@ -18,6 +21,8 @@ import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { ProductService } from './product.service';
 import { v4 as uuidv4 } from 'uuid';
+import { Pagination } from 'nestjs-typeorm-paginate';
+import { ProductEntity } from './entities/product.entity';
 
 export const storage = {
   storage: diskStorage({
@@ -38,9 +43,18 @@ export const storage = {
 export class ProductController {
   constructor(private readonly productService: ProductService) {}
 
+  // @Get()
+  // findAll() {
+  //   return this.productService.findAll();
+  // }
+
   @Get()
-  findAll() {
-    return this.productService.findAll();
+  index(
+    @Query('page', new DefaultValuePipe(1), ParseIntPipe) page = 1,
+    @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit = 10,
+  ): Promise<Pagination<ProductEntity>> {
+    limit = limit > 10 ? 10 : limit;
+    return this.productService.findAll({ page, limit });
   }
 
   @Get('categories')

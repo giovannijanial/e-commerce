@@ -22,11 +22,14 @@ export const theme = createTheme({
       paper: '#FFF'
     },
     text: {
-      primary: '#161A1D'
+      primary: '#161A1D',
+      secondary: '#909595'
     }
   },
   typography: {
     fontFamily: [
+      'Open Sans',
+      'Roboto',
       '-apple-system',
       'BlinkMacSystemFont',
       '"Segoe UI"',

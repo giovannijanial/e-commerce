@@ -1,5 +1,10 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import {
+  IPaginationOptions,
+  paginate,
+  Pagination,
+} from 'nestjs-typeorm-paginate';
 import { Like, Repository } from 'typeorm';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
@@ -30,8 +35,25 @@ export class ProductService {
     return this.productRepository.save(product);
   }
 
-  findAll() {
-    return this.productRepository.find({ relations: ['categories'] });
+  findAll(options: IPaginationOptions): Promise<Pagination<ProductEntity>> {
+    // const queryBuilder = this.productRepository.createQueryBuilder('p');
+
+    // queryBuilder.select([
+    //   'p.id',
+    //   'p.name',
+    //   'p.price',
+    //   'p.quantity',
+    //   'p.image',
+    //   'p.createdAt',
+    //   'p.updateAt',
+    //   'p.categories',
+    //   'p.cartProducts',
+    // ]);
+    // queryBuilder.orderBy('h.id', 'ASC');
+
+    return paginate<ProductEntity>(this.productRepository, options, {
+      relations: ['categories'],
+    });
   }
 
   findAllCategories() {
