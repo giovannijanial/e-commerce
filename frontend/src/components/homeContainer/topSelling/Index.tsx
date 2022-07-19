@@ -6,15 +6,16 @@ import { IProduct } from '../../../interfaces/Product';
 import ProductItemCard from '../BoxProduct';
 import { StyledTopSelling } from './index.styled';
 
-const HomeTopSelling = () => {
-  const { getAll, products, loading, error } = useProduct();
+interface Props {
+  products: IProduct[],
+  loading: boolean,
+  error: string[],
+}
 
-  useEffect(() => {
-    getAll()
-  }, [getAll])
+const HomeTopSelling = ({ products, loading, error }: Props) => {
 
   function showTopProducts() {
-    return products && products.slice(10, 13).map((product: IProduct) => (
+    return products && products.slice(8, 11).map((product: IProduct) => (
       <ProductItemCard key={product.id} product={product} />
     ))
   }

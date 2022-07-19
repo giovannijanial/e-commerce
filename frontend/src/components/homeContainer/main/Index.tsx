@@ -2,16 +2,19 @@ import { Grid } from '@mui/material'
 import { useEffect } from 'react'
 import { useCategory } from '../../../hooks/useCategory'
 import { useProduct } from '../../../hooks/useProduct'
+import { IProduct } from '../../../interfaces/Product'
 import BoxMain from './BoxMain'
 import ListCategories from './ListCategories'
 
-const HomeMain = () => {
-  const { getAll: getAllProducts, products, loading, error } = useProduct();
+interface Props {
+  products: IProduct[],
+  loading: boolean,
+  error: string[],
+}
+
+const HomeMain = ({ products, loading, error }: Props) => {
   const { getAll: getAllCategories, categories } = useCategory();
 
-  useEffect(() => {
-    getAllProducts();
-  }, [getAllProducts])
 
   useEffect(() => {
     getAllCategories();

@@ -6,14 +6,12 @@ import ProductCard from "../../components/productCard/Index";
 import { useProduct } from "../../hooks/useProduct";
 import { IProduct } from '../../interfaces/Product';
 
-const BoxProducts = () => {
-  const { getAll, getByCategory, products, loading, error } = useProduct();
-  const { category } = useParams();
+interface Props {
+  products: IProduct[];
+  loading: boolean;
+}
 
-  useEffect(() => {
-    category ? getByCategory(category) : getAll();
-  }, [getAll, getByCategory, category])
-
+const BoxProducts = ({ products, loading }: Props) => {
   function showProducts() {
     return products && products.slice(0, 15).map((product: IProduct) => (
       <Box>

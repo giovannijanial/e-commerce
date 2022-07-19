@@ -51,9 +51,9 @@ export class ProductController {
   @Get()
   index(
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page = 1,
-    @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit = 10,
+    @Query('limit', new DefaultValuePipe(14), ParseIntPipe) limit = 14,
   ): Promise<Pagination<ProductEntity>> {
-    limit = limit > 10 ? 10 : limit;
+    limit = limit > 14 ? 14 : limit;
     return this.productService.findAll({ page, limit });
   }
 

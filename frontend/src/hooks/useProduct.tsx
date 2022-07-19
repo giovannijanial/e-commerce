@@ -1,7 +1,7 @@
 import { AxiosError } from "axios";
 import { Buffer } from "buffer";
 import { useCallback, useState } from "react"
-import { IProduct } from "../interfaces/Product";
+import { IMeta, IProduct } from "../interfaces/Product";
 import { IUploadImage } from "../interfaces/UploadImage";
 import { ProductService } from "../services/productService";
 
@@ -12,16 +12,18 @@ export const useProduct = () => {
   const [error, setError] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [pagination, setPagination] = useState<IMeta>();
 
 
-  const getAll = useCallback(async () => {
+  const getAll = useCallback(async (page: number) => {
     setLoading(true);
-    const { status, data } = await ProductService.getAll()
+    const { status, data } = await ProductService.getAll(page)
 
     if (status !== 200) {
       setError(["error"])
     };
-    setProducts(data);
+    setProducts(data.items);
+    setPagination(data.meta);
     setLoading(false);
   }, []);
 
@@ -161,6 +163,7 @@ export const useProduct = () => {
     remove,
     success,
     setProduct,
-    uploadImage
+    uploadImage,
+    pagination
   }
 }

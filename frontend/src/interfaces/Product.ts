@@ -15,3 +15,15 @@ export interface IProduct {
   updateAt?: Date;
   categories: ICategory[];
 }
+
+export interface IMeta {
+  totalItems: number;
+  itemCount: number;
+  itemsPerPage: number;
+  totalPages: number;
+  currentPage: number;
+}
+export interface IProductPage {
+  items: IProduct[];
+  meta: IMeta;
+}

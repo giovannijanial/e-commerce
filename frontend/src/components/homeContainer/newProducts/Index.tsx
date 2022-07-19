@@ -6,16 +6,16 @@ import { IProduct } from '../../../interfaces/Product'
 import ProductItemCard from '../BoxProduct'
 import { StyledNewProducts } from './index.styled'
 
-const HomeNewProducts = () => {
+interface Props {
+  products: IProduct[],
+  loading: boolean,
+  error: string[],
+}
 
-  const { getAll, products, loading, error } = useProduct();
-
-  useEffect(() => {
-    getAll()
-  }, [getAll])
+const HomeNewProducts = ({ products, loading, error }: Props) => {
 
   function showNewProducts() {
-    return products && products.slice(7, 10).map((product: IProduct) => (
+    return products && products.slice(5, 8).map((product: IProduct) => (
       <ProductItemCard key={product.id} product={product} />
     ))
   }

@@ -1,8 +1,7 @@
-import { ICategory, IProduct } from '../interfaces/Product';
-import { IUploadImage } from '../interfaces/UploadImage';
+import { ICategory, IProduct, IProductPage } from '../interfaces/Product';
 import { Api } from '../providers';
 
-const getAll = () => Api.get<IProduct[]>('product');
+const getAll = (page: number) => Api.get<IProductPage>(`product?page=${page}`);
 
 const getOne = (id: number) => Api.get<IProduct>(`product/${id}`);
 
@@ -25,7 +24,7 @@ const uploadImage = (data: FormData) =>
 
 const update = (id: number, product: IProduct) =>
   Api.patch<IProduct>(`product/${id}`, product);
-  
+
 const remove = (id: number) => Api.delete<IProduct>(`product/${id}`);
 
 export const ProductService = {
