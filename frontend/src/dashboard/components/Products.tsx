@@ -16,7 +16,7 @@ const DashProducts = () => {
   const { getAll, products, loading, error } = useProduct();
 
   useEffect(() => {
-    getAll()
+    getAll(1)
   }, [getAll])
 
   return (

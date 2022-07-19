@@ -76,7 +76,7 @@ export default function DialogDetailsOrder({ dialog, onClose, currentCart }: Pro
                 fullWidth
                 id="total"
                 label="Total Value"
-                value={currentCart?.total}
+                value={currentCart?.total.toFixed(2)}
                 InputProps={{
                   readOnly: true,
                 }}

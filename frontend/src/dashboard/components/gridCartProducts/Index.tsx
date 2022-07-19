@@ -117,7 +117,16 @@ export default function GridCartProducts({ cartId, cartProducts, origin }: Props
         `${params.row.product.name}`,
     },
     { field: 'quantity', headerName: 'Quantity', width: 100, headerClassName: 'header', headerAlign: "center", align: "center", },
-    { field: 'price', headerName: 'Unit Price', width: 100, headerClassName: 'header', headerAlign: "center", align: "center", },
+    {
+      field: 'price',
+      headerName: 'Unit Price',
+      width: 100,
+      headerClassName: 'header',
+      headerAlign: "center",
+      align: "center",
+      valueGetter: (params: GridValueGetterParams) =>
+        `${(params.row.price).toFixed(2)}`,
+    },
     {
       field: 'total',
       headerName: 'Subtotal',
@@ -126,7 +135,7 @@ export default function GridCartProducts({ cartId, cartProducts, origin }: Props
       headerAlign: "center",
       align: "center",
       valueGetter: (params: GridValueGetterParams) =>
-        `${params.row.quantity * params.row.price}`,
+        `${(params.row.quantity * params.row.price).toFixed(2)}`,
     },
   ];
 

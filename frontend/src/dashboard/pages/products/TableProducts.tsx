@@ -12,12 +12,13 @@ import DialogDetailsProduct from './detailsProduct/Index';
 import DialogUpdateProduct from './updateProduct/Index';
 
 export default function TableProducts() {
-  const { getAll, products, loading, error, remove, setProduct } = useProduct();
+  const { getAll, products, loading, error, remove, pagination } = useProduct();
   const [openDialogDelete, setOpenDialogDelete] = useState(false);
   const [openDialogDetails, setOpenDialogDetails] = useState(false);
   const [openDialogUpdate, setOpenDialogUpdate] = useState(false);
   const [currentId, setCurrentId] = useState<GridRowId>(0)
   const [currentProduct, setCurrentProduct] = useState<IProduct>();
+  const [page, setPage] = useState(0);
 
   // DELETE
   const handleOpenDialogDelete = (id: GridRowId) => () => {
@@ -31,7 +32,7 @@ export default function TableProducts() {
 
   const deleteProduct = useCallback((id: GridRowId) => async () => {
     await remove(+id);
-    await getAll();
+    await getAll(page + 1);
     setOpenDialogDelete(false);
   }, [remove, getAll]);
 
@@ -52,8 +53,8 @@ export default function TableProducts() {
   };
 
   useEffect(() => {
-    getAll()
-  }, [getAll, openDialogUpdate])
+    getAll(page + 1)
+  }, [getAll, openDialogUpdate, page])
 
   const columns: GridColumns<IProduct> = [
     { field: 'id', headerName: 'ID', width: 70, headerClassName: 'header' },
@@ -123,8 +124,12 @@ export default function TableProducts() {
         loading={loading}
         rows={products}
         columns={columns}
-        pageSize={10}
-        rowsPerPageOptions={[10]}
+        page={page}
+        pagination
+        paginationMode="server"
+        pageSize={pagination?.itemsPerPage}
+        rowCount={pagination?.totalItems}
+        onPageChange={(newPage) => setPage(newPage)}
         checkboxSelection
         sx={{
           backgroundColor: theme.palette.background.paper,
