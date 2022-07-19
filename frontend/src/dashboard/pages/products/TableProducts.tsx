@@ -113,7 +113,7 @@ export default function TableProducts() {
 
   return (
     <Box sx={{
-      height: 600,
+      height: 635,
       width: '100%',
       '& .header div': {
         fontWeight: "600",

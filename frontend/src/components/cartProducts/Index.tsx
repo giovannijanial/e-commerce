@@ -35,7 +35,7 @@ const CartProducts = ({ cart }: Props) => {
           <Typography>Total Parcial</Typography>
         </Grid>
         {cart.cartProducts && cart.cartProducts.map((cartProduct) => (
-          <CartProduct cartProduct={cartProduct} />
+          <CartProduct key={cartProduct.id} cartProduct={cartProduct} />
         ))}
       </Grid>
     )

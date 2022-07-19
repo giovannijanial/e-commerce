@@ -1,13 +1,15 @@
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
-import { Autocomplete, Box, Button, Checkbox, Container, Grid, TextField, Toolbar, Typography } from '@mui/material';
-import { ChangeEvent, FormEvent, useCallback, useEffect, useState } from 'react';
+import { Autocomplete, Box, Button, Checkbox, Container, Fab, Grid, Input, TextField, Toolbar, Typography } from '@mui/material';
+import { ChangeEvent, FormEvent, useCallback, useEffect, useRef, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useCategory } from '../../../../hooks/useCategory';
 import { useProduct } from '../../../../hooks/useProduct';
 import { ICategory, IProduct } from '../../../../interfaces/Product';
 import { DashBoxMain } from '../../../components/main/main.styled';
 import { NumberFormatCustom } from './priceFormat';
+import PhotoCamera from '@mui/icons-material/PhotoCamera';
+import { IUploadImage } from '../../../../interfaces/UploadImage';
 
 export interface IPriceFormat {
   price: string;
@@ -18,14 +20,13 @@ const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 const DashAddProductPage = () => {
   const [name, setName] = useState("");
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState<File>();
   const [priceFormat, setPriceFormat] = useState<IPriceFormat>({ price: "" });
   const [quantity, setQuantity] = useState(0);
   const [newCategories, setNewCategories] = useState<ICategory[]>([]);
 
-
   const navigate = useNavigate();
-  const { create, error, loading, success } = useProduct();
+  const { create, error, loading, success, uploadImage } = useProduct();
   const { getAll, categories } = useCategory();
 
   useEffect(() => {
@@ -43,18 +44,28 @@ const DashAddProductPage = () => {
   }, [success])
 
 
-  const handleSubmit = useCallback((event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = useCallback(async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const product: IProduct = {
       name,
       price: parseFloat(priceFormat.price),
       quantity,
+      image: "",
       categories: newCategories,
       cartItems: {}
     }
 
-    create(product)
+    const currentProduct = await create(product)
+
+    if (currentProduct?.id) {
+      const data = new FormData();
+
+      data.append("actioon", "ADD");
+      data.append("id", currentProduct.id.toString());
+      data.append("file", image as Blob)
+      uploadImage(data);
+    }
 
   }, [create, name, priceFormat, quantity, newCategories]);
 
@@ -63,6 +74,14 @@ const DashAddProductPage = () => {
       ...priceFormat,
       [event.target.name]: event.target.value,
     });
+  };
+
+  const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const files = event.target.files;
+    if (files) {
+      const file = files[0];
+      setImage(file);
+    }
   };
 
   return (
@@ -82,7 +101,7 @@ const DashAddProductPage = () => {
             flexDirection: 'column',
             alignItems: 'center',
           }}>
-          <Grid container spacing={2}>
+          <Grid container spacing={2} sx={{ display: "flex", alignItems: "center" }}>
             <Grid item xs={12}>
               <TextField
                 autoComplete="given-name"
@@ -95,6 +114,25 @@ const DashAddProductPage = () => {
                 onChange={(e: ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
                 value={name}
               />
+            </Grid>
+            <Grid item xs={10}>
+              <TextField
+                fullWidth
+                disabled
+                value={image?.name}
+              />
+            </Grid>
+            <Grid item xs={2} sx={{ display: "flex", justifyContent: "center" }}>
+              <Button variant="contained" component="label" endIcon={<PhotoCamera />}>
+                Upload
+                <input
+                  hidden
+                  accept="image/*"
+                  multiple
+                  type="file"
+                  onChange={handleImageChange}
+                />
+              </Button>
             </Grid>
             <Grid item xs={6}>
               <TextField
@@ -173,8 +211,8 @@ const DashAddProductPage = () => {
             )}
           </Box>
         </Box>
-      </Container>
-    </DashBoxMain>
+      </Container >
+    </DashBoxMain >
   )
 }
 

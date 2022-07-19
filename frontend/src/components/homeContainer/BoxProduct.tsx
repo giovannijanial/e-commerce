@@ -1,24 +1,44 @@
 import { Card, CardActionArea, CardActions, CardContent, CardMedia, Grid, Typography } from '@mui/material';
 import { Box } from '@mui/system';
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { theme } from '../../app.styled';
+import { useProduct } from '../../hooks/useProduct';
 import { IProduct } from '../../interfaces/Product';
 import BuyButton from '../buyButton/Index';
 import FavoriteRating from '../productCard/Rating';
 
 const ProductItemCard = ({ product }: { product: IProduct }) => {
 
+  const { getImage, image } = useProduct();
+
+  useEffect(() => {
+    if (product.image)
+      getImage(product.image);
+  }, [getImage])
+
   return (
     <Grid item md={4} sm={8} xs={12}>
       <Card sx={{ maxHeight: 650 }}>
-        <CardActionArea component={Link} to={`/products/${product.id}`}>
+        <CardActionArea
+          component={Link}
+          to={`/products/${product.id}`}
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItemns: "center"
+          }}>
           <CardMedia
             component="img"
-            height="350"
-            image=""
             alt="image"
+            src={`data:image/jpeg;base64, ${image}`}
+            style={{
+              width: "auto",
+              maxHeight: "350px"
+            }}
           />
-          <CardContent>
+          <CardContent sx={{ alignSelf: "flex-start" }}>
             <Typography
               gutterBottom
               variant="h6"
@@ -30,7 +50,7 @@ const ProductItemCard = ({ product }: { product: IProduct }) => {
               }}>
               {product.name}
             </Typography>
-            <Box sx={{ display: "flex", flexDirection: "column", alignItems: "flex-end" }}>
+            <Box sx={{ display: "flex", flexDirection: "column", alignSelf: "flex-start" }}>
               <FavoriteRating />
               <Typography
                 gutterBottom variant="h5"

@@ -2,6 +2,7 @@ import { AxiosError } from "axios";
 import { Buffer } from "buffer";
 import { useCallback, useState } from "react"
 import { IProduct } from "../interfaces/Product";
+import { IUploadImage } from "../interfaces/UploadImage";
 import { ProductService } from "../services/productService";
 
 export const useProduct = () => {
@@ -64,6 +65,24 @@ export const useProduct = () => {
     }
   }, [])
 
+  const uploadImage = useCallback(async (data: FormData) => {
+    setLoading(true);
+    try {
+      const res = await ProductService.uploadImage(data)
+      setSuccess(true);
+    } catch (error: AxiosError | any) {
+      if (!error?.response) {
+        setError(["Sem resposta do servidor!"])
+      }
+      if (error.response.status === 400) {
+        setError(error.response.data?.message)
+      }
+    } finally {
+      setLoading(false)
+    }
+
+  }, []);
+
   const search = useCallback(async (query: string) => {
     setLoading(true);
     try {
@@ -81,6 +100,7 @@ export const useProduct = () => {
     setLoading(true);
     try {
       const res = await ProductService.create(product)
+      return res.data
       setSuccess(true);
     } catch (error: AxiosError | any) {
       if (!error?.response) {
@@ -140,6 +160,7 @@ export const useProduct = () => {
     update,
     remove,
     success,
-    setProduct
+    setProduct,
+    uploadImage
   }
 }
