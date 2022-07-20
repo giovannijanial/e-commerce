@@ -9,12 +9,12 @@ import CartResume from './CartResume'
 
 const CartPage = () => {
   const { cart } = useContext(CartContext);
-  const { getOne, cart: currentCart, loading, error, remove } = useCart();
+  const { getOne, cart: currentCart, loading, error, removeProduct } = useCart();
 
   useEffect(() => {
     if (cart?.id)
       getOne(cart.id)
-  }, [getOne, cart])
+  }, [getOne, cart, removeProduct])
 
   return (
     <MainContainer sx={{ flexDirection: "column", alignItems: "center" }}>

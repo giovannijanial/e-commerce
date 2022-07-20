@@ -2,13 +2,14 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import { Avatar, Button, ButtonGroup, Divider, Grid, Typography } from '@mui/material';
 import { Box } from '@mui/system';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useContext } from 'react';
 import { theme } from '../../app.styled';
 import { useProduct } from '../../hooks/useProduct';
 import { ICartItem } from "../../interfaces/Cart";
 import DeleteIcon from '@mui/icons-material/Delete';
 import DialogDelete from '../dialogs/DeleteDialog';
 import { useCart } from '../../hooks/useCart';
+import CartContext from '../../contexts/cartProvider';
 
 interface Props {
   cartId: string | undefined;
@@ -22,6 +23,7 @@ const CartProduct = ({ cartId, cartProduct }: Props) => {
 
   const { getImage, image } = useProduct();
   const { removeProduct, loading } = useCart();
+  const { removeProduct: removeProductContext, increaseProduct } = useContext(CartContext);
 
   const handleOpenDialogDelete = (id: number) => () => {
     setOpenDialogDelete(true);
@@ -47,13 +49,17 @@ const CartProduct = ({ cartId, cartProduct }: Props) => {
   }
 
   const handleIncrease = () => {
-    if (quantity)
+    if (quantity && cartProduct.id) {
       setQuantity(quantity + 1)
+      increaseProduct(cartProduct.id)
+    }
   }
 
   const handleRemoveProduct = useCallback((idCartProduct: number) => async () => {
     if (cartId) {
       await removeProduct(cartId, idCartProduct);
+      removeProductContext(idCartProduct);
+
     }
     setOpenDialogDelete(false);
   }, [removeProduct]);
@@ -102,7 +108,7 @@ const CartProduct = ({ cartId, cartProduct }: Props) => {
         {quantity && (<Typography color={theme.palette.primary.main}><b>R${(quantity * cartProduct.price).toFixed(2)}</b></Typography>)}
       </Grid>
       <Grid item xs={1} sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-        {cartProduct.product.id && (
+        {cartProduct.id && (
           <Button color='secondary' onClick={handleOpenDialogDelete(cartProduct.id)}>
             <DeleteIcon />
           </Button>
