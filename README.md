@@ -5,7 +5,7 @@
 	<a href="https://pt-br.reactjs.org/" target="blank"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" width="200" alt="React Logo" /></a>
 </p>
 <p align="center">Aplicação construída em <b>typescript</b>, com o framework <b>Nest.JS</b> e <b>React</b>.</p>
-<p align="center">Algumas das dependências utilizadas:</p>
+<p align="center">Outros elementos da stack:</p>
 <p align="center">
     <img src="https://www.vectorlogo.zone/logos/sqlite/sqlite-icon.svg" width="60" 	alt="SQLite"  title="SQLite3"/>
     <img src="https://user-images.githubusercontent.com/30929568/119165576-42d60c80-ba7b-11eb-95ce-c61b12a97edf.png" width="60" alt="TypeORM" title="TypeORM" />
