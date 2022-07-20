@@ -3,11 +3,10 @@ import { Box } from '@mui/material';
 import { DataGrid, GridActionsCellItem, GridColumns, GridRowId, GridValueGetterParams } from '@mui/x-data-grid';
 import { useCallback, useEffect, useState } from 'react';
 import { theme } from '../../../app.styled';
-import { useCart } from '../../../hooks/useCart';
-import { useProduct } from '../../../hooks/useProduct';
-import { ICartItem } from '../../../interfaces/Cart';
-import { ICategory, IProduct } from '../../../interfaces/Product';
 import DialogDelete from '../../../components/dialogs/DeleteDialog';
+import { useCart } from '../../../hooks/useCart';
+import { ICartItem } from '../../../interfaces/Cart';
+import { IProduct } from '../../../interfaces/Product';
 
 interface Props {
   cartId: string;

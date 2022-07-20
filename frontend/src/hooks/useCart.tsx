@@ -13,8 +13,7 @@ export const useCart = () => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
-  const { addProduct, setActiveCart } = useContext(CartContext);
-
+  const { setActiveCart } = useContext(CartContext);
 
   const getAll = useCallback(async () => {
     setLoading(true);
@@ -99,6 +98,7 @@ export const useCart = () => {
   const removeProduct = useCallback(async (id: string, idProduct: number) => {
     setLoading(true);
     try {
+      console.log(id, idProduct)
       const { status, data } = await CartService.removeProduct(id, idProduct)
 
     } catch (error) {
