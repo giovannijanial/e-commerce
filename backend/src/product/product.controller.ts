@@ -15,38 +15,17 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { diskStorage } from 'multer';
-import { extname, join } from 'path';
+import { Pagination } from 'nestjs-typeorm-paginate';
+import { join } from 'path';
+import { storage } from 'src/utils/Storage';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
-import { ProductService } from './product.service';
-import { v4 as uuidv4 } from 'uuid';
-import { Pagination } from 'nestjs-typeorm-paginate';
 import { ProductEntity } from './entities/product.entity';
-
-export const storage = {
-  storage: diskStorage({
-    destination: './uploads/imgs-product',
-    filename: (req, file, cb) => {
-      const filename = `${file.originalname.substring(
-        0,
-        file.originalname.length - 4,
-      )}-${uuidv4()}`;
-      const extension = `${extname(file.originalname)}`;
-
-      cb(null, `${filename}${extension}`);
-    },
-  }),
-};
+import { ProductService } from './product.service';
 
 @Controller('product')
 export class ProductController {
   constructor(private readonly productService: ProductService) {}
-
-  // @Get()
-  // findAll() {
-  //   return this.productService.findAll();
-  // }
 
   @Get()
   index(
@@ -60,6 +39,16 @@ export class ProductController {
   @Get('categories')
   findAllCategories() {
     return this.productService.findAllCategories();
+  }
+
+  @Get('top-rating')
+  findTopRating() {
+    return this.productService.findTopProducts();
+  }
+
+  @Get('last-changed')
+  findLastChanged() {
+    return this.productService.findLastChanged();
   }
 
   @Get('search')

@@ -13,6 +13,10 @@ const getImage = (image: string) =>
 const getByCategory = (category: string) =>
   Api.get<ICategory>(`product/categories/${category}`);
 
+const getTopProducts = () => Api.get<IProduct[]>('product/top-rating');
+
+const getLastChanged = () => Api.get<IProduct[]>('product/last-changed');
+
 const search = (query: string) =>
   Api.get<IProduct[]>(`product/search?q=${query}`);
 const create = (product: IProduct) => Api.post<IProduct>('product', product);
@@ -33,6 +37,8 @@ export const ProductService = {
   getImage,
   uploadImage,
   getByCategory,
+  getTopProducts,
+  getLastChanged,
   search,
   create,
   update,

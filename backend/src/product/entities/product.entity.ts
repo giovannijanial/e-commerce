@@ -27,6 +27,9 @@ export class ProductEntity {
   quantity: number;
 
   @Column({ nullable: true })
+  rating: number;
+
+  @Column({ nullable: true })
   image: string;
 
   @CreateDateColumn()

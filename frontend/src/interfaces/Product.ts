@@ -9,6 +9,7 @@ export interface IProduct {
   name: string;
   price: number;
   quantity: number;
+  rating: number;
   image?: string;
   cartItems: Object;
   createdAt?: Date;

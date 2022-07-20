@@ -11,6 +11,7 @@ import { ChangeEvent, FormEvent, useCallback, useEffect, useState } from 'react'
 import { useCategory } from '../../../../hooks/useCategory';
 import { useProduct } from '../../../../hooks/useProduct';
 import { ICategory, IProduct } from '../../../../interfaces/Product';
+import { getProductRating } from '../../../../utils/ProductRating';
 import { IPriceFormat } from '../addProduct/Index';
 import { NumberFormatCustom } from '../addProduct/priceFormat';
 
@@ -57,6 +58,7 @@ export default function DialogUpdateProduct({ dialog, setOpenDialogUpdate, curre
       name,
       price: parseFloat(priceFormat.price),
       quantity,
+      rating: getProductRating(),
       categories: newCategories,
       cartItems: {}
     }

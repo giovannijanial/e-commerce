@@ -12,6 +12,9 @@ export class CreateProductDto {
   @IsNumber()
   quantity: number;
 
+  @IsNumber()
+  rating: number;
+
   @IsString()
   image: string;
 

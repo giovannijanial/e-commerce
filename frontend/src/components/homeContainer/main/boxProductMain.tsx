@@ -68,7 +68,7 @@ const ProductBoxMain = ({ product, locale }: Props) => {
             justifyContent: "space-around",
             minWidth: "100%"
           }}>
-            <FavoriteRating />
+            <FavoriteRating rating={product.rating} />
             <Typography
               gutterBottom variant="h6"
               component="div"

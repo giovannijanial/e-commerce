@@ -54,6 +54,35 @@ export const useProduct = () => {
     }
   }, [])
 
+  const getTopProducts = useCallback(async () => {
+    setLoading(true);
+    const { status, data } = await ProductService.getTopProducts()
+
+    console.log(data);
+
+    if (status !== 200) {
+      setError(["error"])
+    };
+
+    setProducts(data);
+    setLoading(false);
+  }, []);
+
+  const getLastChanged = useCallback(async () => {
+    setLoading(true);
+    const { status, data } = await ProductService.getLastChanged()
+
+    console.log(data);
+
+    if (status !== 200) {
+      setError(["error"])
+    };
+
+    setProducts(data);
+    setLoading(false);
+  }, []);
+
+
   const getImage = useCallback(async (image: string) => {
     setLoading(true);
     try {
@@ -164,6 +193,8 @@ export const useProduct = () => {
     success,
     setProduct,
     uploadImage,
-    pagination
+    pagination,
+    getTopProducts,
+    getLastChanged
   }
 }

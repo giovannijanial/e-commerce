@@ -4,7 +4,7 @@ import { useProduct } from '../../hooks/useProduct'
 import { SHomeContainer } from './index.styled'
 import HomeMain from './main/Index'
 import HomeNewProducts from './newProducts/Index'
-import HomeOthers from './othersProducts/Index'
+import HomeTopProducts from './topProducts/Index'
 import HomeTopSelling from './topSelling/Index'
 
 
@@ -19,9 +19,9 @@ const HomeContainer = () => {
   return (
     <SHomeContainer>
       <HomeMain products={products} loading={loading} error={error} />
-      <HomeNewProducts products={products} loading={loading} error={error} />
+      <HomeNewProducts />
       <HomeTopSelling products={products} loading={loading} error={error} />
-      <HomeOthers products={products} loading={loading} error={error} />
+      <HomeTopProducts />
     </SHomeContainer >
   )
 }

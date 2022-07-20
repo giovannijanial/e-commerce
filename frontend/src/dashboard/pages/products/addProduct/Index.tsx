@@ -10,6 +10,7 @@ import { DashBoxMain } from '../../../components/main/main.styled';
 import { NumberFormatCustom } from './priceFormat';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import { IUploadImage } from '../../../../interfaces/UploadImage';
+import { getProductRating } from '../../../../utils/ProductRating';
 
 export interface IPriceFormat {
   price: string;
@@ -51,6 +52,7 @@ const DashAddProductPage = () => {
       name,
       price: parseFloat(priceFormat.price),
       quantity,
+      rating: getProductRating(),
       image: "",
       categories: newCategories,
       cartItems: {}

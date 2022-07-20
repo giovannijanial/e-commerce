@@ -47,7 +47,7 @@ const ProductCard = ({ product }: { product: IProduct }) => {
               }}>
               {product.name}
             </Typography>
-            <FavoriteRating />
+            <FavoriteRating rating={product.rating} />
             <Typography
               gutterBottom variant="h5"
               component="div"

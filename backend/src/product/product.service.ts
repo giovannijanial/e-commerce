@@ -45,6 +45,22 @@ export class ProductService {
     return this.categoryRepository.find();
   }
 
+  async findTopProducts() {
+    return this.productRepository.find({
+      order: { rating: 'DESC' },
+      relations: ['categories'],
+      take: 3,
+    });
+  }
+
+  async findLastChanged() {
+    return this.productRepository.find({
+      order: { updateAt: 'DESC' },
+      relations: ['categories'],
+      take: 3,
+    });
+  }
+
   async findOne(id: number) {
     const product = await this.productRepository.findOne({
       where: { id },

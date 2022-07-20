@@ -128,7 +128,6 @@ const items: Item[] = [
 ]
 
 const Swiper = () => {
-
   return (
     <div style={{ marginTop: "50px", color: "#494949" }}>
       <Carousel>

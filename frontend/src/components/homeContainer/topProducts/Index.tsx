@@ -6,16 +6,16 @@ import { IProduct } from '../../../interfaces/Product';
 import ProductItemCard from '../BoxProduct';
 import { StyledOthers } from './index.styled';
 
-interface Props {
-  products: IProduct[],
-  loading: boolean,
-  error: string[],
-}
+const HomeTopProducts = () => {
 
-const HomeOthers = ({ products, loading, error }: Props) => {
+  const { getTopProducts, products, loading, error } = useProduct();
+
+  useEffect(() => {
+    getTopProducts()
+  }, [getTopProducts])
 
   function showOthersProducts() {
-    return products && products.slice(11, 14).map((product: IProduct) => (
+    return products && products.map((product: IProduct) => (
       <ProductItemCard key={product.id} product={product} />
     ))
   }
@@ -37,4 +37,4 @@ const HomeOthers = ({ products, loading, error }: Props) => {
   )
 }
 
-export default HomeOthers
+export default HomeTopProducts

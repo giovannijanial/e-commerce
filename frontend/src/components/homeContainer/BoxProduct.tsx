@@ -51,7 +51,7 @@ const ProductItemCard = ({ product }: { product: IProduct }) => {
               {product.name}
             </Typography>
             <Box sx={{ display: "flex", flexDirection: "column", alignSelf: "flex-start" }}>
-              <FavoriteRating />
+              <FavoriteRating rating={product.rating} />
               <Typography
                 gutterBottom variant="h5"
                 component="div"
