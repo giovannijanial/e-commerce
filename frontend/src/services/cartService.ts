@@ -10,6 +10,9 @@ const create = (body: any) => Api.post<ICart>('cart', body);
 const update = (id: string, cart: ICart) =>
   Api.patch<ICart>(`cart/${id}`, cart);
 
+const updateCartProduct = (id: string, cartItemId: number, body: any) =>
+  Api.patch<ICart>(`cart/${id}/${cartItemId}`, body);
+
 const remove = (id: string) => Api.delete<ICart>(`cart/${id}`);
 
 const removeProduct = (id: string, idProduct: number) =>
@@ -20,6 +23,7 @@ export const CartService = {
   getOne,
   create,
   update,
+  updateCartProduct,
   remove,
   removeProduct
 };

@@ -1,11 +1,9 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { UpdateCartProductDto } from 'src/cart-product/dto/update-cart-product.dto';
 import { CartProductEntity } from 'src/cart-product/entities/cart-product.entity';
 import { ProductEntity } from 'src/product/entities/product.entity';
 import { UserEntity } from 'src/user/entities/user.entity';
 import { Repository } from 'typeorm';
-import { UpdateCartDto } from './dto/update-cart.dto';
 import { CartEntity, CartStatus } from './entities/cart.entity';
 
 @Injectable()
@@ -86,7 +84,7 @@ export class CartService {
     currentCart: CartEntity,
   ) {
     const currentItem = currentCart.cartProducts.find(
-      (CartProduct) => CartProduct.product.id === product.id,
+      (cartProduct) => cartProduct.product.id === product.id,
     );
 
     if (!currentItem) {
@@ -172,13 +170,15 @@ export class CartService {
     return this.cartRepository.remove(cart);
   }
 
-  async update(
-    id: string,
-    itemId: number,
-    updateCartProductDto: UpdateCartProductDto,
-  ) {
-    await this.findOne(id);
-    await this.cartProductRepository.update(itemId, updateCartProductDto);
-    return this.cartRepository.update(id, {});
+  async update(id: string, itemId: number, quantity: number) {
+    const currentCart = await this.findOne(id);
+    const currentItem = currentCart.cartProducts.find(
+      (cartProduct) => cartProduct.id === itemId,
+    );
+    await this.cartProductRepository.update(currentItem.id, {
+      quantity,
+    });
+
+    return this.updateCart(currentCart.id);
   }
 }

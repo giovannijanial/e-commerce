@@ -1,6 +1,6 @@
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
-import { Avatar, Button, ButtonGroup, Divider, Grid, Typography } from '@mui/material';
+import { Avatar, Button, ButtonGroup, CircularProgress, Divider, Grid, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { useState, useEffect, useCallback, useContext } from 'react';
 import { theme } from '../../app.styled';
@@ -22,8 +22,8 @@ const CartProduct = ({ cartId, cartProduct }: Props) => {
   const [currentId, setCurrentId] = useState(0);
 
   const { getImage, image } = useProduct();
-  const { removeProduct, loading } = useCart();
-  const { removeProduct: removeProductContext, increaseProduct } = useContext(CartContext);
+  const { removeProduct, loading, updateCartProduct } = useCart();
+  const { removeProduct: removeProductContext, increaseProduct, reduceProduct } = useContext(CartContext);
 
   const handleOpenDialogDelete = (id: number) => () => {
     setOpenDialogDelete(true);
@@ -43,15 +43,23 @@ const CartProduct = ({ cartId, cartProduct }: Props) => {
     setQuantity(cartProduct.quantity)
   }, [cartProduct])
 
-  const handleReduce = () => {
-    if (quantity)
-      setQuantity(quantity - 1)
+  const handleReduce = (idCartProduct: number | undefined) => {
+    if (quantity && cartProduct.id) {
+      if (cartId && idCartProduct) {
+        setQuantity(quantity - 1)
+        updateCartProduct(cartId, idCartProduct, quantity - 1);
+        reduceProduct(cartProduct.id)
+      }
+    }
   }
 
-  const handleIncrease = () => {
+  const handleIncrease = (idCartProduct: number | undefined) => {
     if (quantity && cartProduct.id) {
-      setQuantity(quantity + 1)
-      increaseProduct(cartProduct.id)
+      if (cartId && idCartProduct) {
+        setQuantity(quantity + 1)
+        updateCartProduct(cartId, idCartProduct, quantity + 1);
+        increaseProduct(cartProduct.id)
+      }
     }
   }
 
@@ -75,32 +83,37 @@ const CartProduct = ({ cartId, cartProduct }: Props) => {
       <Grid item xs={3} sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
         {quantity && (
           <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "space-between" }}>
-            <Typography sx={{ mb: 1 }}>{quantity}</Typography>
-            <ButtonGroup>
-              {quantity > 1 ? (<Button
-                aria-label="reduce"
-                size='small'
-                onClick={(e) => handleReduce()}
-              >
-                <RemoveIcon fontSize="small" />
-              </Button>) : (
-                <Button
-                  disabled
-                  aria-label="reduce"
-                  size='small'
-                  onClick={(e) => handleReduce()}
-                >
-                  <RemoveIcon fontSize="small" />
-                </Button>
-              )}
-              <Button
-                aria-label="increase"
-                size='small'
-                onClick={(e) => handleIncrease()}
-              >
-                <AddIcon fontSize="small" />
-              </Button>
-            </ButtonGroup>
+            {loading ? (
+              <CircularProgress color="primary" />
+            ) : (
+              <>
+                <Typography sx={{ mb: 1 }}>{quantity}</Typography>
+                <ButtonGroup>
+                  {quantity > 1 ? (<Button
+                    aria-label="reduce"
+                    size='small'
+                    onClick={(e) => handleReduce(cartProduct.id)}
+                  >
+                    <RemoveIcon fontSize="small" />
+                  </Button>) : (
+                    <Button
+                      disabled
+                      aria-label="reduce"
+                      size='small'
+                    >
+                      <RemoveIcon fontSize="small" />
+                    </Button>
+                  )}
+                  <Button
+                    aria-label="increase"
+                    size='small'
+                    onClick={(e) => handleIncrease(cartProduct.id)}
+                  >
+                    <AddIcon fontSize="small" />
+                  </Button>
+                </ButtonGroup>
+              </>
+            )}
           </Box>
         )}
       </Grid>

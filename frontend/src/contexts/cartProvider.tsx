@@ -68,6 +68,7 @@ export const CartProvider = ({ children }: Props) => {
     if (productIndex < 0) {
       const updatedCart = {
         ...cart,
+        total: cart.total + product.price,
         quantityProducts: cart.quantityProducts + quantity,
         cartProducts: [...cart.cartProducts, { price: product.price, quantity, product }]
       }
@@ -82,7 +83,11 @@ export const CartProvider = ({ children }: Props) => {
 
   const removeProduct = (idCartProduct: number) => {
     const newCartProducts = cart.cartProducts.filter((cartProduct) => cartProduct.id !== idCartProduct);
-    setCart({ ...cart, cartProducts: newCartProducts, quantityProducts: cart.quantityProducts - 1 });
+    setCart({
+      ...cart,
+      quantityProducts: cart.quantityProducts - 1,
+      cartProducts: newCartProducts,
+    });
   }
 
   const increaseProduct = (idCartProduct: number) => {
@@ -95,7 +100,15 @@ export const CartProvider = ({ children }: Props) => {
     setCart({ ...cart, cartProducts: newCartProducts, total: newTotal });
   }
 
-  const reduceProduct = (idCartProduct: number) => { }
+  const reduceProduct = (idCartProduct: number) => {
+    const newCartProducts = cart.cartProducts;
+    let newTotal = cart.total;
+    const cartProductIndex = findIndexCartProduct(idCartProduct);
+    newCartProducts[cartProductIndex].quantity = cart.cartProducts[cartProductIndex].quantity - 1
+    newTotal -= newCartProducts[cartProductIndex].price;
+
+    setCart({ ...cart, cartProducts: newCartProducts, total: newTotal });
+  }
 
   return (
     <CartContext.Provider value={{ cart, addProduct, removeProduct, setActiveCart, logoutCart, increaseProduct, reduceProduct }}>

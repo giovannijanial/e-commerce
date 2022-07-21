@@ -83,6 +83,26 @@ export const useCart = () => {
     }
   }, []);
 
+  const updateCartProduct = useCallback(async (id: string, cartItemId: number, quantity: number) => {
+    setLoading(true);
+    try {
+      const body = {
+        quantity
+      }
+      const res = await CartService.updateCartProduct(id, cartItemId, body)
+      setSuccess(true);
+    } catch (error: AxiosError | any) {
+      if (!error?.response) {
+        setError(["Sem resposta do servidor!"])
+      }
+      if (error.response.status === 400) {
+        setError(error.response.data?.message)
+      }
+    } finally {
+      setLoading(false)
+    }
+  }, []);
+
   const remove = useCallback(async (id: string) => {
     setLoading(true);
     try {
@@ -98,7 +118,6 @@ export const useCart = () => {
   const removeProduct = useCallback(async (id: string, idProduct: number) => {
     setLoading(true);
     try {
-      console.log(id, idProduct)
       const { status, data } = await CartService.removeProduct(id, idProduct)
 
     } catch (error) {
@@ -119,6 +138,7 @@ export const useCart = () => {
     update,
     remove,
     setCart,
-    removeProduct
+    removeProduct,
+    updateCartProduct
   }
 }
