@@ -1,6 +1,5 @@
-import { Box, CircularProgress, Grid, Typography } from '@mui/material'
+import { Grid, LinearProgress, Typography } from '@mui/material'
 import { useContext, useEffect } from 'react'
-import { theme } from '../../app.styled'
 import { MainContainer } from '../../components/main/main.styled'
 import CartContext from '../../contexts/cartProvider'
 import { useCart } from '../../hooks/useCart'
@@ -21,9 +20,11 @@ const CartPage = () => {
       {currentCart ? (
         <Grid container spacing={4}>
           <Grid item xs={9}>
+            {loading && <LinearProgress />}
             <CartProductsGrid currentCart={currentCart} />
           </Grid>
           <Grid item xs={3}>
+            {loading && <LinearProgress />}
             <CartResume currentCart={currentCart} loading={loading} />
           </Grid>
         </Grid>

@@ -49,14 +49,14 @@ export default function InfoProduct() {
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
           <Tab label="Avaliações" {...a11yProps(0)} />
-          <Tab label="Descrição" {...a11yProps(1)} />
+          <Tab label="Detalhes" {...a11yProps(1)} />
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        Reviews
+        Reviews...
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Description
+        Details...
       </TabPanel>
     </Box>
   );

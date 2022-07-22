@@ -1,5 +1,5 @@
 import { Button } from "@mui/material";
-import { useContext, useState } from "react";
+import { useCallback, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../../contexts/authProvider";
 import CartContext from "../../contexts/cartProvider";
@@ -25,18 +25,18 @@ export default function BuyButton({ product, origin }: Props) {
     setOpenDialogCart(false);
   };
 
-  const handleButton = () => {
+  const handleButton = useCallback(async () => {
     if (auth.token) {
       if (product.id) {
-        create(auth.user, product, 1)
-        addProduct(auth.user, product, 1);
         setOpenDialogCart(true);
+        await create(auth.user, product, 1)
+        addProduct(product, 1);
       }
     }
     else {
       navigate("/login")
     }
-  }
+  }, [])
 
   return (
     <>

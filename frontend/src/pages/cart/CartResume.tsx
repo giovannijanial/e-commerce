@@ -72,10 +72,34 @@ const CartResume = ({ currentCart, loading }: Props) => {
             <Typography variant='body1'><b>R${getTotalWithoutPromo()}</b></Typography>
             <Typography variant='body2'>(em até 10x de R${getInstallments()})</Typography>
           </Grid>
-          <Grid item xs={12} sx={{ mt: 3, display: "flex", justifyContent: "center" }}>
-            <Box bgcolor={theme.palette.success.main} sx={{ width: 300, height: 100, display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
-              <Typography variant='h5' color={theme.palette.success.dark}>Valor no <b>PIX</b></Typography>
-              <Typography variant='h5' color={theme.palette.success.dark}><b>R${currentCart.total.toFixed(2)}</b></Typography>
+          <Grid
+            item
+            xs={12}
+            sx={{
+              mt: 3,
+              display: "flex",
+              justifyContent: "center"
+            }}>
+            <Box
+              bgcolor={theme.palette.success.main}
+              sx={{
+                width: 300,
+                height: 100,
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center"
+              }}>
+              <Typography
+                variant='h5'
+                color={theme.palette.success.dark}>
+                Valor no <b>PIX</b>
+              </Typography>
+              <Typography
+                variant='h5'
+                color={theme.palette.success.dark}>
+                <b>R${currentCart.total.toFixed(2)}</b>
+              </Typography>
             </Box>
           </Grid>
           <Grid item xs={12}>

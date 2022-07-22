@@ -69,7 +69,7 @@ export default function SignUpPage() {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h3">
-          Sign up
+          Cadastro
         </Typography>
         <Box component="form" onSubmit={handleSubmit}
           sx={{
@@ -85,7 +85,7 @@ export default function SignUpPage() {
                 required
                 fullWidth
                 id="name"
-                label="First Name"
+                label="Nome"
                 autoFocus
                 onChange={(e: ChangeEvent<HTMLInputElement>) => setFirstName(e.target.value)}
                 value={firstName}
@@ -96,7 +96,7 @@ export default function SignUpPage() {
                 required
                 fullWidth
                 id="lastName"
-                label="Last Name"
+                label="Sobrenome"
                 name="lastName"
                 autoComplete="family-name"
                 onChange={(e: ChangeEvent<HTMLInputElement>) => setLastName(e.target.value)}
@@ -109,7 +109,7 @@ export default function SignUpPage() {
                 fullWidth
                 id="age"
                 type="number"
-                label="Age"
+                label="Idade"
                 name="age"
                 autoComplete="family-name"
                 onChange={(e: ChangeEvent<HTMLInputElement>) => setAge(parseInt(e.target.value))}
@@ -121,7 +121,7 @@ export default function SignUpPage() {
                 required
                 fullWidth
                 id="email"
-                label="Email Address"
+                label="Email"
                 name="email"
                 autoComplete="email"
                 onChange={(e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
@@ -135,7 +135,7 @@ export default function SignUpPage() {
                 required
                 fullWidth
                 id="username"
-                label="User Name"
+                label="Username"
                 name="username"
                 autoComplete="user-name"
                 onChange={(e: ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}
@@ -160,7 +160,7 @@ export default function SignUpPage() {
             <Grid item xs={12}>
               <FormControlLabel
                 control={<Checkbox value="allowExtraEmails" color="primary" />}
-                label="I want to receive inspiration, marketing promotions and updates via email."
+                label="Declaro que quero receber as novidadades do E-commerce por email."
               />
             </Grid>
           </Grid>
@@ -169,12 +169,12 @@ export default function SignUpPage() {
             variant="contained"
             sx={{ mt: 3, mb: 2, width: 600 }}
           >
-            Sign Up
+            Salvar
           </Button>
           <Grid container justifyContent="flex-end">
             <Grid item>
               <Link to="/login">
-                Already have an account? Sign in
+                Já tem uma conta? Faça o login!
               </Link>
             </Grid>
           </Grid>

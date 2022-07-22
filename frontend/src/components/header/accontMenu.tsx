@@ -45,7 +45,7 @@ export default function AccountMenu({ role }: Props) {
 
   return (
     <>
-      <Tooltip title="Account">
+      <Tooltip title="Conta">
         <StyledIconButon
           id={role}
           onClick={handleClick}
@@ -102,13 +102,13 @@ export default function AccountMenu({ role }: Props) {
           <ListItemIcon>
             <Settings fontSize="small" />
           </ListItemIcon>
-          Settings
+          Configurações
         </MenuItem>
         <MenuItem onClick={handleLogout}>
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>
-          Logout
+          Sair
         </MenuItem>
       </Menu>
     </>

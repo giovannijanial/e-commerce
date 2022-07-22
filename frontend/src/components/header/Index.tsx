@@ -8,16 +8,16 @@ const Header = () => {
   return (
     <>
       <StyledGrid container spacing={2} columns={{ xs: 4, sm: 8, md: 12 }} >
-        <StyledGridItem item xs={12} sm={8} md={2}>
+        <StyledGridItem item sm={2} md={2} display={{ xs: "none", sm: "flex", md: "flex" }}>
           <Logo />
         </StyledGridItem>
-        <StyledGridItem item xs={12} sm={6} md={8}>
+        <StyledGridItem item xs={4} sm={4} md={8}>
           <Search />
         </StyledGridItem>
-        <StyledGridItem item sm={2} display={{ xs: "none", sm: "block", md: "block" }} >
+        <StyledGridItem item xs={4} sm={2} display={{ sm: "block", md: "block" }} >
           <Buttons />
         </StyledGridItem>
-        <StyledGridNavigation item sm={12} display={{ xs: "none", sm: "none", md: "block" }}>
+        <StyledGridNavigation item xs={4} sm={12} display={{ sm: "none", md: "block" }}>
           <Navbar />
         </StyledGridNavigation>
       </StyledGrid >

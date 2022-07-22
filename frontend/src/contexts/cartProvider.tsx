@@ -1,7 +1,6 @@
 import { createContext, ReactNode, useState } from "react";
 import { ICart } from "../interfaces/Cart";
 import { IProduct } from "../interfaces/Product";
-import { IUser } from "../interfaces/User";
 import { CartService } from "../services/cartService";
 
 interface Props {
@@ -11,7 +10,7 @@ export interface ICartContext {
   cart: ICart,
   setActiveCart: (idCartActive: string) => void,
   logoutCart: () => void,
-  addProduct: (user: IUser, product: IProduct, quantity: number) => void,
+  addProduct: (product: IProduct, quantity: number) => void,
   removeProduct: (idCartProduct: number) => void,
   reduceProduct: (idCartProduct: number) => void,
   increaseProduct: (idCartProduct: number) => void,
@@ -48,9 +47,9 @@ export const CartProvider = ({ children }: Props) => {
     return productIndex;
   }
 
-  const findIndexCartProduct = (idCartProduct: number) => {
-    const cartProductIndex = cart.cartProducts.findIndex((cartProduct) => cartProduct.id === idCartProduct);
-    return cartProductIndex;
+  const findIndexProduct = (productId: number) => {
+    const productIndex = cart.cartProducts.findIndex((cartProduct) => cartProduct.product.id === productId);
+    return productIndex;
   }
 
   const setActiveCart = async (idCartActive: string) => {
@@ -62,7 +61,7 @@ export const CartProvider = ({ children }: Props) => {
     setCart(initialState.cart);
   }
 
-  const addProduct = async (user: IUser, product: IProduct, quantity: number) => {
+  const addProduct = async (product: IProduct, quantity: number) => {
 
     const productIndex = verifyCartProduct(product);
     if (productIndex < 0) {
@@ -90,22 +89,22 @@ export const CartProvider = ({ children }: Props) => {
     });
   }
 
-  const increaseProduct = (idCartProduct: number) => {
+  const increaseProduct = (productId: number) => {
     const newCartProducts = cart.cartProducts;
     let newTotal = cart.total;
-    const cartProductIndex = findIndexCartProduct(idCartProduct);
-    newCartProducts[cartProductIndex].quantity = cart.cartProducts[cartProductIndex].quantity + 1
-    newTotal += newCartProducts[cartProductIndex].price;
+    const productIndex = findIndexProduct(productId);
+    newCartProducts[productIndex].quantity = cart.cartProducts[productIndex].quantity + 1
+    newTotal += newCartProducts[productIndex].price;
 
     setCart({ ...cart, cartProducts: newCartProducts, total: newTotal });
   }
 
-  const reduceProduct = (idCartProduct: number) => {
+  const reduceProduct = (productId: number) => {
     const newCartProducts = cart.cartProducts;
     let newTotal = cart.total;
-    const cartProductIndex = findIndexCartProduct(idCartProduct);
-    newCartProducts[cartProductIndex].quantity = cart.cartProducts[cartProductIndex].quantity - 1
-    newTotal -= newCartProducts[cartProductIndex].price;
+    const productIndex = findIndexProduct(productId);
+    newCartProducts[productIndex].quantity = cart.cartProducts[productIndex].quantity - 1
+    newTotal -= newCartProducts[productIndex].price;
 
     setCart({ ...cart, cartProducts: newCartProducts, total: newTotal });
   }

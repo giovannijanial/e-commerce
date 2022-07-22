@@ -15,12 +15,12 @@ import AboutPage from './pages/about/Index';
 import CartPage from './pages/cart/Index';
 import ContactPage from './pages/contact/Index';
 import HomePage from "./pages/home/Index";
-import LoginPage from './pages/login/Index';
 import NotFoundPage from './pages/notFound/Index';
 import { default as OrdersPage } from './pages/orders/Index';
 import ProductsPage from './pages/products/Index';
 import ProductPage from './pages/products/product/Index';
 import SearchPage from './pages/search/Index';
+import SignInPage from './pages/signIn/Index';
 import SignUpPage from './pages/signUp/Index';
 
 export const url = "http://localhost:3000";
@@ -41,6 +41,7 @@ function App() {
               <Route path='/dash/products/add' element={<DashAddProductPage />} />
               <Route path='/dash/users' element={<DashUserPage />} />
               <Route path='/dash/orders' element={<DashOrderPage />} />
+              <Route path='*' element={<NotFoundPage />} />
             </Routes>
           </BrowserRouter>
         ) : (
@@ -55,11 +56,10 @@ function App() {
               <Route path='/orders' element={<OrdersPage />} />
               <Route path='/about' element={<AboutPage />} />
               <Route path='/contact' element={<ContactPage />} />
-              <Route path='/login' element={<LoginPage />} />
+              <Route path='/login' element={<SignInPage />} />
               <Route path='/sign' element={<SignUpPage />} />
               <Route path='/cart' element={<CartPage />} />
               <Route path='/search' element={<SearchPage />} />
-
               <Route path='*' element={<NotFoundPage />} />
             </Routes>
             <Footer />

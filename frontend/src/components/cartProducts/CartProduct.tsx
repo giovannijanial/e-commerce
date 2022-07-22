@@ -43,23 +43,19 @@ const CartProduct = ({ cartId, cartProduct }: Props) => {
     setQuantity(cartProduct.quantity)
   }, [cartProduct])
 
-  const handleReduce = useCallback(async (idCartProduct: number | undefined) => {
-    if (quantity && cartProduct.id) {
-      if (cartId && idCartProduct) {
-        setQuantity(quantity - 1)
-        await updateCartProduct(cartId, idCartProduct, quantity - 1);
-        reduceProduct(cartProduct.id)
-      }
+  const handleReduce = useCallback(async () => {
+    if (quantity && cartId && cartProduct.id && cartProduct.product.id) {
+      setQuantity(quantity - 1)
+      await updateCartProduct(cartId, cartProduct.id, quantity - 1);
+      reduceProduct(cartProduct.product.id)
     }
   }, [quantity, updateCartProduct])
 
-  const handleIncrease = useCallback(async (idCartProduct: number | undefined) => {
-    if (quantity && cartProduct.id) {
-      if (cartId && idCartProduct) {
-        setQuantity(quantity + 1)
-        await updateCartProduct(cartId, idCartProduct, quantity + 1);
-        increaseProduct(cartProduct.id)
-      }
+  const handleIncrease = useCallback(async () => {
+    if (quantity && cartId && cartProduct.id && cartProduct.product.id) {
+      setQuantity(quantity + 1)
+      await updateCartProduct(cartId, cartProduct.id, quantity + 1);
+      increaseProduct(cartProduct.product.id)
     }
   }, [quantity, updateCartProduct])
 
@@ -67,7 +63,6 @@ const CartProduct = ({ cartId, cartProduct }: Props) => {
     if (cartId) {
       await removeProduct(cartId, idCartProduct);
       removeProductContext(idCartProduct);
-
     }
     setOpenDialogDelete(false);
   }, [removeProduct]);
@@ -92,7 +87,7 @@ const CartProduct = ({ cartId, cartProduct }: Props) => {
                   {quantity > 1 ? (<Button
                     aria-label="reduce"
                     size='small'
-                    onClick={(e) => handleReduce(cartProduct.id)}
+                    onClick={(e) => handleReduce()}
                   >
                     <RemoveIcon fontSize="small" />
                   </Button>) : (
@@ -107,7 +102,7 @@ const CartProduct = ({ cartId, cartProduct }: Props) => {
                   <Button
                     aria-label="increase"
                     size='small'
-                    onClick={(e) => handleIncrease(cartProduct.id)}
+                    onClick={(e) => handleIncrease()}
                   >
                     <AddIcon fontSize="small" />
                   </Button>

@@ -7,16 +7,16 @@ const Navgation = () => {
   return (
     <StyledBoxNavgation>
       <StyledItemBox>
-        <NavLink to="/">Home</NavLink>
+        <NavLink to="/">Inicio</NavLink>
       </StyledItemBox>
       <StyledItemBox>
-        <NavLink to="/products">Products</NavLink>
+        <NavLink to="/products">Produtos</NavLink>
       </StyledItemBox>
       <StyledItemBox>
-        <NavLink to="/about">About</NavLink>
+        <NavLink to="/about">Sobre</NavLink>
       </StyledItemBox>
       <StyledItemBox>
-        <NavLink to="/contact">Contact</NavLink>
+        <NavLink to="/contact">Contato</NavLink>
       </StyledItemBox>
     </StyledBoxNavgation>
   )

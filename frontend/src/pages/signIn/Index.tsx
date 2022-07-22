@@ -7,16 +7,14 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import { FormEvent, useCallback, useContext, useEffect, useState } from 'react';
+import { FormEvent, useCallback, useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { MainContainer } from '../../components/main/main.styled';
 import { useAuth } from '../../hooks/useAuth';
 import { ILogin } from '../../interfaces/Auth';
 import { LocationProps } from '../../interfaces/Location';
-import AuthContext from '../../contexts/authProvider';
-import CartContext from '../../contexts/cartProvider';
 
-export default function LoginPage() {
+export default function SignInPage() {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -67,17 +65,17 @@ export default function LoginPage() {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h3">
-          Sign in
+          Login
         </Typography>
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 10 }}>
           <TextField
             margin="normal"
             required
             fullWidth
-            id="userName"
-            label="UserName"
-            name="userName"
-            autoComplete="userName"
+            id="username"
+            label="Username"
+            name="username"
+            autoComplete="username"
             autoFocus
             value={userName}
             onChange={(e) => setUserName(e.target.value)}
@@ -118,18 +116,18 @@ export default function LoginPage() {
               variant="contained"
               sx={{ mt: 4, mb: 3 }}
             >
-              Sign In
+              Login
             </Button>
           )}
           <Grid container>
             <Grid item xs>
               <Link to="#">
-                Forgot password?
+                Esqueceu a senha?
               </Link>
             </Grid>
             <Grid item>
               <Link to="/sign">
-                {"Don't have an account? Sign Up"}
+                {"Ainda não tem uma conta? Cadastre-se agora!"}
               </Link>
             </Grid>
           </Grid>
