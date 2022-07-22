@@ -17,6 +17,28 @@
     <img src="https://styled-components.com/logo.png" width="60" alt="StyledComponents" title="Styled Components"  />
 </p>		
 
+## Descrição
+
+<p>E-commerce de produtos em geral construído em NodeJS.</p>
+<p>Contém a sessão para usuários e dashboard para administradores do sistema.</p>
+<p>O banco de dados - sqlite - está presente no repositório apenas para exemplo, o mesmo pode ser totalmente alterado dentro do sitema.</p>
+
+ ```bash
+  login: admin
+  password: admin
+ ```
+
+ ```bash
+  login: user
+  password: user
+ ```
+ 
+## Installation
+
+```bash
+$ npm install
+```
+
 
 
 
