@@ -43,25 +43,25 @@ const CartProduct = ({ cartId, cartProduct }: Props) => {
     setQuantity(cartProduct.quantity)
   }, [cartProduct])
 
-  const handleReduce = (idCartProduct: number | undefined) => {
+  const handleReduce = useCallback(async (idCartProduct: number | undefined) => {
     if (quantity && cartProduct.id) {
       if (cartId && idCartProduct) {
         setQuantity(quantity - 1)
-        updateCartProduct(cartId, idCartProduct, quantity - 1);
+        await updateCartProduct(cartId, idCartProduct, quantity - 1);
         reduceProduct(cartProduct.id)
       }
     }
-  }
+  }, [quantity, updateCartProduct])
 
-  const handleIncrease = (idCartProduct: number | undefined) => {
+  const handleIncrease = useCallback(async (idCartProduct: number | undefined) => {
     if (quantity && cartProduct.id) {
       if (cartId && idCartProduct) {
         setQuantity(quantity + 1)
-        updateCartProduct(cartId, idCartProduct, quantity + 1);
+        await updateCartProduct(cartId, idCartProduct, quantity + 1);
         increaseProduct(cartProduct.id)
       }
     }
-  }
+  }, [quantity, updateCartProduct])
 
   const handleRemoveProduct = useCallback((idCartProduct: number) => async () => {
     if (cartId) {

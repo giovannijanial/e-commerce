@@ -8,13 +8,13 @@ import CartProductsGrid from './CartProductsGrid'
 import CartResume from './CartResume'
 
 const CartPage = () => {
-  const { cart, reduceProduct, increaseProduct } = useContext(CartContext);
-  const { getOne, cart: currentCart, loading, error, removeProduct } = useCart();
+  const { cart } = useContext(CartContext);
+  const { getOne, cart: currentCart, loading, error, removeProduct, updateCartProduct } = useCart();
 
   useEffect(() => {
     if (cart?.id)
       getOne(cart.id)
-  }, [getOne, cart, removeProduct, reduceProduct, increaseProduct])
+  }, [getOne, cart, removeProduct, updateCartProduct])
 
   return (
     <MainContainer sx={{ flexDirection: "column", alignItems: "center" }}>
