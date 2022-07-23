@@ -19,15 +19,17 @@
 
 ## :desktop_computer: Projeto
 
-<p>• App e-commerce construído em NodeJS para fins educativos.</p>
-<p>• Contém sessão para usuários e dashboard para administradores do sistema.</p>
+- App e-commerce construído em NodeJS para fins educativos.
+- Contém sessão para usuários e dashboard para administradores do sistema.
 
+## Home Page
 
+## Products
  
 ## :floppy_disk: Instalação
 
 ```bash
-$ git clone 
+$ git clone git@github.com:giovannijanial/e-commerce.git
 $ cd e-commerce
 $ cd backend
 $ npm install #se necessário acrescentar --legacy-peer-deps
@@ -40,12 +42,15 @@ $ npm install
 
 ```bash
 #backend
-$ npm run start:dev
+$ npm run start # development
+$ npm run start:dev # watch mode
+$ npm run start:prod # production mode
+
 #frontend
 $ npm run dev
  ```
 
-##  :spider_web: Testando a aplicação...
+##  :spider_web: Testando a aplicação
 
 - backend starts in [localhost:3001](http://localhost:3001/).
 - frontend starts in [localhost:3000](http://localhost:3000/).
@@ -62,6 +67,11 @@ password: admin
   password: user
  ```
 
+## :memo: Observações
+
+> ecommerceDB -> arquivo - sqlite - com os dados da aplicação.
+
+> frontend ainda não está responsivo.
 
 
 
