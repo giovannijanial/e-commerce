@@ -28,7 +28,7 @@ export const theme = createTheme({
   },
   typography: {
     fontFamily: [
-      'Open Sans',
+      'Anek Latin',
       'Roboto',
       '-apple-system',
       'BlinkMacSystemFont',

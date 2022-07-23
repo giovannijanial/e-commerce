@@ -1,8 +1,7 @@
 import { AxiosError } from "axios";
 import { Buffer } from "buffer";
-import { useCallback, useState } from "react"
+import { useCallback, useState } from "react";
 import { IMeta, IProduct } from "../interfaces/Product";
-import { IUploadImage } from "../interfaces/UploadImage";
 import { ProductService } from "../services/productService";
 
 export const useProduct = () => {
@@ -58,8 +57,6 @@ export const useProduct = () => {
     setLoading(true);
     const { status, data } = await ProductService.getTopProducts()
 
-    console.log(data);
-
     if (status !== 200) {
       setError(["error"])
     };
@@ -71,8 +68,6 @@ export const useProduct = () => {
   const getLastChanged = useCallback(async () => {
     setLoading(true);
     const { status, data } = await ProductService.getLastChanged()
-
-    console.log(data);
 
     if (status !== 200) {
       setError(["error"])
