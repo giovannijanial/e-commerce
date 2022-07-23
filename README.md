@@ -1,4 +1,4 @@
-# E-Commerce
+# App E-Commerce
 
 <p align="center">
   	<a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
@@ -17,28 +17,50 @@
     <img src="https://styled-components.com/logo.png" width="60" alt="StyledComponents" title="Styled Components"  />
 </p>		
 
-## Descrição
+## :desktop_computer: Projeto
 
-<p>E-commerce de produtos em geral construído em NodeJS.</p>
-<p>Contém a sessão para usuários e dashboard para administradores do sistema.</p>
-<p>O banco de dados - sqlite - está presente no repositório apenas para exemplo, o mesmo pode ser totalmente alterado dentro do sitema.</p>
+<p>• App e-commerce construído em NodeJS para fins educativos.</p>
+<p>• Contém sessão para usuários e dashboard para administradores do sistema.</p>
 
- ```bash
-  login: admin
-  password: admin
- ```
 
- ```bash
-  login: user
-  password: user
- ```
  
-## Installation
+## :floppy_disk: Instalação
 
 ```bash
+$ git clone 
+$ cd e-commerce
+$ cd backend
+$ npm install #se necessário acrescentar --legacy-peer-deps
+$ cd ..
+$ cd frontend
 $ npm install
 ```
 
+## :rocket: Inicialização
+
+```bash
+#backend
+$ npm run start:dev
+#frontend
+$ npm run dev
+ ```
+
+##  :spider_web: Testando a aplicação...
+
+- backend starts in [localhost:3001](http://localhost:3001/).
+- frontend starts in [localhost:3000](http://localhost:3000/).
+
+```bash
+#login como admin
+login: admin
+password: admin
+```
+
+ ```bash
+ #login como usuário
+  login: user
+  password: user
+ ```
 
 
 
