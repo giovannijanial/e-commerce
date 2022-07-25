@@ -15,17 +15,84 @@
     <img src="https://camo.githubusercontent.com/306dedb9426f1d93a981d305a0a18164932ece8dca4d5fd820b1d3c36625b218/68747470733a2f2f6d75692e636f6d2f7374617469632f6c6f676f2e737667" width="60" alt="Material UI"  title="Material UI"/>
     <img src="https://user-images.githubusercontent.com/8939680/57233882-20344080-6fe5-11e9-9086-d20a955bed59.png" width="60"  alt="Axios" title="Axios" />
     <img src="https://styled-components.com/logo.png" width="60" alt="StyledComponents" title="Styled Components"  />
-</p>		
+</p>
 
+ ---
+ 
 ## :desktop_computer: Projeto
 
 - App e-commerce construído em NodeJS para fins educativos.
 - Contém sessão para usuários e dashboard para administradores do sistema.
 
-## Home Page
+---
 
-## Products
- 
+## Home Page
+![Screenshot_2](https://user-images.githubusercontent.com/101146139/180884538-c99132a3-c06c-4a70-94bb-c88310a774db.png)
+
+![Screenshot_3](https://user-images.githubusercontent.com/101146139/180884895-65653f5e-ad7e-4e38-aa9c-0837af9b8f2b.png)
+
+---
+
+## Products Page
+
+![Screenshot_4](https://user-images.githubusercontent.com/101146139/180884993-a902f0d1-7704-4d48-889b-0c4efd8c205d.png)
+
+---
+
+## Search Page
+
+![Screenshot_5](https://user-images.githubusercontent.com/101146139/180885173-9bab77ad-2737-4f9f-af10-2ab876358f4d.png)
+
+---
+
+## Login Page
+
+![Screenshot_6](https://user-images.githubusercontent.com/101146139/180885174-8ba9c739-2dbf-4730-8c8e-8677568a6a13.png)
+
+---
+
+## Orders Page
+
+![Screenshot_7](https://user-images.githubusercontent.com/101146139/180885175-93454c19-a1bc-45ea-82b8-36620fb8c274.png)
+
+---
+
+## Cart Page
+
+![Screenshot_8](https://user-images.githubusercontent.com/101146139/180885158-3a37585b-1eb9-4a91-9c21-481727f9ad9a.png)
+
+---
+
+## Dashboard - Admin Panel
+
+![Screenshot_9](https://user-images.githubusercontent.com/101146139/180885166-b9a387c4-266d-40f0-9922-dd47fd638c71.png)
+
+---
+
+## Dashboard - Products
+
+![Screenshot_10](https://user-images.githubusercontent.com/101146139/180885168-d8503718-0d2f-434a-a9fd-d6833de3f749.png)
+
+---
+
+## Dashboard - Product Detail's
+
+![Screenshot_13](https://user-images.githubusercontent.com/101146139/180885172-f9fb6ab6-5b62-4f43-9c92-7c4517513857.png)
+
+---
+
+## Dashboard - Orders
+
+![Screenshot_11](https://user-images.githubusercontent.com/101146139/180885169-b3e7af4e-12c6-4dde-a514-d40b0ea094f2.png)
+
+---
+
+## Dashboard - Users
+
+![Screenshot_12](https://user-images.githubusercontent.com/101146139/180885171-7c87bb88-2a20-464b-bd7b-ce23f2f506f6.png)
+
+---
+
 ## :floppy_disk: Instalação
 
 ```bash
@@ -72,7 +139,3 @@ password: admin
 > ecommerceDB -> arquivo - sqlite - com os dados da aplicação.
 
 > frontend ainda não está responsivo.
-
-
-
-
