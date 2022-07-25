@@ -1,13 +1,12 @@
-import { Button, CircularProgress, Divider, Grid, Typography } from '@mui/material'
-import { Box } from '@mui/system'
-import { theme } from '../../app.styled'
-import { ICart } from '../../interfaces/Cart'
+import { Button, CircularProgress, Divider, Grid, Typography } from '@mui/material';
+import { Box } from '@mui/system';
+import { useCallback, useContext, useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import { useCart } from '../../hooks/useCart';
-import FinishedCartDialog from '../../components/dialogs/FinishedCartDialog';
-import { useState, useCallback, useContext } from 'react';
+import { theme } from '../../app.styled';
+import FinishedCartDialog from '../../components/dialogs/FinishedCartDialog copy';
 import CartContext from '../../contexts/cartProvider';
-import { CartStatus } from '../../enums/CartStatus';
+import { useCart } from '../../hooks/useCart';
+import { ICart } from '../../interfaces/Cart';
 
 interface Props {
   currentCart: ICart;
@@ -109,7 +108,7 @@ const CartResume = ({ currentCart, loading }: Props) => {
               justifyContent: "center"
             }}>
             <Box
-              bgcolor={theme.palette.success.main}
+              bgcolor={theme.palette.success.light}
               sx={{
                 width: 300,
                 height: 100,
@@ -120,12 +119,12 @@ const CartResume = ({ currentCart, loading }: Props) => {
               }}>
               <Typography
                 variant='h5'
-                color={theme.palette.success.dark}>
+                color={theme.palette.success.main}>
                 Valor no <b>PIX</b>
               </Typography>
               <Typography
                 variant='h5'
-                color={theme.palette.success.dark}>
+                color={theme.palette.success.main}>
                 <b>R${currentCart.total.toFixed(2)}</b>
               </Typography>
             </Box>

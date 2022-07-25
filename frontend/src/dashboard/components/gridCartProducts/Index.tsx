@@ -140,7 +140,6 @@ export default function GridCartProducts({ cartId, cartProducts, origin }: Props
 
   return (
     <Box sx={{
-      height: 500,
       width: '100%',
       '& .header div': {
         fontWeight: "600",
@@ -148,6 +147,7 @@ export default function GridCartProducts({ cartId, cartProducts, origin }: Props
     }}>
       {cart && (
         <DataGrid
+          autoHeight
           loading={loading}
           rows={cart.cartProducts}
           columns={origin === "details" ? columnsDetails : columnsUpdate}

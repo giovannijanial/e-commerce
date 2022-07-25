@@ -3,6 +3,7 @@ import { useState } from "react";
 import { ICart } from "../../interfaces/Cart"
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import OrderProduct from "./OrderProduct";
+import { theme } from "../../app.styled";
 
 interface Props {
   cart: ICart;
@@ -41,10 +42,12 @@ const Orders = ({ cart, index }: Props) => {
           {cart.id}
         </Typography>
         <Typography sx={{ width: '20%', flexShrink: 0 }}>
-          {getCartDate()}
+          <b>{getCartDate()}</b>
         </Typography>
         <Typography sx={{ width: '20%', flexShrink: 0 }}>{cart.cartStatus}</Typography>
-        <Typography sx={{ width: '10%', flexShrink: 0 }}>{cart.total.toFixed(2)}</Typography>
+        <Typography sx={{ width: '10%', flexShrink: 0 }} color="primary">
+          <b>{cart.total.toFixed(2)}</b>
+        </Typography>
       </AccordionSummary>
       <AccordionDetails>
         <Grid container spacing={2}>
@@ -58,7 +61,9 @@ const Orders = ({ cart, index }: Props) => {
               alignItems: "center"
             }}
           >
-            <Typography>Quantidade</Typography>
+            <Typography>
+              <b>Quantidade</b>
+            </Typography>
           </Grid>
           <Grid item xs={2}
             sx={{
@@ -67,7 +72,9 @@ const Orders = ({ cart, index }: Props) => {
               alignItems: "center"
             }}
           >
-            <Typography>Total Parcial</Typography>
+            <Typography>
+              <b>Total Parcial</b>
+            </Typography>
           </Grid>
           {cart.cartProducts && cart.cartProducts.map((cartProduct) => (
             <OrderProduct key={cartProduct.id} cartProduct={cartProduct} />

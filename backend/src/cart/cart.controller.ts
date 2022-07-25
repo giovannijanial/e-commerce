@@ -52,7 +52,6 @@ export class CartController {
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateCartDto: UpdateCartDto) {
-    console.log(updateCartDto);
     return this.cartService.finishCart(id, updateCartDto);
   }
 }

@@ -1,23 +1,23 @@
 import ArticleIcon from '@mui/icons-material/Article';
 import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
 import { Box } from '@mui/material';
 import { DataGrid, GridActionsCellItem, GridCellParams, GridColumns, GridRowId, GridValueGetterParams } from '@mui/x-data-grid';
 import clsx from 'clsx';
 import { useCallback, useEffect, useState } from 'react';
 import { theme } from '../../../app.styled';
+import AproveOrderDialog from '../../../components/dialogs/AproveOrderDialog';
+import DialogDelete from '../../../components/dialogs/DeleteDialog';
 import { useCart } from '../../../hooks/useCart';
 import { ICart, ICartItem } from '../../../interfaces/Cart';
-import DialogDelete from '../../../components/dialogs/DeleteDialog';
 import DialogDetailsOrder from './detailsOrder/Index';
-import DialogUpdateOrder from './updateOrder/Index';
+import FileDownloadDoneIcon from '@mui/icons-material/FileDownloadDone';
 
 export default function TableOrders() {
-  const { getAll, carts, loading, error, remove, setCart } = useCart();
+  const { getAll, carts, loading, update, remove } = useCart();
 
   const [openDialogDelete, setOpenDialogDelete] = useState(false);
   const [openDialogDetails, setOpenDialogDetails] = useState(false);
-  const [openDialogUpdate, setOpenDialogUpdate] = useState(false);
+  const [openDialogAprove, setOpenDialogAprove] = useState(false);
   const [currentId, setCurrentId] = useState<GridRowId>(0)
   const [currentCart, setCurrentCart] = useState<ICart>();
 
@@ -47,22 +47,32 @@ export default function TableOrders() {
     setOpenDialogDetails(false);
   };
 
-  // UPDATE
-  const handleOpenDialogUpdate = (cart: ICart) => () => {
-    setOpenDialogUpdate(true);
-    setCurrentCart(cart)
+  // APROVE
+  const handleOpenDialogAprove = (id: GridRowId) => () => {
+    setOpenDialogAprove(true);
+    setCurrentId(id)
   };
+
+  const handleCloseDialogAprove = () => {
+    setOpenDialogAprove(false);
+  };
+
+  const aproveOrder = useCallback((id: GridRowId) => async () => {
+    await update(id.toString(), "shipped");
+    await getAll();
+    setOpenDialogAprove(false);
+  }, [update, getAll]);
 
   useEffect(() => {
     getAll()
-  }, [getAll, openDialogUpdate])
+  }, [getAll, openDialogAprove])
 
   const columns: GridColumns<ICart> = [
     { field: 'id', headerName: 'ID', width: 140, headerClassName: 'header' },
     {
       field: 'user',
       headerName: 'Username',
-      width: 120,
+      width: 110,
       headerClassName: 'header',
       renderCell: (params) => (
         <p>{params.value.username}</p>
@@ -82,15 +92,30 @@ export default function TableOrders() {
       )
     },
     {
+      field: 'updateAt',
+      headerName: 'Date',
+      width: 100,
+      headerClassName: 'header',
+      align: "center",
+      headerAlign: "center",
+      valueGetter: (params: GridValueGetterParams) => {
+        const date = new Date(params.row.updateAt.toString());
+        const cartDate = `${date.getDate()}/${date.getUTCMonth() + 1}/${date.getFullYear()}`;
+        return `${cartDate}`
+      }
+    },
+    {
       field: 'cartStatus',
       headerName: 'Status',
-      width: 180,
+      width: 150,
       headerClassName: 'header',
       align: "center",
       headerAlign: "center",
       cellClassName: (params: GridCellParams<string>) => {
         return clsx('super-app', {
           wp: params.value === "waitingPayment",
+          sd: params.value === "shipped",
+          pd: params.value === "payd",
         });
       },
     },
@@ -118,15 +143,24 @@ export default function TableOrders() {
             onClick={handleOpenDialogDelete(params.id)}
           />
           <GridActionsCellItem
-            icon={<EditIcon />}
-            label="Edit"
-            onClick={handleOpenDialogUpdate(params.row)}
-          />
-          <GridActionsCellItem
             icon={<ArticleIcon />}
             label="Details"
             onClick={handleOpenDialogDetails(params.row)}
           />
+          {params.row.cartStatus === 'payd' ? (
+            <GridActionsCellItem
+              icon={<FileDownloadDoneIcon />}
+              label="Aprove"
+              onClick={handleOpenDialogAprove(params.id)}
+            />
+          ) : (
+            <GridActionsCellItem
+              icon={<FileDownloadDoneIcon />}
+              label="Aprove"
+              disabled
+              onClick={handleOpenDialogAprove(params.id)}
+            />
+          )}
         </Box>
       ],
     },
@@ -140,7 +174,16 @@ export default function TableOrders() {
         fontWeight: "600",
       },
       '& .super-app.wp': {
-        color: `${theme.palette.primary.main}`
+        color: `${theme.palette.primary.main}`,
+        fontWeight: "600",
+      },
+      '& .super-app.sd': {
+        color: `${theme.palette.success.main}`,
+        fontWeight: "600",
+      },
+      '& .super-app.pd': {
+        color: `${theme.palette.warning.main}`,
+        fontWeight: "600",
       },
     }}>
       <DataGrid
@@ -149,7 +192,6 @@ export default function TableOrders() {
         columns={columns}
         pageSize={10}
         rowsPerPageOptions={[10]}
-        checkboxSelection
         getRowHeight={() => 'auto'}
         sx={{
           backgroundColor: theme.palette.background.paper,
@@ -165,14 +207,16 @@ export default function TableOrders() {
         onConfirm={deleteCart}
         id={currentId}
         loading={loading} />
-      <DialogUpdateOrder
-        dialog={openDialogUpdate}
-        setOpenDialogUpdate={setOpenDialogUpdate}
-        currentCart={currentCart} />
       <DialogDetailsOrder
         dialog={openDialogDetails}
         onClose={handleCloseDialogDetails}
         currentCart={currentCart} />
+      <AproveOrderDialog
+        dialog={openDialogAprove}
+        onClose={handleCloseDialogAprove}
+        onConfirm={aproveOrder}
+        id={currentId}
+        loading={loading} />
     </Box >
   );
 }

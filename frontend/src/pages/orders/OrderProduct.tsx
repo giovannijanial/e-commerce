@@ -33,7 +33,7 @@ const OrderProduct = ({ cartProduct }: Props) => {
       </Grid>
       <Grid item xs={2} sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
         <Typography>
-          {(cartProduct.price * cartProduct.quantity).toFixed(2)}
+          <b>{(cartProduct.price * cartProduct.quantity).toFixed(2)}</b>
         </Typography>
       </Grid>
       <Grid item xs={12}>

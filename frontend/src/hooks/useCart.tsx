@@ -72,6 +72,7 @@ export const useCart = () => {
       const body = {
         cartStatus
       }
+      console.log(id, body);
       const res = await CartService.update(id, body)
       setSuccess(true);
     } catch (error: AxiosError | any) {

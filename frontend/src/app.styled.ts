@@ -1,4 +1,5 @@
 import { createTheme } from '@mui/material/styles';
+import { dark } from '@mui/material/styles/createPalette';
 import { createGlobalStyle } from 'styled-components';
 
 export const theme = createTheme({
@@ -8,14 +9,20 @@ export const theme = createTheme({
       main: '#BA181B',
       dark: '#660708'
     },
+    warning: {
+      light: '#00b4d8',
+      main: '#023e8a',
+      dark: '#03045e'
+    },
     secondary: {
       light: '#B1A7A6',
       main: '#161A1D',
       dark: '#0B090A'
     },
     success: {
-      main: '#e5fff1',
-      dark: '#1f9050'
+      light: '#e5fff1',
+      main: '#1f9050',
+      dark: '#092917'
     },
     background: {
       default: '#F5F3F4',

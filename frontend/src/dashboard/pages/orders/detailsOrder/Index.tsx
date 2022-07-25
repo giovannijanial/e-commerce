@@ -16,6 +16,7 @@ interface Props {
 }
 
 export default function DialogDetailsOrder({ dialog, onClose, currentCart }: Props) {
+
   return (
     <Box>
       <Dialog open={dialog} onClose={onClose} fullWidth maxWidth="lg">
@@ -34,7 +35,7 @@ export default function DialogDetailsOrder({ dialog, onClose, currentCart }: Pro
                 }}
               />
             </Grid>
-            <Grid item xs={2}>
+            <Grid item xs={1}>
               <TextField
                 name="userId"
                 fullWidth
@@ -46,7 +47,7 @@ export default function DialogDetailsOrder({ dialog, onClose, currentCart }: Pro
                 }}
               />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={4}>
               <TextField
                 name="username"
                 fullWidth
@@ -60,6 +61,18 @@ export default function DialogDetailsOrder({ dialog, onClose, currentCart }: Pro
             </Grid>
             <Grid item xs={3}>
               <TextField
+                name="status"
+                fullWidth
+                id="status"
+                label="Cart Status"
+                value={currentCart?.cartStatus}
+                InputProps={{
+                  readOnly: true,
+                }}
+              />
+            </Grid>
+            <Grid item xs={2}>
+              <TextField
                 name="quantityProducts"
                 fullWidth
                 id="quantityProducts"
@@ -70,7 +83,7 @@ export default function DialogDetailsOrder({ dialog, onClose, currentCart }: Pro
                 }}
               />
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={2}>
               <TextField
                 name="total"
                 fullWidth
@@ -82,16 +95,28 @@ export default function DialogDetailsOrder({ dialog, onClose, currentCart }: Pro
                 }}
               />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={4}>
               <TextField
-                name="status"
+                name="createdAt"
                 fullWidth
-                id="status"
-                label="Cart Status"
-                value={currentCart?.cartStatus}
+                id="createdAt"
+                label="Created At"
                 InputProps={{
                   readOnly: true,
                 }}
+                value={currentCart?.createdAt}
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <TextField
+                name="updatedAt"
+                fullWidth
+                id="updatedAt"
+                label="Updated At"
+                InputProps={{
+                  readOnly: true,
+                }}
+                value={currentCart?.updateAt}
               />
             </Grid>
             <Grid item xs={12}>
