@@ -1,4 +1,4 @@
-import { Avatar, Grid, Typography } from '@mui/material'
+import { Avatar, Divider, Grid, Typography } from '@mui/material'
 import { useEffect } from 'react';
 import { useProduct } from '../../hooks/useProduct';
 import { ICartItem } from '../../interfaces/Cart'
@@ -35,6 +35,9 @@ const OrderProduct = ({ cartProduct }: Props) => {
         <Typography>
           {(cartProduct.price * cartProduct.quantity).toFixed(2)}
         </Typography>
+      </Grid>
+      <Grid item xs={12}>
+        <Divider />
       </Grid>
     </>
   )

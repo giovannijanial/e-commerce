@@ -101,12 +101,16 @@ export default function AccountMenu({ role }: Props) {
           <Avatar /> {auth.user.firstName}
         </MenuItem>
         <Divider />
-        <MenuItem onClick={handleOrders}>
-          <ListItemIcon>
-            <ViewListIcon fontSize="small" />
-          </ListItemIcon>
-          Meus Pedidos
-        </MenuItem>
+        {role === "user" && (
+          <>
+            <MenuItem onClick={handleOrders}>
+              <ListItemIcon>
+                <ViewListIcon fontSize="small" />
+              </ListItemIcon>
+              Meus Pedidos
+            </MenuItem>
+          </>
+        )}
         <MenuItem>
           <ListItemIcon>
             <Settings fontSize="small" />
