@@ -7,8 +7,7 @@ const getOne = (id: string) => Api.get<ICart>(`cart/${id}`);
 
 const create = (body: any) => Api.post<ICart>('cart', body);
 
-const update = (id: string, cart: ICart) =>
-  Api.patch<ICart>(`cart/${id}`, cart);
+const update = (id: string, body: any) => Api.patch<ICart>(`cart/${id}`, body);
 
 const updateCartProduct = (id: string, cartItemId: number, body: any) =>
   Api.patch<ICart>(`cart/${id}/${cartItemId}`, body);

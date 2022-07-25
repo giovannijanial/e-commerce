@@ -3,5 +3,6 @@ export enum CartStatus {
   PAYD = 'payd',
   SHIPPED = 'shipped',
   DELIVERED = 'delivered',
+  FINISHED = 'finished',
   CANCELED = 'canceled'
 }

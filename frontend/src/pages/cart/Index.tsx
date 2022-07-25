@@ -6,6 +6,7 @@ import { useCart } from '../../hooks/useCart'
 import CartProductsGrid from './CartProductsGrid'
 import CartResume from './CartResume'
 
+
 const CartPage = () => {
   const { cart } = useContext(CartContext);
   const { getOne, cart: currentCart, loading, error, removeProduct, updateCartProduct } = useCart();

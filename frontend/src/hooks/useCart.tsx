@@ -66,10 +66,13 @@ export const useCart = () => {
     }
   }, []);
 
-  const update = useCallback(async (id: string, cart: ICart) => {
+  const update = useCallback(async (id: string, cartStatus: string) => {
     setLoading(true);
     try {
-      const res = await CartService.update(id, cart)
+      const body = {
+        cartStatus
+      }
+      const res = await CartService.update(id, body)
       setSuccess(true);
     } catch (error: AxiosError | any) {
       if (!error?.response) {

@@ -94,6 +94,7 @@ export const useUser = () => {
 
   return {
     users,
+    user,
     error,
     success,
     loading,

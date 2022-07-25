@@ -46,31 +46,54 @@ const Footer = () => {
         <Typography variant="body1" color={theme.palette.background.default} >
           <b>Contato</b>
         </Typography>
-        <Box sx={{ mt: 2, display: "flex", flexDirection: "column", alignItems: "center" }} color={theme.palette.background.default}>
-          <Typography
-            variant="body2"
-            sx={{ fontSize: "0.9em", display: "flex", alignItems: "center" }}>
-            <GitHubIcon color="inherit" />
-            /giovannijanial
-          </Typography>
-          <Typography
-            variant="body2"
-            sx={{ fontSize: "0.9em", display: "flex", alignItems: "center" }}>
-            <LinkedInIcon color="inherit" sx={{ mt: 1 }} />
-            /giovannijanial
-          </Typography>
-          <Typography
-            variant="body2"
-            sx={{ fontSize: "0.9em", display: "flex", alignItems: "center" }}>
-            <InstagramIcon color="inherit" sx={{ mt: 1 }} />
-            /giovannijanial
-          </Typography>
-          <Typography
-            variant="body2"
-            sx={{ fontSize: "0.9em", display: "flex", alignItems: "center" }}>
-            <TwitterIcon color="inherit" sx={{ mt: 1 }} />
-            /giovannijanial
-          </Typography>
+        <Box
+          sx={{ mt: 2, display: "flex", flexDirection: "column", alignItems: "center" }}
+          color={theme.palette.background.default}
+        >
+          <Link href="https://github.com/giovannijanial" sx={{ textDecoration: "none" }} color="inherit">
+            <Typography
+              variant="body2"
+              sx={{ fontSize: "0.9em", display: "flex", alignItems: "center" }}>
+              <GitHubIcon color="inherit" />
+              /giovannijanial
+            </Typography>
+          </Link>
+          <Link
+            href="https://www.linkedin.com/in/giovanni-pinheiro-janial-328393230/"
+            sx={{ textDecoration: "none" }}
+            color="inherit"
+          >
+            <Typography
+              variant="body2"
+              sx={{ fontSize: "0.9em", display: "flex", alignItems: "center" }}>
+              <LinkedInIcon color="inherit" sx={{ mt: 1 }} />
+              /giovannijanial
+            </Typography>
+          </Link>
+          <Link
+            href="https://www.linkedin.com/in/giovanni-pinheiro-janial-328393230/"
+            sx={{ textDecoration: "none" }}
+            color="inherit"
+          >
+            <Typography
+              variant="body2"
+              sx={{ fontSize: "0.9em", display: "flex", alignItems: "center" }}>
+              <InstagramIcon color="inherit" sx={{ mt: 1 }} />
+              /giovannijanial
+            </Typography>
+          </Link>
+          <Link
+            href="https://www.linkedin.com/in/giovanni-pinheiro-janial-328393230/"
+            sx={{ textDecoration: "none" }}
+            color="inherit"
+          >
+            <Typography
+              variant="body2"
+              sx={{ fontSize: "0.9em", display: "flex", alignItems: "center" }}>
+              <TwitterIcon color="inherit" sx={{ mt: 1 }} />
+              /giovannijanial
+            </Typography>
+          </Link>
         </Box>
       </>
 

@@ -12,7 +12,9 @@ export interface ICart {
   id?: string;
   quantityProducts: number;
   total: number;
-  cartStatus?: CartStatus;
+  cartStatus: CartStatus;
   user?: IUser;
   cartProducts: ICartItem[];
+  createdAt?: Date;
+  updateAt?: Date;
 }

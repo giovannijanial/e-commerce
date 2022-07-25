@@ -1,4 +1,5 @@
 import { createContext, ReactNode, useState } from "react";
+import { CartStatus } from "../enums/CartStatus";
 import { ICart } from "../interfaces/Cart";
 import { IProduct } from "../interfaces/Product";
 import { CartService } from "../services/cartService";
@@ -14,6 +15,7 @@ export interface ICartContext {
   removeProduct: (idCartProduct: number) => void,
   reduceProduct: (idCartProduct: number) => void,
   increaseProduct: (idCartProduct: number) => void,
+  updateCart: (cartStatus: CartStatus) => void,
 }
 
 const findCartActive = async (cartId: string): Promise<ICart> => {
@@ -24,6 +26,7 @@ const findCartActive = async (cartId: string): Promise<ICart> => {
 const cartInitialState: ICart = {
   quantityProducts: 0,
   total: 0,
+  cartStatus: CartStatus.FINISHED,
   cartProducts: []
 }
 
@@ -34,7 +37,8 @@ const initialState = {
   addProduct: () => { },
   removeProduct: () => { },
   reduceProduct: () => { },
-  increaseProduct: () => { }
+  increaseProduct: () => { },
+  updateCart: () => { },
 }
 
 const CartContext = createContext<ICartContext>(initialState);
@@ -109,8 +113,22 @@ export const CartProvider = ({ children }: Props) => {
     setCart({ ...cart, cartProducts: newCartProducts, total: newTotal });
   }
 
+  const updateCart = (cartStatus: CartStatus) => {
+    setCart({ ...cart, cartStatus })
+  }
+
   return (
-    <CartContext.Provider value={{ cart, addProduct, removeProduct, setActiveCart, logoutCart, increaseProduct, reduceProduct }}>
+    <CartContext.Provider
+      value={{
+        cart,
+        addProduct,
+        removeProduct,
+        setActiveCart,
+        logoutCart,
+        increaseProduct,
+        reduceProduct,
+        updateCart
+      }}>
       {children}
     </CartContext.Provider >
   )

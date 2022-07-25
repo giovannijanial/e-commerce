@@ -36,7 +36,7 @@ export class UserService {
   async findOne(id: number) {
     const user = await this.userRepository.findOne({
       where: { id },
-      relations: ['carts'],
+      relations: ['carts', 'carts.cartProducts', 'carts.cartProducts.product'],
     });
 
     if (!user) {

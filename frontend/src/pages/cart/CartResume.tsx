@@ -3,6 +3,11 @@ import { Box } from '@mui/system'
 import { theme } from '../../app.styled'
 import { ICart } from '../../interfaces/Cart'
 import { useNavigate } from "react-router-dom";
+import { useCart } from '../../hooks/useCart';
+import FinishedCartDialog from '../../components/dialogs/FinishedCartDialog';
+import { useState, useCallback, useContext } from 'react';
+import CartContext from '../../contexts/cartProvider';
+import { CartStatus } from '../../enums/CartStatus';
 
 interface Props {
   currentCart: ICart;
@@ -10,7 +15,11 @@ interface Props {
 }
 
 const CartResume = ({ currentCart, loading }: Props) => {
+  const [openFinishedCart, setOpenFinishedCart] = useState(false);
+  const [currentId, setCurrentId] = useState("");
 
+  const { update } = useCart();
+  const { logoutCart } = useContext(CartContext);
   const navigate = useNavigate();
 
   const getTotalWithoutPromo = (): number => {
@@ -23,6 +32,25 @@ const CartResume = ({ currentCart, loading }: Props) => {
     const totalWithoutPromo = getTotalWithoutPromo();
     return parseFloat((totalWithoutPromo / 10).toFixed(2));
   }
+
+  const handleOpenFinishedCart = (id: string | undefined) => () => {
+    setOpenFinishedCart(true);
+    if (id)
+      setCurrentId(id)
+  };
+
+  const handleCloseFinishedCart = () => {
+    setOpenFinishedCart(false);
+  };
+
+  const handleFinishCart = useCallback((cartId: string) => async () => {
+    if (cartId) {
+      await update(cartId, "payd");
+      logoutCart();
+      navigate("/");
+    }
+    setOpenFinishedCart(false);
+  }, [update]);
 
   const handleBack = () => {
     navigate("/products")
@@ -107,6 +135,7 @@ const CartResume = ({ currentCart, loading }: Props) => {
               <Button
                 size='large'
                 variant="contained"
+                onClick={handleOpenFinishedCart(currentCart.id)}
                 sx={{ height: 60 }}>
                 <b>Ir para o Pagamento</b>
               </Button>
@@ -122,6 +151,12 @@ const CartResume = ({ currentCart, loading }: Props) => {
           </Grid>
         </>
       )}
+      <FinishedCartDialog
+        dialog={openFinishedCart}
+        onClose={handleCloseFinishedCart}
+        onConfirm={handleFinishCart}
+        id={currentId}
+        loading={loading} />
     </Grid >
   )
 }

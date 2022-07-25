@@ -3,11 +3,13 @@ import { v4 as uuidv4 } from 'uuid';
 import {
   BeforeInsert,
   Column,
+  CreateDateColumn,
   Entity,
   JoinColumn,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 import { UserEntity } from 'src/user/entities/user.entity';
 
@@ -16,6 +18,7 @@ export enum CartStatus {
   PAYD = 'payd',
   SHIPPED = 'shipped',
   DELIVERED = 'delivered',
+  FINISHED = 'finished',
   CANCELED = 'canceled',
 }
 @Entity({ name: 'cart' })
@@ -42,6 +45,12 @@ export class CartEntity {
   @OneToMany(() => CartProductEntity, (cartProducts) => cartProducts.cart)
   @JoinColumn({ name: 'cart_id' })
   cartProducts: CartProductEntity[];
+
+  @CreateDateColumn()
+  createdAt: string;
+
+  @UpdateDateColumn()
+  updateAt: string;
 
   @BeforeInsert()
   generatedId() {

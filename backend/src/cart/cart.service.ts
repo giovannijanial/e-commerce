@@ -4,6 +4,7 @@ import { CartProductEntity } from 'src/cart-product/entities/cart-product.entity
 import { ProductEntity } from 'src/product/entities/product.entity';
 import { UserEntity } from 'src/user/entities/user.entity';
 import { Repository } from 'typeorm';
+import { UpdateCartDto } from './dto/update-cart.dto';
 import { CartEntity, CartStatus } from './entities/cart.entity';
 
 @Injectable()
@@ -48,13 +49,12 @@ export class CartService {
       (cart) => cart.cartStatus === CartStatus.WAITING_PAYMENT,
     );
 
-    const currentCart = await this.findOne(currentCartID.id);
-
-    if (!currentCart) {
+    if (!currentCartID) {
       return this.newCart(currentUser, product, quantity);
-    } else {
-      return this.addItemCart(product, quantity, currentCart);
     }
+
+    const currentCart = await this.findOne(currentCartID.id);
+    return this.addItemCart(product, quantity, currentCart);
   }
 
   async newCart(
@@ -170,7 +170,7 @@ export class CartService {
     return this.cartRepository.remove(cart);
   }
 
-  async update(id: string, itemId: number, quantity: number) {
+  async updateCartProduct(id: string, itemId: number, quantity: number) {
     const currentCart = await this.findOne(id);
     const currentItem = currentCart.cartProducts.find(
       (cartProduct) => cartProduct.id === itemId,
@@ -180,5 +180,10 @@ export class CartService {
     });
 
     return this.updateCart(currentCart.id);
+  }
+
+  async finishCart(id: string, updateCartDto: UpdateCartDto) {
+    await this.findOne(id);
+    return this.cartRepository.update(id, { ...updateCartDto });
   }
 }

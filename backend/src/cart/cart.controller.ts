@@ -8,6 +8,7 @@ import {
   Post,
 } from '@nestjs/common';
 import { CartService } from './cart.service';
+import { UpdateCartDto } from './dto/update-cart.dto';
 
 @Controller('cart')
 export class CartController {
@@ -40,12 +41,18 @@ export class CartController {
   }
 
   @Patch(':id/:itemId')
-  update(
+  updateCartProduct(
     @Param('id') id: string,
     @Param('itemId') itemId: string,
     @Body() body: any,
   ) {
     const { quantity } = body;
-    return this.cartService.update(id, +itemId, quantity);
+    return this.cartService.updateCartProduct(id, +itemId, quantity);
+  }
+
+  @Patch(':id')
+  update(@Param('id') id: string, @Body() updateCartDto: UpdateCartDto) {
+    console.log(updateCartDto);
+    return this.cartService.finishCart(id, updateCartDto);
   }
 }

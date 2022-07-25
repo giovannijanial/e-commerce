@@ -12,6 +12,7 @@ import { useNavigate } from 'react-router-dom';
 import AuthContext from '../../contexts/authProvider';
 import CartContext from '../../contexts/cartProvider';
 import { StyledIconButon } from './buttons.styled';
+import ViewListIcon from '@mui/icons-material/ViewList';
 
 interface Props {
   role: string
@@ -33,6 +34,10 @@ export default function AccountMenu({ role }: Props) {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const handleOrders = () => {
+    navigate("/orders");
+  }
 
   const handleLogout = () => {
 
@@ -96,6 +101,12 @@ export default function AccountMenu({ role }: Props) {
           <Avatar /> {auth.user.firstName}
         </MenuItem>
         <Divider />
+        <MenuItem onClick={handleOrders}>
+          <ListItemIcon>
+            <ViewListIcon fontSize="small" />
+          </ListItemIcon>
+          Meus Pedidos
+        </MenuItem>
         <MenuItem>
           <ListItemIcon>
             <Settings fontSize="small" />

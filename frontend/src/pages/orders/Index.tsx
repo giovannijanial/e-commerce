@@ -1,101 +1,46 @@
-import { Grid, Paper, Typography } from '@mui/material';
-import Link from '@mui/material/Link';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
+import { Box, CircularProgress, Typography } from '@mui/material';
+import { useContext, useEffect } from 'react';
 import { MainContainer } from '../../components/main/main.styled';
-
-// Generate Order Data
-function createData(
-  id: number,
-  date: string,
-  name: string,
-  shipTo: string,
-  paymentMethod: string,
-  amount: number,
-) {
-  return { id, date, name, shipTo, paymentMethod, amount };
-}
-
-const rows = [
-  createData(
-    0,
-    '16 Mar, 2019',
-    'Elvis Presley',
-    'Tupelo, MS',
-    'VISA ⠀•••• 3719',
-    312.44,
-  ),
-  createData(
-    1,
-    '16 Mar, 2019',
-    'Paul McCartney',
-    'London, UK',
-    'VISA ⠀•••• 2574',
-    866.99,
-  ),
-  createData(2, '16 Mar, 2019', 'Tom Scholz', 'Boston, MA', 'MC ⠀•••• 1253', 100.81),
-  createData(
-    3,
-    '16 Mar, 2019',
-    'Michael Jackson',
-    'Gary, IN',
-    'AMEX ⠀•••• 2000',
-    654.39,
-  ),
-  createData(
-    4,
-    '15 Mar, 2019',
-    'Bruce Springsteen',
-    'Long Branch, NJ',
-    'VISA ⠀•••• 5919',
-    212.79,
-  ),
-];
-
-function preventDefault(event: React.MouseEvent) {
-  event.preventDefault();
-}
+import AuthContext from '../../contexts/authProvider';
+import { useUser } from '../../hooks/useUser';
+import Orders from './Orders';
 
 export default function OrdersPage() {
+
+  const { auth } = useContext(AuthContext);
+  const { getOne, user, loading } = useUser();
+
+  useEffect(() => {
+    if (auth.user.id)
+      getOne(auth.user.id);
+  }, [getOne])
+
+  const renderOrders = () => {
+
+    return (
+      <Box
+        sx={{
+          marginTop: "10px",
+          padding: "10px 20px",
+          display: "flex",
+          flexDirection: "column",
+          maxWidth: "1360px",
+        }}
+      >
+        <Typography variant='h3' sx={{ mb: 3 }}>Meus Pedidos</Typography>
+        {user?.carts && user.carts
+          .sort((a, b) => a.cartStatus < b.cartStatus ? 1 : -1)
+          .map((cart, index) => (
+            <Orders key={cart.id} cart={cart} index={index} />
+          ))}
+      </Box>
+    )
+  }
+
   return (
     <MainContainer>
-      <Grid item xs={12} md={4} lg={3}>
-        <Grid item xs={12}>
-          <Paper elevation={3} sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-            <Typography variant="h5">
-              Orders
-            </Typography>
-            <Table size="small">
-              <TableHead>
-                <TableRow>
-                  <TableCell>Date</TableCell>
-                  <TableCell>Name</TableCell>
-                  <TableCell>Ship To</TableCell>
-                  <TableCell>Payment Method</TableCell>
-                  <TableCell align="right">Sale Amount</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {rows.map((row) => (
-                  <TableRow key={row.id}>
-                    <TableCell>{row.date}</TableCell>
-                    <TableCell>{row.name}</TableCell>
-                    <TableCell>{row.shipTo}</TableCell>
-                    <TableCell>{row.paymentMethod}</TableCell>
-                    <TableCell align="right">{`$${row.amount}`}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-            <Link color="primary" href="#" onClick={preventDefault} sx={{ mt: 3 }}>
-              See more orders
-            </Link>
-          </Paper>
-        </Grid>
-      </Grid>
+      {loading && (<CircularProgress />)}
+      {renderOrders()}
     </MainContainer>
   );
 }
