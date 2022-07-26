@@ -17,14 +17,12 @@
     <img src="https://styled-components.com/logo.png" width="60" alt="StyledComponents" title="Styled Components"  />
 </p>
 
- ---
  
 ## :desktop_computer: Projeto
 
 - App e-commerce construído em NodeJS para fins educativos.
 - Contém sessão para usuários e dashboard para administradores do sistema.
 
----
 
 ## Home Page
 ![Screenshot_2](https://user-images.githubusercontent.com/101146139/180884538-c99132a3-c06c-4a70-94bb-c88310a774db.png)
