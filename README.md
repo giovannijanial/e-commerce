@@ -137,3 +137,8 @@ password: admin
 > ecommerceDB -> arquivo - sqlite - com os dados da aplicação.
 
 > frontend ainda não está responsivo.
+
+## :satellite: Contato
+- Instagram: https://www.instagram.com/giovannijanial/
+- LinkedIn: https://www.linkedin.com/in/gpjanial/
+- Twitter: https://twitter.com/giovannijanial
